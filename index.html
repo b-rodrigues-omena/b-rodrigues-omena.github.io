@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<title>Bruno de Luca · Sistemas web e automações com IA</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Sistemas web e automações com IA, feitos sob medida por quem conhece a rotina financeira por dentro. São Paulo, atendimento em todo o Brasil.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2309090a'/%3E%3Crect x='3.5' y='3.5' width='25' height='25' fill='none' stroke='%23fff'/%3E%3Ctext x='16' y='20.5' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='11' fill='%23fff'%3EBL%3C/text%3E%3C/svg%3E">
+<link rel="canonical" href="https://b-rodrigues-omena.github.io/">
+<meta name="theme-color" content="#09090a">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Bruno de Luca · Sistemas web e automações com IA">
+<meta property="og:description" content="Sistemas web e automações com IA, feitos sob medida por quem conhece a rotina financeira por dentro. São Paulo, atendimento em todo o Brasil.">
+<meta property="og:url" content="https://b-rodrigues-omena.github.io/">
+<meta property="og:image" content="https://b-rodrigues-omena.github.io/previa.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Unbounded:wght@400;500;600&display=swap">
+<style>
+/* Layout: painel de instrumentos. Faixas de largura total separadas por fios de 1px, quadros com marcas de registro nos cantos e rótulos em mono, como a tela de um sistema. Preto é a identidade; o claro só entra por escolha. */
+:root{
+  --bg:#09090a;
+  --panel:#0e0f10;
+  --line:#222426;
+  --line-2:#3a3d40;
+  --muted:#8a8e93;
+  --fg:#e6e7e8;
+  --ink:#ffffff;
+  --inv:#09090a;
+  --grid:rgba(255,255,255,.035);
+  --screen:#000000;
+  --f-display:"Unbounded","Segoe UI",system-ui,sans-serif;
+  --f-body:"Geist","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --max:1200px;
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#f2f3f3;
+  --panel:#fafafa;
+  --line:#d6d8d9;
+  --line-2:#b4b7ba;
+  --muted:#5f6368;
+  --fg:#151617;
+  --ink:#000000;
+  --inv:#f2f3f3;
+  --grid:rgba(0,0,0,.045);
+  --screen:#000000;
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+a{color:inherit}
+:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
+::selection{background:var(--ink);color:var(--inv)}
+h1,h2,h3{text-wrap:balance}
+p{margin:0}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-left:max(clamp(16px,4vw,40px),env(safe-area-inset-left,0px));padding-right:max(clamp(16px,4vw,40px),env(safe-area-inset-right,0px))}
+.mono{font-family:var(--f-mono)}
+.label{display:block;font:500 11px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+/* Faixa corrida */
+.ticker{border-bottom:1px solid var(--line);overflow:hidden;color:var(--muted);font:500 11px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase}
+.ticker-track{display:flex;width:max-content;padding-block:11px;animation:tick 48s linear infinite}
+.ticker-track span{padding-right:3em;white-space:nowrap}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* Navegação */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:24px;height:62px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.mark{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--ink);font:600 11px/1 var(--f-display);letter-spacing:.02em}
+.logo .nm{font:500 13px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.links{display:flex;gap:26px;margin-left:auto}
+.links a{text-decoration:none;color:var(--muted);font:500 11.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding-block:8px;transition:color .2s}
+.links a:hover{color:var(--ink)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.tbtn{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line-2);background:transparent;color:var(--fg);cursor:pointer;transition:border-color .2s}
+.tbtn:hover{border-color:var(--ink)}
+.tbtn svg{width:16px;height:16px}
+@media (max-width:880px){.links{display:none}.nav-actions{margin-left:auto}}
+@media (max-width:420px){.logo .nm{display:none}}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding-inline:22px;border:1px solid var(--ink);background:transparent;color:var(--ink);font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover{background:var(--ink);color:var(--inv)}
+.btn-solid{background:var(--ink);color:var(--inv)}
+.btn-solid:hover{background:transparent;color:var(--ink)}
+.btn-sm{height:38px;padding-inline:14px;font-size:11px}
+
+/* Quadro com marcas de registro */
+.ticks{position:relative}
+.ticks::before{content:"";position:absolute;inset:-1px;pointer-events:none;background:
+  linear-gradient(var(--ink),var(--ink)) 0 0/12px 1px,linear-gradient(var(--ink),var(--ink)) 0 0/1px 12px,
+  linear-gradient(var(--ink),var(--ink)) 100% 0/12px 1px,linear-gradient(var(--ink),var(--ink)) 100% 0/1px 12px,
+  linear-gradient(var(--ink),var(--ink)) 0 100%/12px 1px,linear-gradient(var(--ink),var(--ink)) 0 100%/1px 12px,
+  linear-gradient(var(--ink),var(--ink)) 100% 100%/12px 1px,linear-gradient(var(--ink),var(--ink)) 100% 100%/1px 12px;background-repeat:no-repeat}
+
+/* Abertura */
+.hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 70% 40%,#000 30%,transparent 80%);mask-image:radial-gradient(ellipse 80% 70% at 70% 40%,#000 30%,transparent 80%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(40px,5vw,72px);align-items:center;padding-block:clamp(48px,8vw,104px)}
+@media (max-width:980px){.hero .wrap{grid-template-columns:minmax(0,1fr)}}
+.hero-meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
+.coords{font:500 11px/1.4 var(--f-mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.status{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line-2);padding:8px 12px;font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--fg)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ink);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+.name{display:flex;flex-direction:column;margin:30px 0 0;font:500 clamp(44px,12vw,96px)/.94 var(--f-display);letter-spacing:-.04em;text-transform:uppercase;color:var(--ink)}
+.name span{white-space:nowrap}
+.name .o{color:var(--muted);background:linear-gradient(180deg,var(--muted) 10%,var(--line-2) 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+@media (min-width:981px){.name{font-size:clamp(56px,6.6vw,96px)}}
+.thesis{margin-top:30px;font:300 clamp(24px,3vw,36px)/1.15 var(--f-body);letter-spacing:-.02em;color:var(--ink)}
+.lede{margin-top:14px;max-width:50ch;color:var(--muted);font-size:17px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:44px;border-top:1px solid var(--line)}
+.stat{padding:18px 14px 0 0;min-width:0}
+.stat+.stat{border-left:1px solid var(--line);padding-left:16px}
+.stat b{display:block;font:500 clamp(24px,3vw,32px)/1 var(--f-display);letter-spacing:-.04em;color:var(--ink);font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:9px;font:500 10.5px/1.45 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* Console */
+.console{min-width:0;border:1px solid var(--line-2);background:var(--panel)}
+.console-head{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line);font:500 11px/1 var(--f-mono);letter-spacing:.06em;color:var(--muted)}
+.sq{width:8px;height:8px;border:1px solid var(--line-2)}
+.console-head .file{margin-left:6px;color:var(--fg)}
+.live{display:flex;align-items:center;gap:8px;margin-left:auto;letter-spacing:.16em;text-transform:uppercase}
+.console-body{min-height:17em;padding:18px 16px;font:400 12.5px/1.75 var(--f-mono)}
+.ln{display:grid;grid-template-columns:9ch 17ch minmax(0,1fr);gap:0 12px}
+.ln .t,.ln .k{color:var(--muted)}
+.ln .v{color:var(--fg);min-width:0;overflow-wrap:anywhere}
+.ln.res{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line-2)}
+.ln.res .v{color:var(--ink)}
+.ln.alert .v span{background:var(--ink);color:var(--inv);padding:1px 6px}
+.cursor{display:inline-block;width:.6em;height:1.05em;margin-left:2px;background:var(--fg);vertical-align:-.18em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.console-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;padding:11px 14px;border-top:1px solid var(--line);font:500 10.5px/1.4 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:560px){.ln{grid-template-columns:8ch minmax(0,1fr)}.ln .v{grid-column:2}}
+
+/* Seções */
+.sec{border-bottom:1px solid var(--line)}
+.sec>.wrap{padding-block:clamp(64px,9vw,120px)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 48px;align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.sec-head .label{margin-bottom:16px}
+.sec-head p{max-width:46ch;color:var(--muted)}
+@media (max-width:880px){.sec-head{grid-template-columns:minmax(0,1fr)}}
+h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing:-.04em;color:var(--ink)}
+
+/* Ao vivo: gravações do sistema */
+.live-grid{display:grid;grid-template-columns:minmax(0,2.3fr) minmax(0,.85fr);gap:clamp(28px,3.5vw,48px);align-items:start}
+@media (max-width:920px){.live-grid{grid-template-columns:minmax(0,1fr)}}
+.live-main{min-width:0}
+.browser{border:1px solid var(--line-2);background:var(--panel)}
+.browser-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);font:500 11px/1 var(--f-mono);letter-spacing:.06em;color:var(--muted)}
+.browser-bar .url{flex:1;min-width:0;margin-left:6px;padding:6px 10px;border:1px solid var(--line);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.browser-bar .tagline{letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+@media (max-width:480px){.browser-bar .tagline{display:none}}
+.browser video,.phone video{display:block;width:100%;height:auto;max-width:100%;background:var(--screen)}
+.browser video{aspect-ratio:16/10}
+.clip-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-top:0}
+@media (max-width:560px){.clip-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.clip-tab{position:relative;padding:15px 12px 17px;border:0;background:var(--bg);color:var(--muted);text-align:left;font:500 11px/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:color .2s,background .2s}
+.clip-tab:hover{color:var(--fg)}
+.clip-tab[aria-selected="true"]{color:var(--ink);background:var(--panel)}
+.clip-tab .bar{position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--ink)}
+.clip-cap{margin-top:14px;min-height:3.2em;max-width:62ch;color:var(--muted)}
+.phone-wrap{margin:0;min-width:0}
+.phone{max-width:290px;margin:0 auto;padding:10px;border:1px solid var(--line-2);border-radius:34px;background:var(--panel)}
+.phone video{aspect-ratio:480/1040;border-radius:25px}
+.phone-wrap figcaption{margin-top:14px;text-align:center;font:500 10.5px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* Serviços */
+.svc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (max-width:760px){.svc-grid{grid-template-columns:minmax(0,1fr)}}
+.svc{display:grid;align-content:start;gap:12px;padding:clamp(24px,3vw,36px);background:var(--bg);transition:background .25s}
+.svc:hover{background:var(--panel)}
+.svc svg{width:28px;height:28px;fill:none;stroke:var(--ink);stroke-width:1.25;stroke-linecap:square}
+.svc h3{margin:8px 0 0;font:500 21px/1.25 var(--f-body);letter-spacing:-.015em;color:var(--ink)}
+.svc p{color:var(--muted)}
+.svc .for{margin-top:8px;padding-top:14px;border-top:1px dashed var(--line-2);font:500 12px/1.6 var(--f-mono);letter-spacing:.02em;color:var(--fg)}
+.svc .for span{margin-right:8px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-size:10.5px}
+
+/* Cases */
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start;padding-block:clamp(40px,5vw,64px);border-top:1px solid var(--line)}
+.case:first-child{border-top:0;padding-top:0}
+@media (max-width:920px){.case{grid-template-columns:minmax(0,1fr)}}
+.viz{margin:0}
+.viz .frame{border:1px solid var(--line-2);background:var(--panel)}
+.viz svg{display:block;width:100%;height:auto;max-width:100%}
+.viz figcaption{margin-top:10px;font:500 10.5px/1.4 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{padding:6px 9px;border:1px solid var(--line-2);font:500 10.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--fg)}
+.tag.solid{background:var(--ink);border-color:var(--ink);color:var(--inv)}
+.case h3{margin:20px 0 6px;font:500 clamp(22px,2.6vw,30px)/1.12 var(--f-display);letter-spacing:-.035em;color:var(--ink)}
+.where{font:500 12px/1.4 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.case .lead{margin-top:18px;max-width:56ch}
+.kv{display:grid;grid-template-columns:12ch minmax(0,1fr);gap:12px 18px;margin:22px 0 0}
+.kv dt{font:500 10.5px/2.1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.kv dd{margin:0;min-width:0}
+@media (max-width:480px){.kv{grid-template-columns:minmax(0,1fr);gap:4px}.kv dd+dt{margin-top:12px}}
+.done{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.done li{position:relative;padding-left:20px}
+.done li::before{content:"+";position:absolute;left:0;top:0;font-family:var(--f-mono);color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px 0;margin-top:24px;font:500 11px/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.chips span+span::before{content:"/";margin-inline:12px;color:var(--line-2)}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin-top:24px;background:var(--line);border:1px solid var(--line)}
+.metrics div{padding:14px 14px 12px;background:var(--bg);min-width:0}
+.metrics b{display:block;font:500 20px/1 var(--f-display);letter-spacing:-.04em;color:var(--ink);font-variant-numeric:tabular-nums}
+.metrics span{display:block;margin-top:8px;font:500 10px/1.4 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:560px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.note{margin-top:18px;font:500 11px/1.5 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.note a{color:var(--ink);text-underline-offset:3px}
+
+/* SVG das ilustrações */
+.s-l{fill:var(--muted);font-family:var(--f-mono);font-size:9.5px;letter-spacing:.08em}
+.s-m{fill:var(--fg);font-family:var(--f-mono);font-size:11px}
+.s-r{fill:var(--fg);font-family:var(--f-mono);font-size:9.5px}
+.s-mi{fill:var(--ink);font-family:var(--f-mono);font-size:12.5px}
+.s-v{fill:var(--ink);font-family:var(--f-display);font-size:25px;letter-spacing:-.03em}
+.s-inv{fill:var(--inv);font-family:var(--f-mono);font-size:9.5px;letter-spacing:.08em}
+.s-box{fill:none;stroke:var(--line-2)}
+.s-box-d{fill:none;stroke:var(--line-2);stroke-dasharray:3 3}
+.s-grid{fill:none;stroke:var(--line);stroke-dasharray:2 4}
+.s-line{fill:none;stroke:var(--line-2)}
+.s-link{fill:none;stroke:var(--muted)}
+.s-ink{fill:none;stroke:var(--ink);stroke-width:1.5}
+.s-solid{fill:var(--ink)}
+.s-bg{fill:var(--bg);stroke:var(--line-2)}
+.s-bar{fill:var(--muted)}
+.s-bar-inv{fill:var(--inv);opacity:.55}
+.stop-a{stop-color:var(--ink);stop-opacity:.18}
+.stop-b{stop-color:var(--ink);stop-opacity:0}
+
+/* Também construí */
+.more{margin-top:clamp(48px,6vw,72px)}
+.more .label{margin-bottom:16px}
+.more ul{margin:0;padding:0;list-style:none;border-top:1px solid var(--line-2)}
+.more li{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr) minmax(0,.7fr);gap:6px 24px;padding:16px 0;border-bottom:1px solid var(--line)}
+.more li b{font-weight:500;color:var(--ink)}
+.more li span{color:var(--muted)}
+.more li em{font:500 11px/1.9 var(--f-mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:right}
+@media (max-width:760px){.more li{grid-template-columns:minmax(0,1fr)}.more li em{text-align:left}}
+
+/* Processo */
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0;padding:0;list-style:none;border-top:1px solid var(--line-2)}
+.step{position:relative;padding:26px 22px 0 0;min-width:0}
+.step::before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;background:var(--bg);border:1px solid var(--ink)}
+.step:last-child::before{background:var(--ink)}
+.step .n{font:500 11px/1 var(--f-mono);letter-spacing:.16em;color:var(--muted)}
+.step h3{margin:14px 0 8px;font:500 18px/1.3 var(--f-body);letter-spacing:-.01em;color:var(--ink)}
+.step p{font-size:15px;color:var(--muted)}
+@media (max-width:920px){
+  .steps{grid-template-columns:minmax(0,1fr);border-top:0;border-left:1px solid var(--line-2)}
+  .step{padding:0 0 30px 26px}
+  .step:last-child{padding-bottom:0}
+  .step::before{top:3px;left:-5px}
+}
+
+/* Sobre */
+.about{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,72px);align-items:start}
+@media (max-width:920px){.about{grid-template-columns:minmax(0,1fr)}}
+.about-text{display:grid;gap:18px;max-width:62ch;font-size:17px}
+.about-text p+p{color:var(--muted)}
+.facts{margin:0;border:1px solid var(--line-2)}
+.facts div{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.facts div:last-child{border-bottom:0}
+.facts dt{font:500 10.5px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:0;text-align:right;color:var(--ink)}
+.career{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:clamp(40px,5vw,64px) 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.career li{padding:16px 16px 0 0;min-width:0}
+.career li+li{border-left:1px solid var(--line);padding-left:16px}
+.career b{display:block;font:500 12px/1 var(--f-mono);letter-spacing:.12em;color:var(--ink)}
+.career span{display:block;margin-top:10px;font-size:14px;line-height:1.45;color:var(--muted)}
+@media (max-width:920px){
+  .career{grid-template-columns:minmax(0,1fr);border-top:0}
+  .career li,.career li+li{display:grid;grid-template-columns:9ch minmax(0,1fr);gap:16px;padding:12px 0;border-left:0;border-bottom:1px solid var(--line)}
+  .career span{margin-top:0}
+  .career b{line-height:1.45}
+}
+
+/* Ferramentas */
+.stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (max-width:880px){.stack{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.stack{grid-template-columns:minmax(0,1fr)}}
+.col{padding:24px;background:var(--bg)}
+.col h3{margin:0 0 14px;font:500 11px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+.col ul{display:grid;gap:7px;margin:0;padding:0;list-style:none;color:var(--muted);font-size:15px}
+.col.key{background:var(--panel)}
+.col.key h3::after{content:" · diferencial";color:var(--muted)}
+
+/* Contato */
+.contact .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,5vw,72px);align-items:end}
+@media (max-width:920px){.contact .wrap{grid-template-columns:minmax(0,1fr)}}
+.contact h2{font-size:clamp(34px,5.4vw,68px)}
+.contact .sub{margin-top:22px;max-width:44ch;color:var(--muted);font-size:17px}
+.rows{border-top:1px solid var(--line-2)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.row small{display:block;margin-bottom:6px;font:500 10.5px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.row .val{font:500 clamp(16px,1.8vw,19px)/1.3 var(--f-body);color:var(--ink);overflow-wrap:anywhere;text-decoration:none}
+.row a.val:hover{text-decoration:underline;text-underline-offset:4px}
+.acts{display:flex;gap:8px}
+.ibtn{display:inline-flex;align-items:center;height:36px;padding-inline:12px;border:1px solid var(--line-2);background:transparent;color:var(--fg);font:500 10.5px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:border-color .2s,background .2s,color .2s}
+.ibtn:hover{border-color:var(--ink);color:var(--ink)}
+
+/* Rodapé */
+.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;padding-block:26px;font:500 11px/1.5 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--ink)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker-track,.dot,.cursor{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Sistemas web sob medida</span><span>+</span><span>Automação com IA</span><span>+</span><span>ERP financeiro</span><span>+</span><span>Claude Code</span><span>+</span><span>São Paulo · atendo todo o Brasil</span><span>+</span>
+    <span>Sistemas web sob medida</span><span>+</span><span>Automação com IA</span><span>+</span><span>ERP financeiro</span><span>+</span><span>Claude Code</span><span>+</span><span>São Paulo · atendo todo o Brasil</span><span>+</span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#topo" aria-label="Bruno de Luca, voltar ao início"><span class="mark">BL</span><span class="nm">Bruno de Luca</span></a>
+    <nav class="links" aria-label="Seções">
+      <a href="#ao-vivo">Ao vivo</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#cases">Cases</a>
+      <a href="#processo">Processo</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="tbtn" id="tema" type="button" aria-label="Usar tema claro" aria-pressed="false">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+      </button>
+      <a class="btn btn-solid btn-sm" href="https://wa.me/5511961645087?text=Ol%C3%A1%2C%20Bruno!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Orçamento</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="topo">
+  <div class="wrap">
+    <div>
+      <div class="hero-meta">
+        <span class="status"><span class="dot" aria-hidden="true"></span>Aceitando novos projetos</span>
+        <span class="coords">São Paulo, BR · 23°33′S 46°38′W</span>
+      </div>
+      <h1 class="name"><span>Bruno</span><span class="o">de Luca</span></h1>
+      <p class="thesis">Transformo processo em sistema.</p>
+      <p class="lede">Sistemas web e automações com IA, feitos sob medida por quem conhece a rotina financeira por dentro. Do problema real ao sistema no ar.</p>
+      <div class="ctas">
+        <a class="btn btn-solid" href="https://wa.me/5511961645087?text=Ol%C3%A1%2C%20Bruno!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Pedir orçamento ↗</a>
+        <a class="btn" href="#ao-vivo">Ver funcionando ↓</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>8+</b><span>anos em finanças</span></div>
+        <div class="stat"><b>2</b><span>sistemas em produção</span></div>
+        <div class="stat"><b>200+</b><span>scripts e automações</span></div>
+      </div>
+    </div>
+
+    <div class="console ticks" aria-label="Exemplo de automação: um boleto chega por e-mail, a IA lê, o sistema confere e cria o lançamento">
+      <div class="console-head">
+        <span class="sq"></span><span class="sq"></span><span class="sq"></span>
+        <span class="file" id="console-file">boletos.log</span>
+        <span class="live"><span class="dot" aria-hidden="true"></span>Rodando</span>
+      </div>
+      <div class="console-body" id="console-body">
+        <div class="ln"><span class="t">09:14:02</span><span class="k">e-mail recebido</span><span class="v">cobranca_novembro.pdf</span></div>
+        <div class="ln"><span class="t">09:14:03</span><span class="k">IA leu o boleto</span><span class="v">Gráfica Exemplo · R$ 1.240,00 · vence 15/11</span></div>
+        <div class="ln"><span class="t">09:14:03</span><span class="k">código de barras</span><span class="v">valor confere ✓</span></div>
+        <div class="ln"><span class="t">09:14:04</span><span class="k">remetente</span><span class="v">na lista de confiança ✓</span></div>
+        <div class="ln"><span class="t">09:14:04</span><span class="k">duplicidade</span><span class="v">nenhum comprovante igual ✓</span></div>
+        <div class="ln res"><span class="t">09:14:04</span><span class="k">resultado</span><span class="v"><span>lançado, aguardando conferência</span><i class="cursor" aria-hidden="true"></i></span></div>
+      </div>
+      <div class="console-foot"><span>Automação real do ERP no ar</span><span>Dados fictícios</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="ao-vivo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="label">[ Ao vivo ]</span>
+        <h2>O sistema funcionando.</h2>
+      </div>
+      <p>Gravação real do Visão, o ERP que construí com IA, rodando com dados fictícios de uma empresa de exemplo. A interface é a mesma do ERP que está em produção.</p>
+    </div>
+    <div class="live-grid">
+      <div class="live-main">
+        <div class="browser ticks">
+          <div class="browser-bar">
+            <span class="sq"></span><span class="sq"></span><span class="sq"></span>
+            <span class="url">visão · empresa exemplo</span>
+            <span class="tagline">Dados fictícios</span>
+          </div>
+          <video id="demo-video" src="midia/inicio.mp4" poster="midia/inicio.jpg" width="1280" height="800" muted playsinline autoplay preload="metadata" aria-label="Gravação do sistema: visão geral, contas a pagar, fluxo de caixa e conciliação"></video>
+        </div>
+        <div class="clip-tabs" role="tablist" aria-label="Telas do sistema">
+          <button class="clip-tab" type="button" role="tab" id="clip-inicio" aria-selected="true" data-src="midia/inicio.mp4" data-poster="midia/inicio.jpg" data-cap="Saldo de hoje, projeção de 30 dias e só os avisos que pedem atenção.">Visão geral<span class="bar"></span></button>
+          <button class="clip-tab" type="button" role="tab" id="clip-pagar" aria-selected="false" data-src="midia/pagar.mp4" data-poster="midia/pagar.jpg" data-cap="Contas a pagar com filtros de um clique: próximos 7 dias, atrasados e busca por fornecedor.">Contas a pagar<span class="bar"></span></button>
+          <button class="clip-tab" type="button" role="tab" id="clip-fluxo" aria-selected="false" data-src="midia/fluxo.mp4" data-poster="midia/fluxo.jpg" data-cap="O mês dia a dia: o que entra, o que sai e o saldo projetado no fim de cada dia.">Fluxo de caixa<span class="bar"></span></button>
+          <button class="clip-tab" type="button" role="tab" id="clip-conciliacao" aria-selected="false" data-src="midia/conciliacao.mp4" data-poster="midia/conciliacao.jpg" data-cap="O extrato do banco casado com os lançamentos, com a certeza de cada sugestão. Um clique confirma.">Conciliação<span class="bar"></span></button>
+        </div>
+        <p class="clip-cap" id="demo-cap" aria-live="polite">Saldo de hoje, projeção de 30 dias e só os avisos que pedem atenção.</p>
+      </div>
+      <figure class="phone-wrap">
+        <div class="phone">
+          <video id="demo-celular" src="midia/celular.mp4" poster="midia/celular.jpg" width="480" height="1040" muted loop playsinline autoplay preload="metadata" aria-label="Gravação do sistema no celular"></video>
+        </div>
+        <figcaption>No celular, como aplicativo</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="servicos">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="label">[ Serviços ]</span>
+        <h2>O que eu construo para você.</h2>
+      </div>
+      <p>Cada projeto começa pela rotina de quem vai usar o sistema. A tecnologia vem depois, escolhida para resolver aquele problema.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16"/><path d="M3 8h18M7 12h5M7 15.5h8"/></svg>
+        <h3>Sistemas web sob medida</h3>
+        <p>ERP, controles financeiros, cadastros e painéis feitos para o seu processo. Funcionam no computador e no celular, com login e perfis de acesso.</p>
+        <p class="for"><span>Ideal para</span>quem controla a empresa em planilhas espalhadas</p>
+      </article>
+      <article class="svc">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 12h4l6-5M11 12l6 5"/></svg>
+        <h3>Automação com IA</h3>
+        <p>E-mails, boletos e notas fiscais lidos por IA e lançados sozinhos. Tarefas repetitivas que rodam todo dia, sem ninguém apertar botão.</p>
+        <p class="for"><span>Ideal para</span>equipes que perdem horas copiando dados</p>
+      </article>
+      <article class="svc">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18M6 17v-6M10 17V7M14 17v-4M18 17V5"/></svg>
+        <h3>Painéis de gestão</h3>
+        <p>Fluxo de caixa, DRE, funil de vendas e metas numa tela, atualizados sozinhos. Você enxerga o mês inteiro antes de ele acontecer.</p>
+        <p class="for"><span>Ideal para</span>sócios e diretores que querem ver os números sem pedir relatório</p>
+      </article>
+      <article class="svc">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10.5 6h3M11 18h2"/></svg>
+        <h3>Apps de agendamento e atendimento</h3>
+        <p>Aplicativo que o cliente instala direto do navegador, com agenda, notificações no celular e conversa pelo WhatsApp.</p>
+        <p class="for"><span>Ideal para</span>prestadores de serviço que agendam por mensagem</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cases">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="label">[ Cases ]</span>
+        <h2>Sistemas reais, rodando.</h2>
+      </div>
+      <p>Projetos usados no dia a dia por empresas e pessoas. Dados de clientes nunca aparecem aqui: as ilustrações usam números fictícios.</p>
+    </div>
+
+    <div class="cases">
+      <article class="case">
+        <figure class="viz">
+          <div class="frame ticks">
+            <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração de painel financeiro: saldo, projeção de 30 dias e totais a pagar e a receber">
+              <defs><linearGradient id="g-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="stop-a"/><stop offset="1" class="stop-b"/></linearGradient></defs>
+              <text x="24" y="38" class="s-l">SALDO EM CONTA</text>
+              <text x="24" y="72" class="s-v">R$ 48.215,30</text>
+              <text x="456" y="38" text-anchor="end" class="s-l">PROJEÇÃO · 30 DIAS</text>
+              <text x="456" y="70" text-anchor="end" class="s-mi">R$ 61.905,12</text>
+              <path d="M24 112H456M24 146H456M24 180H456" class="s-grid"/>
+              <path d="M24 150L64 148L104 152L144 164L184 172L224 174L264 172L304 146L344 140L384 136L424 128L456 124V196H24Z" fill="url(#g-area)"/>
+              <polyline points="24,150 64,148 104,152 144,164 184,172 224,174 264,172 304,146 344,140 384,136 424,128 456,124" class="s-ink"/>
+              <circle cx="456" cy="124" r="3.5" class="s-solid"/>
+              <text x="24" y="214" class="s-l">HOJE</text>
+              <text x="240" y="214" text-anchor="middle" class="s-l">+15 DIAS</text>
+              <text x="456" y="214" text-anchor="end" class="s-l">+30 DIAS</text>
+              <rect x="24.5" y="230.5" width="135" height="52" class="s-box"/>
+              <rect x="172.5" y="230.5" width="135" height="52" class="s-box"/>
+              <rect x="320.5" y="230.5" width="135" height="52" class="s-box"/>
+              <text x="34" y="250" class="s-l">A PAGAR · 30D</text>
+              <text x="34" y="270" class="s-m">R$ 18.740,00</text>
+              <text x="182" y="250" class="s-l">A RECEBER · 30D</text>
+              <text x="182" y="270" class="s-m">R$ 32.429,82</text>
+              <text x="330" y="250" class="s-l">A CONFERIR</text>
+              <text x="330" y="270" class="s-m">3 boletos</text>
+            </svg>
+          </div>
+          <figcaption>Ilustração · números fictícios</figcaption>
+        </figure>
+        <div>
+          <div class="tags"><span class="tag solid">Em produção</span><span class="tag">Uso diário</span></div>
+          <h3>ERP Financeiro Web</h3>
+          <p class="where">Startup de mídia OOH · São Paulo</p>
+          <p class="lead">O financeiro vivia em planilhas, e-mails e WhatsApp. Ninguém via o caixa do mês, e um boleto falso quase foi pago. Hoje a empresa toda trabalha num sistema só.</p>
+          <dl class="kv">
+            <dt>O que fiz</dt>
+            <dd>
+              <ul class="done">
+                <li>~25 painéis: pagar, receber, fluxo de caixa com projeção, conciliação, DRE e folha</li>
+                <li>Boletos e notas fiscais lidos por IA direto do e-mail</li>
+                <li>Quarentena antigolpe e trava contra pagamento em dobro</li>
+                <li>Perfis de acesso, verificação em duas etapas e backup semanal</li>
+              </ul>
+            </dd>
+            <dt>Resultado</dt>
+            <dd>Caixa dos próximos 30 dias numa tela. O fechamento do mês sai num único download para a contabilidade.</dd>
+          </dl>
+          <div class="metrics">
+            <div><b>~20 mil</b><span>linhas de código</span></div>
+            <div><b>12</b><span>rotinas agendadas</span></div>
+            <div><b>13</b><span>assistentes de IA</span></div>
+            <div><b>24h</b><span>no ar, na nuvem</span></div>
+          </div>
+          <div class="chips"><span>Claude Code</span><span>JavaScript</span><span>SQL</span><span>Cloudflare Workers</span><span>D1</span><span>R2</span></div>
+          <p class="note">A mesma interface aparece <a href="#ao-vivo">funcionando ao vivo</a>, com dados fictícios</p>
+        </div>
+      </article>
+
+      <article class="case">
+        <figure class="viz">
+          <div class="frame ticks">
+            <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração de conciliação: linhas do extrato do banco ligadas aos lançamentos do sistema, com uma movimentação sem lançamento destacada">
+              <text x="24" y="34" class="s-l">EXTRATO DO BANCO · OFX</text>
+              <text x="456" y="34" text-anchor="end" class="s-l">LANÇAMENTOS NO SISTEMA</text>
+              <g>
+                <rect x="24.5" y="50.5" width="190" height="30" class="s-box"/>
+                <text x="34" y="69" class="s-r">05/11 PIX recebido</text><text x="204" y="69" text-anchor="end" class="s-r">+2.300,00</text>
+                <path d="M215 65.5H265" class="s-link"/><circle cx="215" cy="65.5" r="2" class="s-solid"/><circle cx="265" cy="65.5" r="2" class="s-solid"/>
+                <rect x="265.5" y="50.5" width="190" height="30" class="s-box"/>
+                <text x="276" y="69" class="s-m">Venda · Cliente A</text><text x="446" y="69" text-anchor="end" class="s-m">✓</text>
+              </g>
+              <g>
+                <rect x="24.5" y="92.5" width="190" height="30" class="s-box"/>
+                <text x="34" y="111" class="s-r">06/11 Boleto pago</text><text x="204" y="111" text-anchor="end" class="s-r">−640,00</text>
+                <path d="M215 107.5H265" class="s-link"/><circle cx="215" cy="107.5" r="2" class="s-solid"/><circle cx="265" cy="107.5" r="2" class="s-solid"/>
+                <rect x="265.5" y="92.5" width="190" height="30" class="s-box"/>
+                <text x="276" y="111" class="s-m">Fornecedor B</text><text x="446" y="111" text-anchor="end" class="s-m">✓</text>
+              </g>
+              <g>
+                <rect x="24" y="134" width="191" height="31" class="s-solid"/>
+                <text x="34" y="153" class="s-inv">07/11 TARIFA</text><text x="204" y="153" text-anchor="end" class="s-inv">−29,90</text>
+                <path d="M215 149.5H265" class="s-box-d"/>
+                <rect x="265.5" y="134.5" width="190" height="30" class="s-box-d"/>
+                <text x="276" y="153" class="s-l">SEM LANÇAMENTO · EXPLICAR</text>
+              </g>
+              <g>
+                <rect x="24.5" y="176.5" width="190" height="30" class="s-box"/>
+                <text x="34" y="195" class="s-r">08/11 TED recebida</text><text x="204" y="195" text-anchor="end" class="s-r">+1.150,00</text>
+                <path d="M215 191.5H265" class="s-link"/><circle cx="215" cy="191.5" r="2" class="s-solid"/><circle cx="265" cy="191.5" r="2" class="s-solid"/>
+                <rect x="265.5" y="176.5" width="190" height="30" class="s-box"/>
+                <text x="276" y="195" class="s-m">Venda · Cliente C</text><text x="446" y="195" text-anchor="end" class="s-m">✓</text>
+              </g>
+              <g>
+                <rect x="24.5" y="218.5" width="190" height="30" class="s-box"/>
+                <text x="34" y="237" class="s-r">09/11 Débito auto.</text><text x="204" y="237" text-anchor="end" class="s-r">−312,40</text>
+                <path d="M215 233.5H265" class="s-link"/><circle cx="215" cy="233.5" r="2" class="s-solid"/><circle cx="265" cy="233.5" r="2" class="s-solid"/>
+                <rect x="265.5" y="218.5" width="190" height="30" class="s-box"/>
+                <text x="276" y="237" class="s-m">Internet e telefone</text><text x="446" y="237" text-anchor="end" class="s-m">✓</text>
+              </g>
+              <text x="24" y="280" class="s-l">4 DE 5 CONCILIADOS SOZINHOS · 1 PARA EXPLICAR</text>
+            </svg>
+          </div>
+          <figcaption>Ilustração · números fictícios</figcaption>
+        </figure>
+        <div>
+          <div class="tags"><span class="tag solid">Produto próprio</span><span class="tag">Em desenvolvimento</span></div>
+          <h3>Visão, ERP financeiro</h3>
+          <p class="where">Para pessoas e pequenas empresas</p>
+          <p class="lead">Reescrevi do zero o que aprendi no ERP, agora como produto. Separa as finanças pessoais das da empresa, concilia o extrato sozinho e tem um assistente de IA que responde sobre o seu dinheiro.</p>
+          <dl class="kv">
+            <dt>O que tem</dt>
+            <dd>
+              <ul class="done">
+                <li>Contas a pagar e a receber, fluxo de caixa e agenda</li>
+                <li>Conciliação automática com o extrato do banco (OFX)</li>
+                <li>Assistente de IA dentro do sistema</li>
+                <li>Testes automáticos a cada atualização</li>
+              </ul>
+            </dd>
+          </dl>
+          <div class="chips"><span>React</span><span>TypeScript</span><span>Hono</span><span>Cloudflare D1</span><span>Vitest</span><span>GitHub Actions</span></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <figure class="viz">
+          <div class="frame ticks">
+            <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração de aplicativo de agendamento no celular: escolha de serviço, dia e horário">
+              <rect x="172.5" y="10.5" width="135" height="279" rx="18" class="s-bg"/>
+              <rect x="218" y="19" width="44" height="5" rx="2.5" class="s-solid" opacity=".35"/>
+              <text x="186" y="50" class="s-m">Agendar serviço</text>
+              <rect x="184.5" y="60.5" width="111" height="24" class="s-box"/>
+              <text x="192" y="76" class="s-l">LAVAGEM DETALHADA</text>
+              <rect x="184.5" y="94.5" width="24" height="34" class="s-box"/>
+              <rect x="213" y="94" width="25" height="35" class="s-solid"/>
+              <rect x="242.5" y="94.5" width="24" height="34" class="s-box"/>
+              <rect x="271.5" y="94.5" width="24" height="34" class="s-box"/>
+              <text x="196.5" y="108" text-anchor="middle" class="s-l">SEG</text><text x="196.5" y="122" text-anchor="middle" class="s-m">10</text>
+              <text x="225.5" y="108" text-anchor="middle" class="s-inv">TER</text><text x="225.5" y="122" text-anchor="middle" class="s-inv">11</text>
+              <text x="254.5" y="108" text-anchor="middle" class="s-l">QUA</text><text x="254.5" y="122" text-anchor="middle" class="s-m">12</text>
+              <text x="283.5" y="108" text-anchor="middle" class="s-l">QUI</text><text x="283.5" y="122" text-anchor="middle" class="s-m">13</text>
+              <rect x="184.5" y="140.5" width="53" height="24" class="s-box"/><text x="211" y="156" text-anchor="middle" class="s-m">08:00</text>
+              <rect x="242.5" y="140.5" width="53" height="24" class="s-box-d"/><text x="269" y="156" text-anchor="middle" class="s-l">09:30</text><path d="M252 152.5H286" class="s-link"/>
+              <rect x="184" y="170" width="54" height="25" class="s-solid"/><text x="211" y="186" text-anchor="middle" class="s-inv">11:00</text>
+              <rect x="242.5" y="170.5" width="53" height="24" class="s-box"/><text x="269" y="186" text-anchor="middle" class="s-m">13:00</text>
+              <rect x="184.5" y="200.5" width="53" height="24" class="s-box"/><text x="211" y="216" text-anchor="middle" class="s-m">14:30</text>
+              <rect x="242.5" y="200.5" width="53" height="24" class="s-box"/><text x="269" y="216" text-anchor="middle" class="s-m">16:00</text>
+              <rect x="184" y="244" width="112" height="30" class="s-solid"/>
+              <text x="240" y="263" text-anchor="middle" class="s-inv">CONFIRMAR</text>
+              <text x="24" y="76" class="s-l">INSTALA COMO APP</text><path d="M122 72.5H168" class="s-link"/><circle cx="170" cy="72.5" r="2" class="s-solid"/>
+              <text x="24" y="216" class="s-l">AVISO NO CELULAR</text><path d="M122 212.5H168" class="s-link"/><circle cx="170" cy="212.5" r="2" class="s-solid"/>
+              <text x="456" y="114" text-anchor="end" class="s-l">ORÇAMENTO NO WHATSAPP</text><path d="M312 110.5H330" class="s-link"/><circle cx="310" cy="110.5" r="2" class="s-solid"/>
+              <text x="456" y="262" text-anchor="end" class="s-l">ÁREA DA EQUIPE</text><path d="M312 258.5H368" class="s-link"/><circle cx="310" cy="258.5" r="2" class="s-solid"/>
+            </svg>
+          </div>
+          <figcaption>Ilustração · horários fictícios</figcaption>
+        </figure>
+        <div>
+          <div class="tags"><span class="tag solid">Negócio real</span><span class="tag">No celular</span></div>
+          <h3>App de agendamento</h3>
+          <p class="where">Estética automotiva · São Paulo</p>
+          <p class="lead">O cliente escolhe o serviço, o dia e o horário pelo celular. A equipe organiza a agenda no mesmo app, sem trocar dezenas de mensagens para marcar um horário.</p>
+          <dl class="kv">
+            <dt>O que tem</dt>
+            <dd>
+              <ul class="done">
+                <li>Instala no celular como aplicativo, sem passar por loja</li>
+                <li>Notificações no celular</li>
+                <li>Fotos do veículo e orçamento pelo WhatsApp</li>
+                <li>Área da equipe com acesso por PIN</li>
+              </ul>
+            </dd>
+          </dl>
+          <div class="chips"><span>PWA</span><span>Web Push</span><span>Cloudflare Workers</span><span>D1</span></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <figure class="viz">
+          <div class="frame ticks">
+            <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração de funil de vendas em colunas, de frio a fechado, e agenda do time com feedback de reunião">
+              <text x="24" y="30" class="s-l">FRIO · 4</text>
+              <text x="136" y="30" class="s-l">MORNO · 3</text>
+              <text x="248" y="30" class="s-l">QUENTE · 2</text>
+              <text x="360" y="30" class="s-l">FECHADO · 1</text>
+              <path d="M24 38.5H120M136 38.5H232M248 38.5H344M360 38.5H456" class="s-line"/>
+              <rect x="24.5" y="48.5" width="95" height="27" class="s-box"/><text x="32" y="61" class="s-r">Cliente A</text><rect x="32" y="66" width="40" height="3" class="s-bar"/>
+              <rect x="24.5" y="82.5" width="95" height="27" class="s-box"/><text x="32" y="95" class="s-r">Cliente B</text><rect x="32" y="100" width="62" height="3" class="s-bar"/>
+              <rect x="24.5" y="116.5" width="95" height="27" class="s-box"/><text x="32" y="129" class="s-r">Cliente C</text><rect x="32" y="134" width="28" height="3" class="s-bar"/>
+              <rect x="24.5" y="150.5" width="95" height="27" class="s-box"/><text x="32" y="163" class="s-r">Cliente D</text><rect x="32" y="168" width="52" height="3" class="s-bar"/>
+              <rect x="136.5" y="48.5" width="95" height="27" class="s-box"/><text x="144" y="61" class="s-r">Cliente E</text><rect x="144" y="66" width="70" height="3" class="s-bar"/>
+              <rect x="136.5" y="82.5" width="95" height="27" class="s-box"/><text x="144" y="95" class="s-r">Cliente F</text><rect x="144" y="100" width="46" height="3" class="s-bar"/>
+              <rect x="136.5" y="116.5" width="95" height="27" class="s-box-d"/><text x="144" y="129" class="s-r">Cliente G</text><text x="144" y="139" class="s-l">PARADA · 32D</text>
+              <rect x="248.5" y="48.5" width="95" height="27" class="s-box"/><text x="256" y="61" class="s-r">Cliente H</text><rect x="256" y="66" width="58" height="3" class="s-bar"/>
+              <rect x="248.5" y="82.5" width="95" height="27" class="s-box"/><text x="256" y="95" class="s-r">Cliente I</text><rect x="256" y="100" width="36" height="3" class="s-bar"/>
+              <rect x="360" y="48" width="96" height="28" class="s-solid"/><text x="368" y="61" class="s-inv">CLIENTE J</text><rect x="368" y="66" width="64" height="3" class="s-bar-inv"/>
+              <text x="24" y="204" class="s-l">AGENDA DO TIME · ATUALIZADA HÁ 3 MIN</text>
+              <text x="456" y="204" text-anchor="end" class="s-l">GOOGLE AGENDA</text>
+              <rect x="24.5" y="212.5" width="431" height="30" class="s-box"/>
+              <text x="34" y="231" class="s-m">14:00</text><text x="84" y="231" class="s-m">Reunião · Cliente H</text>
+              <rect x="368.5" y="218.5" width="80" height="18" class="s-box"/><text x="408.5" y="231" text-anchor="middle" class="s-l">+ FEEDBACK</text>
+              <rect x="24.5" y="248.5" width="431" height="30" class="s-box"/>
+              <text x="34" y="267" class="s-m">16:30</text><text x="84" y="267" class="s-m">Apresentação · Cliente E</text>
+              <rect x="368" y="254" width="81" height="19" class="s-solid"/><text x="408.5" y="267" text-anchor="middle" class="s-inv">FEEDBACK ✓</text>
+            </svg>
+          </div>
+          <figcaption>Ilustração · clientes fictícios</figcaption>
+        </figure>
+        <div>
+          <div class="tags"><span class="tag solid">No ar</span><span class="tag">Pedido da diretoria</span></div>
+          <h3>Plataforma Comercial</h3>
+          <p class="where">Time comercial · startup de mídia OOH</p>
+          <p class="lead">O time acompanhava as propostas numa planilha compartilhada e num painel com números que não batiam. Reuniões e próximos passos se perdiam no WhatsApp. A diretoria comercial pediu um lugar só para enxergar o funil inteiro.</p>
+          <dl class="kv">
+            <dt>O que fiz</dt>
+            <dd>
+              <ul class="done">
+                <li>Funil de propostas em colunas, com o histórico de cada negociação</li>
+                <li>Previsão de vendas contra a meta do mês e motivos de perda</li>
+                <li>Agenda do time ligada ao Google Agenda, com feedback de cada reunião</li>
+                <li>Follow-ups com sugestões e um assistente de IA que consulta o funil</li>
+                <li>Alerta de proposta parada, duplicada ou sem valor</li>
+              </ul>
+            </dd>
+            <dt>Resultado</dt>
+            <dd>Funil, previsão de vendas e agenda do time reunidos numa tela só, com os números conferidos contra a planilha antiga.</dd>
+          </dl>
+          <div class="metrics">
+            <div><b>300+</b><span>propostas organizadas</span></div>
+            <div><b>15 min</b><span>agenda sincronizada</span></div>
+            <div><b>160+</b><span>testes automáticos</span></div>
+            <div><b>7</b><span>checagens de dados</span></div>
+          </div>
+          <div class="chips"><span>Claude Code</span><span>JavaScript</span><span>Cloudflare Workers</span><span>D1</span><span>Google Agenda</span><span>API do Claude</span></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="more">
+      <span class="label">[ Também construí ]</span>
+      <ul>
+        <li><b>Norte</b><span>Painel pessoal de tarefas, hábitos e metas, com assistente de IA</span><em>PWA · Cloudflare</em></li>
+        <li><b>Importador de extratos</b><span>Lê arquivos OFX do banco e confere tudo antes de importar</span><em>PowerShell</em></li>
+        <li><b>Painel de campanhas de mídia</b><span>Mapa de pontos, simulador de impactos e diário da operação</span><em>Web · Mapas</em></li>
+        <li><b>Diagnóstico financeiro</b><span>Histórico de uma empresa reconstruído a partir de 1.800+ movimentações bancárias</span><em>Excel · SQL</em></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="processo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="label">[ Processo ]</span>
+        <h2>Como eu trabalho.</h2>
+      </div>
+      <p>O mesmo método que colocou dois sistemas no ar, em cinco passos. Você acompanha cada etapa e testa o sistema antes de ele virar rotina.</p>
+    </div>
+    <ol class="steps">
+      <li class="step"><span class="n">01</span><h3>Conversa</h3><p>Entendo como a rotina funciona hoje, com quem faz o trabalho, e onde está o gargalo.</p></li>
+      <li class="step"><span class="n">02</span><h3>Regras</h3><p>Transformo a rotina em regras claras: prazos, aprovações e quem vê o quê.</p></li>
+      <li class="step"><span class="n">03</span><h3>Construção com IA</h3><p>Desenvolvo com Claude Code, rápido, com revisão de segurança antes de publicar.</p></li>
+      <li class="step"><span class="n">04</span><h3>Teste com dados reais</h3><p>Cada tela é usada no dia a dia antes de virar padrão. O que incomoda, eu ajusto.</p></li>
+      <li class="step"><span class="n">05</span><h3>No ar e evoluindo</h3><p>Sistema na nuvem, com backup e rotinas automáticas. Sigo melhorando pelo uso real.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="sobre">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="label">[ Sobre ]</span>
+        <h2>Analista financeiro que aprendeu a construir.</h2>
+      </div>
+    </div>
+    <div class="about">
+      <div class="about-text">
+        <p>Comecei em 2017 como jovem aprendiz na contabilidade e passei os anos seguintes perto do dinheiro e dos processos: indústria, despachante e uma startup de mídia, onde hoje sou Analista Financeiro Pleno.</p>
+        <p>Em 2025 comecei a construir com IA. O primeiro sistema virou o ERP que a empresa usa todo dia. Depois veio a plataforma do time comercial. Não tenho formação em TI: aprendi na prática, com curiosidade e o Claude como parceiro de programação. Por isso falo a língua de quem usa o sistema, de contas a pagar a fechamento do mês.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Base</dt><dd>São Paulo · SP</dd></div>
+        <div><dt>Atendimento</dt><dd>Remoto, todo o Brasil</dd></div>
+        <div><dt>Experiência</dt><dd>8+ anos em finanças</dd></div>
+        <div><dt>Ferramenta</dt><dd>Claude Code</dd></div>
+        <div><dt>No ar</dt><dd>ERP e plataforma comercial</dd></div>
+        <div><dt>Status</dt><dd>Aceitando projetos</dd></div>
+      </dl>
+    </div>
+    <ol class="career" aria-label="Trajetória">
+      <li><b>2017</b><span>Jovem aprendiz na contabilidade, indústria têxtil</span></li>
+      <li><b>2019</b><span>Financeiro: contas a pagar e conciliação diária</span></li>
+      <li><b>2019–25</b><span>Administrativo em despachante, duas promoções</span></li>
+      <li><b>2025</b><span>Startup de mídia: campo, depois financeiro</span></li>
+      <li><b>2026</b><span>Dois sistemas no ar e promoção a Analista Pleno</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="ferramentas">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="label">[ Ferramentas ]</span>
+        <h2>O que eu uso.</h2>
+      </div>
+      <p>Finanças primeiro. Saber como o dinheiro anda na empresa é o que deixa o sistema certo de primeira.</p>
+    </div>
+    <div class="stack">
+      <div class="col key"><h3>Finanças</h3><ul><li>Contas a pagar e a receber</li><li>Conciliação bancária</li><li>Fluxo de caixa</li><li>DRE gerencial</li><li>Fechamento contábil</li></ul></div>
+      <div class="col"><h3>IA</h3><ul><li>Claude Code</li><li>IA generativa</li><li>Engenharia de prompt</li><li>Leitura de documentos com IA</li></ul></div>
+      <div class="col"><h3>Web</h3><ul><li>JavaScript e TypeScript</li><li>React</li><li>HTML e CSS</li><li>Apps instaláveis (PWA)</li></ul></div>
+      <div class="col"><h3>Dados</h3><ul><li>SQL</li><li>Cloudflare D1</li><li>Extratos bancários OFX</li><li>Excel avançado</li></ul></div>
+      <div class="col"><h3>Nuvem</h3><ul><li>Cloudflare Workers</li><li>Arquivos no R2</li><li>Rotinas agendadas</li><li>Backup automático</li></ul></div>
+      <div class="col"><h3>Rotina de código</h3><ul><li>Git e GitHub</li><li>PowerShell</li><li>Testes automáticos</li><li>Notificações no celular</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec contact" id="contato">
+  <div class="wrap">
+    <div>
+      <span class="label">[ Contato ]</span>
+      <h2>Seu processo ainda vive numa planilha?</h2>
+      <p class="sub">Me conta como funciona hoje. Respondo rápido e digo, sem compromisso, o que dá para automatizar.</p>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <div><small>WhatsApp</small><span class="val" id="c-whats">(11) 96164-5087</span></div>
+        <div class="acts">
+          <a class="ibtn" href="https://wa.me/5511961645087?text=Ol%C3%A1%2C%20Bruno!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Conversar ↗</a>
+          <button class="ibtn" type="button" id="copy-whats" data-copy="(11) 96164-5087" aria-controls="c-whats">Copiar</button>
+        </div>
+      </div>
+      <div class="row">
+        <div><small>E-mail</small><span class="val" id="c-mail">b.rodrigues.omena@gmail.com</span></div>
+        <div class="acts"><button class="ibtn" type="button" id="copy-mail" data-copy="b.rodrigues.omena@gmail.com" aria-controls="c-mail">Copiar</button></div>
+      </div>
+      <div class="row">
+        <div><small>LinkedIn</small><a class="val" href="https://www.linkedin.com/in/brunodelucaomena" target="_blank" rel="noopener">linkedin.com/in/brunodelucaomena</a></div>
+        <div class="acts"><a class="ibtn" href="https://www.linkedin.com/in/brunodelucaomena" target="_blank" rel="noopener">Abrir ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 Bruno de Luca</span>
+    <span>Feito com Claude Code · HTML, CSS e JS num arquivo só</span>
+    <a href="#topo">Voltar ao topo ↑</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  var KEY='bdl-tema';
+  var tbtn=document.getElementById('tema');
+  try{var salvo=localStorage.getItem(KEY);if(salvo==='light'||salvo==='dark')root.setAttribute('data-theme',salvo);}catch(e){}
+  function rotulo(){
+    var claro=root.getAttribute('data-theme')==='light';
+    tbtn.setAttribute('aria-label',claro?'Usar tema escuro':'Usar tema claro');
+    tbtn.setAttribute('aria-pressed',String(claro));
+  }
+  rotulo();
+  tbtn.addEventListener('click',function(){
+    var prox=root.getAttribute('data-theme')==='light'?'dark':'light';
+    root.setAttribute('data-theme',prox);
+    try{localStorage.setItem(KEY,prox);}catch(e){}
+    rotulo();
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var texto=b.getAttribute('data-copy');
+      function volta(){setTimeout(function(){b.textContent='Copiar';},1800);}
+      function seleciona(){
+        var el=document.getElementById(b.getAttribute('aria-controls'));
+        if(el){var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);}
+        b.textContent='Selecionado';volta();
+      }
+      try{navigator.clipboard.writeText(texto).then(function(){b.textContent='Copiado';volta();},seleciona);}catch(e){seleciona();}
+    });
+  });
+
+
+  (function(){
+    var v=document.getElementById('demo-video'), cel=document.getElementById('demo-celular');
+    var abas=[].slice.call(document.querySelectorAll('.clip-tab'));
+    var leg=document.getElementById('demo-cap');
+    if(!v||!abas.length)return;
+    var reduz=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var atual=0;
+    function toca(el){var p=el.play();if(p&&p.catch)p.catch(function(){});}
+    function escolhe(i,tocar){
+      atual=i;
+      abas.forEach(function(a,j){a.setAttribute('aria-selected',String(j===i));a.querySelector('.bar').style.width=j<i?'100%':'0%';});
+      v.poster=abas[i].getAttribute('data-poster');v.src=abas[i].getAttribute('data-src');leg.textContent=abas[i].getAttribute('data-cap');
+      if(tocar)toca(v);
+    }
+    abas.forEach(function(a,i){a.addEventListener('click',function(){escolhe(i,true);});});
+    v.addEventListener('timeupdate',function(){if(v.duration)abas[atual].querySelector('.bar').style.width=(v.currentTime/v.duration*100)+'%';});
+    v.addEventListener('ended',function(){escolhe((atual+1)%abas.length,true);});
+    if(reduz){[v,cel].forEach(function(el){if(!el)return;el.removeAttribute('autoplay');el.pause();el.controls=true;});return;}
+    if('IntersectionObserver' in window){
+      var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)toca(e.target);else e.target.pause();});},{threshold:.2});
+      obs.observe(v);if(cel)obs.observe(cel);
+    }
+  })();
+
+  var cenas=[
+    {arq:'boletos.log',linhas:[
+      ['09:14:02','e-mail recebido','cobranca_novembro.pdf'],
+      ['09:14:03','IA leu o boleto','Gráfica Exemplo · R$ 1.240,00 · vence 15/11'],
+      ['09:14:03','código de barras','valor confere ✓'],
+      ['09:14:04','remetente','na lista de confiança ✓'],
+      ['09:14:04','duplicidade','nenhum comprovante igual ✓'],
+      ['09:14:04','resultado','lançado, aguardando conferência','res']]},
+    {arq:'boletos.log',linhas:[
+      ['09:31:40','e-mail recebido','imposto_urgente.pdf'],
+      ['09:31:41','IA leu o boleto','"imposto federal" em boleto comum'],
+      ['09:31:41','padrão de golpe','imposto não se paga assim ✕'],
+      ['09:31:41','remetente','fora da lista de confiança ✕'],
+      ['09:31:42','resultado','quarentena: ninguém paga sem revisar','res alert']]},
+    {arq:'conciliacao.log',linhas:[
+      ['18:00:00','rotina diária','conciliação do extrato'],
+      ['18:00:02','extrato OFX','47 movimentações importadas'],
+      ['18:00:03','conciliados','45 de 47 ✓'],
+      ['18:00:03','sem lançamento','2, enviadas para explicar'],
+      ['18:00:04','resultado','caixa do dia conferido','res']]}
+  ];
+  var corpo=document.getElementById('console-body');
+  var arq=document.getElementById('console-file');
+  var reduz=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduz||!corpo)return;
+  var cursor=document.createElement('i');cursor.className='cursor';cursor.setAttribute('aria-hidden','true');
+  function espera(ms){return new Promise(function(r){setTimeout(r,ms);});}
+  async function toca(cena){
+    arq.textContent=cena.arq;
+    corpo.textContent='';
+    for(var i=0;i<cena.linhas.length;i++){
+      var l=cena.linhas[i];
+      var d=document.createElement('div');d.className='ln'+(l[3]?' '+l[3]:'');
+      var t=document.createElement('span');t.className='t';t.textContent=l[0];
+      var k=document.createElement('span');k.className='k';k.textContent=l[1];
+      var v=document.createElement('span');v.className='v';
+      var txt=document.createElement('span');v.appendChild(txt);v.appendChild(cursor);
+      d.appendChild(t);d.appendChild(k);d.appendChild(v);corpo.appendChild(d);
+      for(var c=1;c<=l[2].length;c++){txt.textContent=l[2].slice(0,c);await espera(16);}
+      await espera(i===cena.linhas.length-2?520:300);
+    }
+  }
+  var atual=0;
+  async function laco(){
+    atual=(atual+1)%cenas.length;
+    await toca(cenas[atual]);
+    await espera(4600);
+    laco();
+  }
+  setTimeout(laco,5200);
+})();
+</script>
+</body>
+</html>
