@@ -165,8 +165,8 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
 @media (max-width:480px){.browser-bar .tagline{display:none}}
 .browser video,.phone video{display:block;width:100%;height:auto;max-width:100%;background:var(--screen)}
 .browser video{aspect-ratio:16/10}
-.clip-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-top:0}
-@media (max-width:560px){.clip-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.clip-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-top:0}
+@media (max-width:760px){.clip-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .clip-tab{position:relative;padding:15px 12px 17px;border:0;background:var(--bg);color:var(--muted);text-align:left;font:500 11px/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:color .2s,background .2s}
 .clip-tab:hover{color:var(--fg)}
 .clip-tab[aria-selected="true"]{color:var(--ink);background:var(--panel)}
@@ -195,6 +195,25 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
 .viz{margin:0}
 .viz .frame{border:1px solid var(--line-2);background:var(--panel)}
 .viz svg{display:block;width:100%;height:auto;max-width:100%}
+/* case com filme: o filme ganha mais largura e acompanha a leitura do texto ao lado */
+@media (min-width:921px){.case:has(.viz.film){grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}.viz.film{position:sticky;top:88px}}
+/* filme do case: toca sozinho quando entra na tela; um clique pausa */
+.viz.film .frame{position:relative;background:#08090b}
+.viz.film video{display:block;width:100%;height:auto;aspect-ratio:16/10;background:#08090b;cursor:pointer}
+.film-btn{position:absolute;right:10px;top:10px;height:28px;padding-inline:10px;border:1px solid rgba(255,255,255,.3);background:rgba(8,9,11,.74);color:#f4f4f4;font:500 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;opacity:0;transition:opacity .2s}
+.viz.film .frame:hover .film-btn,.film-btn:focus-visible,.viz.film.pausado .film-btn{opacity:1}
+@media (hover:none){.film-btn{opacity:1}}
+/* ilustrações que se desenham quando o case entra na tela (só com o script ativo e sem "reduzir movimento") */
+@media (prefers-reduced-motion:no-preference){
+  .anima-ok .viz.anim .s-ink{stroke-dasharray:560;stroke-dashoffset:560}
+  .anima-ok .visto .viz.anim .s-ink{animation:traca 2.2s cubic-bezier(.2,.7,.2,1) .25s forwards}
+  .anima-ok .viz.anim .a-in{opacity:0}
+  .anima-ok .visto .viz.anim .a-in{animation:surge .55s ease-out forwards;animation-delay:calc(var(--i,0)*85ms + .3s)}
+  .anima-ok .visto .viz.anim .pulsa{transform-box:fill-box;transform-origin:center;animation:pulsa 2.6s ease-in-out 2.6s infinite}
+  @keyframes traca{to{stroke-dashoffset:0}}
+  @keyframes surge{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+  @keyframes pulsa{50%{transform:scale(2);opacity:.3}}
+}
 .viz figcaption{margin-top:10px;font:500 10.5px/1.4 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
 .tag{padding:6px 9px;border:1px solid var(--line-2);font:500 10.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--fg)}
@@ -397,7 +416,7 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
         <span class="label">[ Ao vivo ]</span>
         <h2>O sistema funcionando.</h2>
       </div>
-      <p>Gravação real do Visão, o sistema que construí com IA: comercial e financeiro no mesmo lugar, rodando com dados fictícios de uma empresa de exemplo. Não é maquete, é o sistema.</p>
+      <p>Gravação real do Visão, o sistema que construí com IA: comercial, reembolsos e financeiro no mesmo lugar, rodando com dados fictícios de uma empresa de exemplo. Não é maquete, é o sistema.</p>
     </div>
     <div class="live-grid">
       <div class="live-main">
@@ -407,12 +426,14 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
             <span class="url">visão · empresa exemplo</span>
             <span class="tagline">Dados fictícios</span>
           </div>
-          <video id="demo-video" src="midia/comercial.mp4" poster="midia/comercial.jpg" width="1280" height="800" muted playsinline autoplay preload="metadata" aria-label="Gravação do sistema: painel comercial, follow-up, venda virando conta a receber, visão geral, fluxo de caixa e conciliação"></video>
+          <video id="demo-video" src="midia/comercial.mp4" poster="midia/comercial.jpg" width="1280" height="800" muted playsinline autoplay preload="metadata" aria-label="Gravação do sistema: painel comercial, follow-up, venda virando conta a receber, reembolsos, visão geral, fluxo de caixa e conciliação"></video>
         </div>
         <div class="clip-tabs" role="tablist" aria-label="Telas do sistema">
           <button class="clip-tab" type="button" role="tab" id="clip-comercial" aria-selected="true" data-src="midia/comercial.mp4" data-poster="midia/comercial.jpg" data-cap="Fechado no mês contra a meta, previsão com o risco de cada mês, rankings e as vendas somadas ao caixa.">Comercial<span class="bar"></span></button>
           <button class="clip-tab" type="button" role="tab" id="clip-followup" aria-selected="false" data-src="midia/followup.mp4" data-poster="midia/followup.jpg" data-cap="As semanas do mês, o quadro das etapas e o detalhe ao lado. Arrastar o cartão muda a etapa do negócio.">Follow-up<span class="bar"></span></button>
           <button class="clip-tab" type="button" role="tab" id="clip-venda" aria-selected="false" data-src="midia/venda.mp4" data-poster="midia/venda.jpg" data-cap="Negócio fechado com um clique: as parcelas viram contas a receber e a comissão vira conta a pagar.">Venda → caixa<span class="bar"></span></button>
+          <button class="clip-tab" type="button" role="tab" id="clip-reembolso" aria-selected="false" data-src="midia/reembolso.mp4" data-poster="midia/reembolso.jpg" data-cap="A fila de quem aprova: o que não tem alerta sai em lote; no pedido com alerta, o cupom fica a um clique.">Reembolsos<span class="bar"></span></button>
+          <button class="clip-tab" type="button" role="tab" id="clip-reembolso-pagar" aria-selected="false" data-src="midia/reembolso-pagar.mp4" data-poster="midia/reembolso-pagar.jpg" data-cap="O pedido aprovado já é conta a pagar. O financeiro registra o pagamento e o painel mostra onde a equipe gasta.">Reembolso → pagar<span class="bar"></span></button>
           <button class="clip-tab" type="button" role="tab" id="clip-inicio" aria-selected="false" data-src="midia/inicio.mp4" data-poster="midia/inicio.jpg" data-cap="Saldo de hoje, projeção de 30 dias e só os avisos que pedem atenção.">Visão geral<span class="bar"></span></button>
           <button class="clip-tab" type="button" role="tab" id="clip-fluxo" aria-selected="false" data-src="midia/fluxo.mp4" data-poster="midia/fluxo.jpg" data-cap="O mês dia a dia: o que entra, o que sai e o saldo projetado no fim de cada dia.">Fluxo de caixa<span class="bar"></span></button>
           <button class="clip-tab" type="button" role="tab" id="clip-conciliacao" aria-selected="false" data-src="midia/conciliacao.mp4" data-poster="midia/conciliacao.jpg" data-cap="O extrato do banco casado com os lançamentos, com a certeza de cada sugestão. Um clique confirma.">Conciliação<span class="bar"></span></button>
@@ -442,7 +463,7 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
       <article class="svc">
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16"/><path d="M3 8h18M7 12h5M7 15.5h8"/></svg>
         <h3>Sistemas web sob medida</h3>
-        <p>Comercial, financeiro, cadastros e painéis feitos para o seu processo, com os setores ligados entre si. Funcionam no computador e no celular, com login e perfis de acesso.</p>
+        <p>Comercial, financeiro, reembolsos e painéis feitos para o seu processo, com os setores ligados entre si. Funcionam no computador e no celular, com login e perfis de acesso.</p>
         <p class="for"><span>Ideal para</span>quem controla a empresa em planilhas espalhadas</p>
       </article>
       <article class="svc">
@@ -474,35 +495,35 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
         <span class="label">[ Cases ]</span>
         <h2>Sistemas reais, rodando.</h2>
       </div>
-      <p>Projetos usados no dia a dia por empresas e pessoas. Dados de clientes nunca aparecem aqui: as ilustrações usam números fictícios.</p>
+      <p>Projetos usados no dia a dia por empresas e pessoas. Dados de clientes nunca aparecem aqui: os filmes mostram os sistemas com dados fictícios e as ilustrações usam números inventados.</p>
     </div>
 
     <div class="cases">
       <article class="case">
-        <figure class="viz">
+        <figure class="viz anim">
           <div class="frame ticks">
             <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração de painel financeiro: saldo, projeção de 30 dias e totais a pagar e a receber">
               <defs><linearGradient id="g-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="stop-a"/><stop offset="1" class="stop-b"/></linearGradient></defs>
               <text x="24" y="38" class="s-l">SALDO EM CONTA</text>
-              <text x="24" y="72" class="s-v">R$ 48.215,30</text>
+              <text x="24" y="72" class="s-v a-in" style="--i:1">R$ 48.215,30</text>
               <text x="456" y="38" text-anchor="end" class="s-l">PROJEÇÃO · 30 DIAS</text>
-              <text x="456" y="70" text-anchor="end" class="s-mi">R$ 61.905,12</text>
+              <text x="456" y="70" text-anchor="end" class="s-mi a-in" style="--i:26">R$ 61.905,12</text>
               <path d="M24 112H456M24 146H456M24 180H456" class="s-grid"/>
-              <path d="M24 150L64 148L104 152L144 164L184 172L224 174L264 172L304 146L344 140L384 136L424 128L456 124V196H24Z" fill="url(#g-area)"/>
+              <path d="M24 150L64 148L104 152L144 164L184 172L224 174L264 172L304 146L344 140L384 136L424 128L456 124V196H24Z" fill="url(#g-area)" class="a-in" style="--i:14"/>
               <polyline points="24,150 64,148 104,152 144,164 184,172 224,174 264,172 304,146 344,140 384,136 424,128 456,124" class="s-ink"/>
-              <circle cx="456" cy="124" r="3.5" class="s-solid"/>
+              <circle cx="456" cy="124" r="3.5" class="s-solid a-in pulsa" style="--i:24"/>
               <text x="24" y="214" class="s-l">HOJE</text>
               <text x="240" y="214" text-anchor="middle" class="s-l">+15 DIAS</text>
               <text x="456" y="214" text-anchor="end" class="s-l">+30 DIAS</text>
               <rect x="24.5" y="230.5" width="135" height="52" class="s-box"/>
               <rect x="172.5" y="230.5" width="135" height="52" class="s-box"/>
               <rect x="320.5" y="230.5" width="135" height="52" class="s-box"/>
-              <text x="34" y="250" class="s-l">A PAGAR · 30D</text>
-              <text x="34" y="270" class="s-m">R$ 18.740,00</text>
-              <text x="182" y="250" class="s-l">A RECEBER · 30D</text>
-              <text x="182" y="270" class="s-m">R$ 32.429,82</text>
-              <text x="330" y="250" class="s-l">A CONFERIR</text>
-              <text x="330" y="270" class="s-m">3 boletos</text>
+              <text x="34" y="250" class="s-l a-in" style="--i:16">A PAGAR · 30D</text>
+              <text x="34" y="270" class="s-m a-in" style="--i:17">R$ 18.740,00</text>
+              <text x="182" y="250" class="s-l a-in" style="--i:19">A RECEBER · 30D</text>
+              <text x="182" y="270" class="s-m a-in" style="--i:20">R$ 32.429,82</text>
+              <text x="330" y="250" class="s-l a-in" style="--i:22">A CONFERIR</text>
+              <text x="330" y="270" class="s-m a-in" style="--i:23">3 boletos</text>
             </svg>
           </div>
           <figcaption>Ilustração · números fictícios</figcaption>
@@ -537,43 +558,18 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
       </article>
 
       <article class="case">
-        <figure class="viz">
+        <figure class="viz film">
           <div class="frame ticks">
-            <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração: uma proposta ganha no comercial vira três contas a receber e uma comissão a pagar no financeiro">
-              <text x="24" y="34" class="s-l">COMERCIAL · PROPOSTA</text>
-              <text x="456" y="34" text-anchor="end" class="s-l">FINANCEIRO · LANÇAMENTOS</text>
-              <rect x="24.5" y="50.5" width="170" height="30" class="s-box"/>
-              <text x="34" y="69" class="s-r">Negociação</text><text x="184" y="69" text-anchor="end" class="s-r">70%</text>
-              <path d="M109.5 80.5V92.5" class="s-link"/>
-              <rect x="24.5" y="92.5" width="170" height="30" class="s-box"/>
-              <text x="34" y="111" class="s-r">Fechamento</text><text x="184" y="111" text-anchor="end" class="s-r">90%</text>
-              <path d="M109.5 122.5V134" class="s-link"/>
-              <rect x="24" y="134" width="171" height="73" class="s-solid"/>
-              <text x="34" y="153" class="s-inv">P-0068 · GANHA</text>
-              <text x="34" y="172" class="s-inv">Cliente A</text>
-              <text x="34" y="194" class="s-inv">R$ 54.000,00</text>
-              <path d="M195 170.5H240V65.5H285" class="s-link"/><path d="M240 107.5H285M240 149.5H285" class="s-link"/><path d="M240 170.5V191.5H285" class="s-box-d"/>
-              <circle cx="195" cy="170.5" r="2" class="s-solid"/><circle cx="285" cy="65.5" r="2" class="s-solid"/><circle cx="285" cy="107.5" r="2" class="s-solid"/><circle cx="285" cy="149.5" r="2" class="s-solid"/>
-              <rect x="285.5" y="50.5" width="170" height="30" class="s-box"/>
-              <text x="295" y="69" class="s-r">18/12 Parcela 1/3</text><text x="446" y="69" text-anchor="end" class="s-r">+18.000</text>
-              <rect x="285.5" y="92.5" width="170" height="30" class="s-box"/>
-              <text x="295" y="111" class="s-r">18/01 Parcela 2/3</text><text x="446" y="111" text-anchor="end" class="s-r">+18.000</text>
-              <rect x="285.5" y="134.5" width="170" height="30" class="s-box"/>
-              <text x="295" y="153" class="s-r">18/02 Parcela 3/3</text><text x="446" y="153" text-anchor="end" class="s-r">+18.000</text>
-              <rect x="285.5" y="176.5" width="170" height="30" class="s-box-d"/>
-              <text x="295" y="195" class="s-r">18/12 Comissão</text><text x="446" y="195" text-anchor="end" class="s-r">−10.800</text>
-              <text x="24" y="246" class="s-l">PREVISÃO DE VENDAS ENTRA NA PROJEÇÃO DE CAIXA</text>
-              <path d="M24 256.5H456" class="s-line"/>
-              <text x="24" y="280" class="s-l">1 CLIQUE · 3 CONTAS A RECEBER · 1 COMISSÃO A PAGAR</text>
-            </svg>
+            <video class="case-film" src="midia/case-comercial.mp4" poster="midia/case-comercial.jpg" width="1280" height="800" muted loop playsinline preload="none" aria-label="Filme do case: painel do gestor com meta, previsão e caixa; follow-up da vendedora no celular; venda fechada virando contas a receber"></video>
+            <button class="film-btn" type="button" aria-label="Pausar o vídeo">Pausar</button>
           </div>
-          <figcaption>Ilustração · números fictícios</figcaption>
+          <figcaption>Filme · 26 s · sistema real, dados fictícios</figcaption>
         </figure>
         <div>
           <div class="tags"><span class="tag solid">Produto próprio</span><span class="tag">Em evolução</span></div>
           <h3>Visão, comercial e financeiro</h3>
           <p class="where">Sistema de gestão para empresas</p>
-          <p class="lead">Meu laboratório de produto: um sistema em que os setores conversam. A venda fechada no comercial vira conta a receber no financeiro, e a previsão de vendas entra na projeção de caixa. É ele que aparece <a href="#ao-vivo">funcionando ao vivo</a>.</p>
+          <p class="lead">Meu laboratório de produto: um sistema em que os setores conversam. A venda fechada no comercial vira conta a receber no financeiro, e a previsão de vendas entra na projeção de caixa. As telas também aparecem, sem cortes, em <a href="#ao-vivo">Ao vivo</a>.</p>
           <dl class="kv">
             <dt>O que tem</dt>
             <dd>
@@ -600,37 +596,49 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
       </article>
 
       <article class="case">
-        <figure class="viz">
+        <figure class="viz film">
           <div class="frame ticks">
-            <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração de aplicativo de agendamento no celular: escolha de serviço, dia e horário">
-              <rect x="172.5" y="10.5" width="135" height="279" rx="18" class="s-bg"/>
-              <rect x="218" y="19" width="44" height="5" rx="2.5" class="s-solid" opacity=".35"/>
-              <text x="186" y="50" class="s-m">Agendar serviço</text>
-              <rect x="184.5" y="60.5" width="111" height="24" class="s-box"/>
-              <text x="192" y="76" class="s-l">LAVAGEM DETALHADA</text>
-              <rect x="184.5" y="94.5" width="24" height="34" class="s-box"/>
-              <rect x="213" y="94" width="25" height="35" class="s-solid"/>
-              <rect x="242.5" y="94.5" width="24" height="34" class="s-box"/>
-              <rect x="271.5" y="94.5" width="24" height="34" class="s-box"/>
-              <text x="196.5" y="108" text-anchor="middle" class="s-l">SEG</text><text x="196.5" y="122" text-anchor="middle" class="s-m">10</text>
-              <text x="225.5" y="108" text-anchor="middle" class="s-inv">TER</text><text x="225.5" y="122" text-anchor="middle" class="s-inv">11</text>
-              <text x="254.5" y="108" text-anchor="middle" class="s-l">QUA</text><text x="254.5" y="122" text-anchor="middle" class="s-m">12</text>
-              <text x="283.5" y="108" text-anchor="middle" class="s-l">QUI</text><text x="283.5" y="122" text-anchor="middle" class="s-m">13</text>
-              <rect x="184.5" y="140.5" width="53" height="24" class="s-box"/><text x="211" y="156" text-anchor="middle" class="s-m">08:00</text>
-              <rect x="242.5" y="140.5" width="53" height="24" class="s-box-d"/><text x="269" y="156" text-anchor="middle" class="s-l">09:30</text><path d="M252 152.5H286" class="s-link"/>
-              <rect x="184" y="170" width="54" height="25" class="s-solid"/><text x="211" y="186" text-anchor="middle" class="s-inv">11:00</text>
-              <rect x="242.5" y="170.5" width="53" height="24" class="s-box"/><text x="269" y="186" text-anchor="middle" class="s-m">13:00</text>
-              <rect x="184.5" y="200.5" width="53" height="24" class="s-box"/><text x="211" y="216" text-anchor="middle" class="s-m">14:30</text>
-              <rect x="242.5" y="200.5" width="53" height="24" class="s-box"/><text x="269" y="216" text-anchor="middle" class="s-m">16:00</text>
-              <rect x="184" y="244" width="112" height="30" class="s-solid"/>
-              <text x="240" y="263" text-anchor="middle" class="s-inv">CONFIRMAR</text>
-              <text x="24" y="76" class="s-l">INSTALA COMO APP</text><path d="M122 72.5H168" class="s-link"/><circle cx="170" cy="72.5" r="2" class="s-solid"/>
-              <text x="24" y="216" class="s-l">AVISO NO CELULAR</text><path d="M122 212.5H168" class="s-link"/><circle cx="170" cy="212.5" r="2" class="s-solid"/>
-              <text x="456" y="114" text-anchor="end" class="s-l">ORÇAMENTO NO WHATSAPP</text><path d="M312 110.5H330" class="s-link"/><circle cx="310" cy="110.5" r="2" class="s-solid"/>
-              <text x="456" y="262" text-anchor="end" class="s-l">ÁREA DA EQUIPE</text><path d="M312 258.5H368" class="s-link"/><circle cx="310" cy="258.5" r="2" class="s-solid"/>
-            </svg>
+            <video class="case-film" src="midia/case-reembolsos.mp4" poster="midia/case-reembolsos.jpg" width="1280" height="800" muted loop playsinline preload="none" aria-label="Filme do case: a vendedora fotografa o cupom e envia pelo celular; o gestor vê o alerta, confere o cupom e aprova; o financeiro registra o pagamento"></video>
+            <button class="film-btn" type="button" aria-label="Pausar o vídeo">Pausar</button>
           </div>
-          <figcaption>Ilustração · horários fictícios</figcaption>
+          <figcaption>Filme · 28 s · sistema real, dados e cupons fictícios</figcaption>
+        </figure>
+        <div>
+          <div class="tags"><span class="tag solid">Produto próprio</span><span class="tag">Módulo do Visão</span></div>
+          <h3>Reembolsos da equipe</h3>
+          <p class="where">Despesas e prestação de contas</p>
+          <p class="lead">A segunda versão de uma ideia que já coloquei em produção: uma plataforma de reembolso para a equipe de uma empresa. Aqui ela foi reescrita do zero como módulo do Visão, ligada ao financeiro.</p>
+          <dl class="kv">
+            <dt>O que tem</dt>
+            <dd>
+              <ul class="done">
+                <li>Pedido pelo celular, com o cupom fotografado na hora</li>
+                <li>Política conferida sozinha: teto por tipo, comprovante, prazo e despesa repetida</li>
+                <li>Aprovação em lote do que não tem alerta e devolução com recado</li>
+                <li>Pedido aprovado vira conta a pagar, em nome de quem pediu</li>
+                <li>Cada pessoa vê só os próprios pedidos; gestor aprova, financeiro paga</li>
+              </ul>
+            </dd>
+            <dt>Resultado</dt>
+            <dd>Do cupom à conta paga sem planilha e sem digitar o mesmo valor duas vezes.</dd>
+          </dl>
+          <div class="metrics">
+            <div><b>5</b><span>alertas automáticos</span></div>
+            <div><b>4</b><span>perfis de acesso</span></div>
+            <div><b>66</b><span>conferências de ponta a ponta</span></div>
+            <div><b>1</b><span>clique para aprovar em lote</span></div>
+          </div>
+          <div class="chips"><span>Claude Code</span><span>React</span><span>TypeScript</span><span>Hono</span><span>Cloudflare D1</span><span>Vitest</span></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <figure class="viz film">
+          <div class="frame ticks">
+            <video class="case-film" src="midia/case-agendamento.mp4" poster="midia/case-agendamento.jpg" width="1280" height="800" muted loop playsinline preload="none" aria-label="Filme do case: o cliente agenda o veículo em quatro passos pelo celular; a equipe aceita e avança o serviço; o cliente acompanha a etapa"></video>
+            <button class="film-btn" type="button" aria-label="Pausar o vídeo">Pausar</button>
+          </div>
+          <figcaption>Filme · 26 s · marca, contatos e preços fictícios na demonstração</figcaption>
         </figure>
         <div>
           <div class="tags"><span class="tag solid">Negócio real</span><span class="tag">No celular</span></div>
@@ -641,19 +649,22 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
             <dt>O que tem</dt>
             <dd>
               <ul class="done">
+                <li>Pedido em quatro passos, com a estimativa calculada na hora</li>
                 <li>Instala no celular como aplicativo, sem passar por loja</li>
-                <li>Notificações no celular</li>
-                <li>Fotos do veículo e orçamento pelo WhatsApp</li>
-                <li>Área da equipe com acesso por PIN</li>
+                <li>Etapas acompanhadas pelo cliente, do agendado ao entregue</li>
+                <li>Notificações no celular, fotos do veículo e conversa pelo WhatsApp</li>
+                <li>Área da equipe com acesso por PIN: pedidos, agenda e pátio</li>
               </ul>
             </dd>
+            <dt>Resultado</dt>
+            <dd>O cliente agenda e acompanha sozinho. A equipe conduz o dia inteiro pelo celular.</dd>
           </dl>
           <div class="chips"><span>PWA</span><span>Web Push</span><span>Cloudflare Workers</span><span>D1</span></div>
         </div>
       </article>
 
       <article class="case">
-        <figure class="viz">
+        <figure class="viz anim">
           <div class="frame ticks">
             <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração de funil de vendas em colunas, de frio a fechado, e agenda do time com feedback de reunião">
               <text x="24" y="30" class="s-l">FRIO · 4</text>
@@ -661,24 +672,24 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
               <text x="248" y="30" class="s-l">QUENTE · 2</text>
               <text x="360" y="30" class="s-l">FECHADO · 1</text>
               <path d="M24 38.5H120M136 38.5H232M248 38.5H344M360 38.5H456" class="s-line"/>
-              <rect x="24.5" y="48.5" width="95" height="27" class="s-box"/><text x="32" y="61" class="s-r">Cliente A</text><rect x="32" y="66" width="40" height="3" class="s-bar"/>
-              <rect x="24.5" y="82.5" width="95" height="27" class="s-box"/><text x="32" y="95" class="s-r">Cliente B</text><rect x="32" y="100" width="62" height="3" class="s-bar"/>
-              <rect x="24.5" y="116.5" width="95" height="27" class="s-box"/><text x="32" y="129" class="s-r">Cliente C</text><rect x="32" y="134" width="28" height="3" class="s-bar"/>
-              <rect x="24.5" y="150.5" width="95" height="27" class="s-box"/><text x="32" y="163" class="s-r">Cliente D</text><rect x="32" y="168" width="52" height="3" class="s-bar"/>
-              <rect x="136.5" y="48.5" width="95" height="27" class="s-box"/><text x="144" y="61" class="s-r">Cliente E</text><rect x="144" y="66" width="70" height="3" class="s-bar"/>
-              <rect x="136.5" y="82.5" width="95" height="27" class="s-box"/><text x="144" y="95" class="s-r">Cliente F</text><rect x="144" y="100" width="46" height="3" class="s-bar"/>
-              <rect x="136.5" y="116.5" width="95" height="27" class="s-box-d"/><text x="144" y="129" class="s-r">Cliente G</text><text x="144" y="139" class="s-l">PARADA · 32D</text>
-              <rect x="248.5" y="48.5" width="95" height="27" class="s-box"/><text x="256" y="61" class="s-r">Cliente H</text><rect x="256" y="66" width="58" height="3" class="s-bar"/>
-              <rect x="248.5" y="82.5" width="95" height="27" class="s-box"/><text x="256" y="95" class="s-r">Cliente I</text><rect x="256" y="100" width="36" height="3" class="s-bar"/>
-              <rect x="360" y="48" width="96" height="28" class="s-solid"/><text x="368" y="61" class="s-inv">CLIENTE J</text><rect x="368" y="66" width="64" height="3" class="s-bar-inv"/>
+              <g class="a-in" style="--i:0"><rect x="24.5" y="48.5" width="95" height="27" class="s-box"/><text x="32" y="61" class="s-r">Cliente A</text><rect x="32" y="66" width="40" height="3" class="s-bar"/></g>
+              <g class="a-in" style="--i:2"><rect x="24.5" y="82.5" width="95" height="27" class="s-box"/><text x="32" y="95" class="s-r">Cliente B</text><rect x="32" y="100" width="62" height="3" class="s-bar"/></g>
+              <g class="a-in" style="--i:4"><rect x="24.5" y="116.5" width="95" height="27" class="s-box"/><text x="32" y="129" class="s-r">Cliente C</text><rect x="32" y="134" width="28" height="3" class="s-bar"/></g>
+              <g class="a-in" style="--i:6"><rect x="24.5" y="150.5" width="95" height="27" class="s-box"/><text x="32" y="163" class="s-r">Cliente D</text><rect x="32" y="168" width="52" height="3" class="s-bar"/></g>
+              <g class="a-in" style="--i:8"><rect x="136.5" y="48.5" width="95" height="27" class="s-box"/><text x="144" y="61" class="s-r">Cliente E</text><rect x="144" y="66" width="70" height="3" class="s-bar"/></g>
+              <g class="a-in" style="--i:10"><rect x="136.5" y="82.5" width="95" height="27" class="s-box"/><text x="144" y="95" class="s-r">Cliente F</text><rect x="144" y="100" width="46" height="3" class="s-bar"/></g>
+              <g class="a-in" style="--i:12"><rect x="136.5" y="116.5" width="95" height="27" class="s-box-d"/><text x="144" y="129" class="s-r">Cliente G</text><text x="144" y="139" class="s-l">PARADA · 32D</text></g>
+              <g class="a-in" style="--i:14"><rect x="248.5" y="48.5" width="95" height="27" class="s-box"/><text x="256" y="61" class="s-r">Cliente H</text><rect x="256" y="66" width="58" height="3" class="s-bar"/></g>
+              <g class="a-in" style="--i:16"><rect x="248.5" y="82.5" width="95" height="27" class="s-box"/><text x="256" y="95" class="s-r">Cliente I</text><rect x="256" y="100" width="36" height="3" class="s-bar"/></g>
+              <g class="a-in" style="--i:18"><rect x="360" y="48" width="96" height="28" class="s-solid"/><text x="368" y="61" class="s-inv">CLIENTE J</text><rect x="368" y="66" width="64" height="3" class="s-bar-inv"/></g>
               <text x="24" y="204" class="s-l">AGENDA DO TIME · ATUALIZADA HÁ 3 MIN</text>
               <text x="456" y="204" text-anchor="end" class="s-l">GOOGLE AGENDA</text>
-              <rect x="24.5" y="212.5" width="431" height="30" class="s-box"/>
+              <g class="a-in" style="--i:20"><rect x="24.5" y="212.5" width="431" height="30" class="s-box"/></g>
               <text x="34" y="231" class="s-m">14:00</text><text x="84" y="231" class="s-m">Reunião · Cliente H</text>
-              <rect x="368.5" y="218.5" width="80" height="18" class="s-box"/><text x="408.5" y="231" text-anchor="middle" class="s-l">+ FEEDBACK</text>
-              <rect x="24.5" y="248.5" width="431" height="30" class="s-box"/>
+              <g class="a-in" style="--i:22"><rect x="368.5" y="218.5" width="80" height="18" class="s-box"/><text x="408.5" y="231" text-anchor="middle" class="s-l">+ FEEDBACK</text></g>
+              <g class="a-in" style="--i:24"><rect x="24.5" y="248.5" width="431" height="30" class="s-box"/></g>
               <text x="34" y="267" class="s-m">16:30</text><text x="84" y="267" class="s-m">Apresentação · Cliente E</text>
-              <rect x="368" y="254" width="81" height="19" class="s-solid"/><text x="408.5" y="267" text-anchor="middle" class="s-inv">FEEDBACK ✓</text>
+              <g class="a-in" style="--i:26"><rect x="368" y="254" width="81" height="19" class="s-solid"/><text x="408.5" y="267" text-anchor="middle" class="s-inv">FEEDBACK ✓</text></g>
             </svg>
           </div>
           <figcaption>Ilustração · clientes fictícios</figcaption>
@@ -886,6 +897,33 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
     if('IntersectionObserver' in window){
       var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)toca(e.target);else e.target.pause();});},{threshold:.2});
       obs.observe(v);if(cel)obs.observe(cel);
+    }
+  })();
+
+  // Filmes dos cases: tocam quando entram na tela e param ao sair; um clique (no vídeo ou no botão) pausa.
+  (function(){
+    var lista=document.querySelector('.cases'); if(lista)lista.classList.add('anima-ok');
+    var cs=[].slice.call(document.querySelectorAll('.case'));
+    if('IntersectionObserver' in window){
+      var oc=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visto');oc.unobserve(e.target);}});},{threshold:.2});
+      cs.forEach(function(c){oc.observe(c);});
+    } else cs.forEach(function(c){c.classList.add('visto');});
+    var filmes=[].slice.call(document.querySelectorAll('video.case-film'));
+    if(!filmes.length)return;
+    var reduz=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function toca(v){var p=v.play();if(p&&p.catch)p.catch(function(){});}
+    filmes.forEach(function(v){
+      var f=v.closest('.viz'), b=f.querySelector('.film-btn');
+      function estado(){f.classList.toggle('pausado',v.paused);if(b){b.textContent=v.paused?'Tocar':'Pausar';b.setAttribute('aria-label',v.paused?'Tocar o vídeo':'Pausar o vídeo');}}
+      function alterna(){if(v.paused){v.removeAttribute('data-parado');toca(v);}else{v.setAttribute('data-parado','1');v.pause();}}
+      v.addEventListener('play',estado);v.addEventListener('pause',estado);v.addEventListener('click',alterna);
+      if(b)b.addEventListener('click',alterna);
+      estado();
+    });
+    if(reduz){filmes.forEach(function(v){v.controls=true;});return;}
+    if('IntersectionObserver' in window){
+      var of=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){if(!v.hasAttribute('data-parado'))toca(v);}else v.pause();});},{threshold:.45});
+      filmes.forEach(function(v){of.observe(v);});
     }
   })();
 
