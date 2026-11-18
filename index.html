@@ -165,7 +165,7 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
 @media (max-width:480px){.browser-bar .tagline{display:none}}
 .browser video,.phone video{display:block;width:100%;height:auto;max-width:100%;background:var(--screen)}
 .browser video{aspect-ratio:16/10}
-.clip-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-top:0}
+.clip-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-top:0}
 @media (max-width:560px){.clip-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .clip-tab{position:relative;padding:15px 12px 17px;border:0;background:var(--bg);color:var(--muted);text-align:left;font:500 11px/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:color .2s,background .2s}
 .clip-tab:hover{color:var(--fg)}
@@ -397,7 +397,7 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
         <span class="label">[ Ao vivo ]</span>
         <h2>O sistema funcionando.</h2>
       </div>
-      <p>Gravação real do Visão, o ERP que construí com IA, rodando com dados fictícios de uma empresa de exemplo. A interface é a mesma do ERP que está em produção.</p>
+      <p>Gravação real do Visão, o sistema que construí com IA: comercial e financeiro no mesmo lugar, rodando com dados fictícios de uma empresa de exemplo. Não é maquete, é o sistema.</p>
     </div>
     <div class="live-grid">
       <div class="live-main">
@@ -407,15 +407,17 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
             <span class="url">visão · empresa exemplo</span>
             <span class="tagline">Dados fictícios</span>
           </div>
-          <video id="demo-video" src="midia/inicio.mp4" poster="midia/inicio.jpg" width="1280" height="800" muted playsinline autoplay preload="metadata" aria-label="Gravação do sistema: visão geral, contas a pagar, fluxo de caixa e conciliação"></video>
+          <video id="demo-video" src="midia/comercial.mp4" poster="midia/comercial.jpg" width="1280" height="800" muted playsinline autoplay preload="metadata" aria-label="Gravação do sistema: painel comercial, follow-up, venda virando conta a receber, visão geral, fluxo de caixa e conciliação"></video>
         </div>
         <div class="clip-tabs" role="tablist" aria-label="Telas do sistema">
-          <button class="clip-tab" type="button" role="tab" id="clip-inicio" aria-selected="true" data-src="midia/inicio.mp4" data-poster="midia/inicio.jpg" data-cap="Saldo de hoje, projeção de 30 dias e só os avisos que pedem atenção.">Visão geral<span class="bar"></span></button>
-          <button class="clip-tab" type="button" role="tab" id="clip-pagar" aria-selected="false" data-src="midia/pagar.mp4" data-poster="midia/pagar.jpg" data-cap="Contas a pagar com filtros de um clique: próximos 7 dias, atrasados e busca por fornecedor.">Contas a pagar<span class="bar"></span></button>
+          <button class="clip-tab" type="button" role="tab" id="clip-comercial" aria-selected="true" data-src="midia/comercial.mp4" data-poster="midia/comercial.jpg" data-cap="Fechado no mês contra a meta, previsão com o risco de cada mês, rankings e as vendas somadas ao caixa.">Comercial<span class="bar"></span></button>
+          <button class="clip-tab" type="button" role="tab" id="clip-followup" aria-selected="false" data-src="midia/followup.mp4" data-poster="midia/followup.jpg" data-cap="As semanas do mês, o quadro das etapas e o detalhe ao lado. Arrastar o cartão muda a etapa do negócio.">Follow-up<span class="bar"></span></button>
+          <button class="clip-tab" type="button" role="tab" id="clip-venda" aria-selected="false" data-src="midia/venda.mp4" data-poster="midia/venda.jpg" data-cap="Negócio fechado com um clique: as parcelas viram contas a receber e a comissão vira conta a pagar.">Venda → caixa<span class="bar"></span></button>
+          <button class="clip-tab" type="button" role="tab" id="clip-inicio" aria-selected="false" data-src="midia/inicio.mp4" data-poster="midia/inicio.jpg" data-cap="Saldo de hoje, projeção de 30 dias e só os avisos que pedem atenção.">Visão geral<span class="bar"></span></button>
           <button class="clip-tab" type="button" role="tab" id="clip-fluxo" aria-selected="false" data-src="midia/fluxo.mp4" data-poster="midia/fluxo.jpg" data-cap="O mês dia a dia: o que entra, o que sai e o saldo projetado no fim de cada dia.">Fluxo de caixa<span class="bar"></span></button>
           <button class="clip-tab" type="button" role="tab" id="clip-conciliacao" aria-selected="false" data-src="midia/conciliacao.mp4" data-poster="midia/conciliacao.jpg" data-cap="O extrato do banco casado com os lançamentos, com a certeza de cada sugestão. Um clique confirma.">Conciliação<span class="bar"></span></button>
         </div>
-        <p class="clip-cap" id="demo-cap" aria-live="polite">Saldo de hoje, projeção de 30 dias e só os avisos que pedem atenção.</p>
+        <p class="clip-cap" id="demo-cap" aria-live="polite">Fechado no mês contra a meta, previsão com o risco de cada mês, rankings e as vendas somadas ao caixa.</p>
       </div>
       <figure class="phone-wrap">
         <div class="phone">
@@ -440,7 +442,7 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
       <article class="svc">
         <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16"/><path d="M3 8h18M7 12h5M7 15.5h8"/></svg>
         <h3>Sistemas web sob medida</h3>
-        <p>ERP, controles financeiros, cadastros e painéis feitos para o seu processo. Funcionam no computador e no celular, com login e perfis de acesso.</p>
+        <p>Comercial, financeiro, cadastros e painéis feitos para o seu processo, com os setores ligados entre si. Funcionam no computador e no celular, com login e perfis de acesso.</p>
         <p class="for"><span>Ideal para</span>quem controla a empresa em planilhas espalhadas</p>
       </article>
       <article class="svc">
@@ -537,66 +539,63 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
       <article class="case">
         <figure class="viz">
           <div class="frame ticks">
-            <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração de conciliação: linhas do extrato do banco ligadas aos lançamentos do sistema, com uma movimentação sem lançamento destacada">
-              <text x="24" y="34" class="s-l">EXTRATO DO BANCO · OFX</text>
-              <text x="456" y="34" text-anchor="end" class="s-l">LANÇAMENTOS NO SISTEMA</text>
-              <g>
-                <rect x="24.5" y="50.5" width="190" height="30" class="s-box"/>
-                <text x="34" y="69" class="s-r">05/11 PIX recebido</text><text x="204" y="69" text-anchor="end" class="s-r">+2.300,00</text>
-                <path d="M215 65.5H265" class="s-link"/><circle cx="215" cy="65.5" r="2" class="s-solid"/><circle cx="265" cy="65.5" r="2" class="s-solid"/>
-                <rect x="265.5" y="50.5" width="190" height="30" class="s-box"/>
-                <text x="276" y="69" class="s-m">Venda · Cliente A</text><text x="446" y="69" text-anchor="end" class="s-m">✓</text>
-              </g>
-              <g>
-                <rect x="24.5" y="92.5" width="190" height="30" class="s-box"/>
-                <text x="34" y="111" class="s-r">06/11 Boleto pago</text><text x="204" y="111" text-anchor="end" class="s-r">−640,00</text>
-                <path d="M215 107.5H265" class="s-link"/><circle cx="215" cy="107.5" r="2" class="s-solid"/><circle cx="265" cy="107.5" r="2" class="s-solid"/>
-                <rect x="265.5" y="92.5" width="190" height="30" class="s-box"/>
-                <text x="276" y="111" class="s-m">Fornecedor B</text><text x="446" y="111" text-anchor="end" class="s-m">✓</text>
-              </g>
-              <g>
-                <rect x="24" y="134" width="191" height="31" class="s-solid"/>
-                <text x="34" y="153" class="s-inv">07/11 TARIFA</text><text x="204" y="153" text-anchor="end" class="s-inv">−29,90</text>
-                <path d="M215 149.5H265" class="s-box-d"/>
-                <rect x="265.5" y="134.5" width="190" height="30" class="s-box-d"/>
-                <text x="276" y="153" class="s-l">SEM LANÇAMENTO · EXPLICAR</text>
-              </g>
-              <g>
-                <rect x="24.5" y="176.5" width="190" height="30" class="s-box"/>
-                <text x="34" y="195" class="s-r">08/11 TED recebida</text><text x="204" y="195" text-anchor="end" class="s-r">+1.150,00</text>
-                <path d="M215 191.5H265" class="s-link"/><circle cx="215" cy="191.5" r="2" class="s-solid"/><circle cx="265" cy="191.5" r="2" class="s-solid"/>
-                <rect x="265.5" y="176.5" width="190" height="30" class="s-box"/>
-                <text x="276" y="195" class="s-m">Venda · Cliente C</text><text x="446" y="195" text-anchor="end" class="s-m">✓</text>
-              </g>
-              <g>
-                <rect x="24.5" y="218.5" width="190" height="30" class="s-box"/>
-                <text x="34" y="237" class="s-r">09/11 Débito auto.</text><text x="204" y="237" text-anchor="end" class="s-r">−312,40</text>
-                <path d="M215 233.5H265" class="s-link"/><circle cx="215" cy="233.5" r="2" class="s-solid"/><circle cx="265" cy="233.5" r="2" class="s-solid"/>
-                <rect x="265.5" y="218.5" width="190" height="30" class="s-box"/>
-                <text x="276" y="237" class="s-m">Internet e telefone</text><text x="446" y="237" text-anchor="end" class="s-m">✓</text>
-              </g>
-              <text x="24" y="280" class="s-l">4 DE 5 CONCILIADOS SOZINHOS · 1 PARA EXPLICAR</text>
+            <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração: uma proposta ganha no comercial vira três contas a receber e uma comissão a pagar no financeiro">
+              <text x="24" y="34" class="s-l">COMERCIAL · PROPOSTA</text>
+              <text x="456" y="34" text-anchor="end" class="s-l">FINANCEIRO · LANÇAMENTOS</text>
+              <rect x="24.5" y="50.5" width="170" height="30" class="s-box"/>
+              <text x="34" y="69" class="s-r">Negociação</text><text x="184" y="69" text-anchor="end" class="s-r">70%</text>
+              <path d="M109.5 80.5V92.5" class="s-link"/>
+              <rect x="24.5" y="92.5" width="170" height="30" class="s-box"/>
+              <text x="34" y="111" class="s-r">Fechamento</text><text x="184" y="111" text-anchor="end" class="s-r">90%</text>
+              <path d="M109.5 122.5V134" class="s-link"/>
+              <rect x="24" y="134" width="171" height="73" class="s-solid"/>
+              <text x="34" y="153" class="s-inv">P-0068 · GANHA</text>
+              <text x="34" y="172" class="s-inv">Cliente A</text>
+              <text x="34" y="194" class="s-inv">R$ 54.000,00</text>
+              <path d="M195 170.5H240V65.5H285" class="s-link"/><path d="M240 107.5H285M240 149.5H285" class="s-link"/><path d="M240 170.5V191.5H285" class="s-box-d"/>
+              <circle cx="195" cy="170.5" r="2" class="s-solid"/><circle cx="285" cy="65.5" r="2" class="s-solid"/><circle cx="285" cy="107.5" r="2" class="s-solid"/><circle cx="285" cy="149.5" r="2" class="s-solid"/>
+              <rect x="285.5" y="50.5" width="170" height="30" class="s-box"/>
+              <text x="295" y="69" class="s-r">18/12 Parcela 1/3</text><text x="446" y="69" text-anchor="end" class="s-r">+18.000</text>
+              <rect x="285.5" y="92.5" width="170" height="30" class="s-box"/>
+              <text x="295" y="111" class="s-r">18/01 Parcela 2/3</text><text x="446" y="111" text-anchor="end" class="s-r">+18.000</text>
+              <rect x="285.5" y="134.5" width="170" height="30" class="s-box"/>
+              <text x="295" y="153" class="s-r">18/02 Parcela 3/3</text><text x="446" y="153" text-anchor="end" class="s-r">+18.000</text>
+              <rect x="285.5" y="176.5" width="170" height="30" class="s-box-d"/>
+              <text x="295" y="195" class="s-r">18/12 Comissão</text><text x="446" y="195" text-anchor="end" class="s-r">−10.800</text>
+              <text x="24" y="246" class="s-l">PREVISÃO DE VENDAS ENTRA NA PROJEÇÃO DE CAIXA</text>
+              <path d="M24 256.5H456" class="s-line"/>
+              <text x="24" y="280" class="s-l">1 CLIQUE · 3 CONTAS A RECEBER · 1 COMISSÃO A PAGAR</text>
             </svg>
           </div>
           <figcaption>Ilustração · números fictícios</figcaption>
         </figure>
         <div>
-          <div class="tags"><span class="tag solid">Produto próprio</span><span class="tag">Em desenvolvimento</span></div>
-          <h3>Visão, ERP financeiro</h3>
-          <p class="where">Para pessoas e pequenas empresas</p>
-          <p class="lead">Reescrevi do zero o que aprendi no ERP, agora como produto. Separa as finanças pessoais das da empresa, concilia o extrato sozinho e tem um assistente de IA que responde sobre o seu dinheiro.</p>
+          <div class="tags"><span class="tag solid">Produto próprio</span><span class="tag">Em evolução</span></div>
+          <h3>Visão, comercial e financeiro</h3>
+          <p class="where">Sistema de gestão para empresas</p>
+          <p class="lead">Meu laboratório de produto: um sistema em que os setores conversam. A venda fechada no comercial vira conta a receber no financeiro, e a previsão de vendas entra na projeção de caixa. É ele que aparece <a href="#ao-vivo">funcionando ao vivo</a>.</p>
           <dl class="kv">
             <dt>O que tem</dt>
             <dd>
               <ul class="done">
-                <li>Contas a pagar e a receber, fluxo de caixa e agenda</li>
-                <li>Conciliação automática com o extrato do banco (OFX)</li>
-                <li>Assistente de IA dentro do sistema</li>
-                <li>Testes automáticos a cada atualização</li>
+                <li>Propostas, follow-ups com data e quadro das etapas do negócio</li>
+                <li>Funil e previsão de vendas contra a meta, com o risco de cada mês</li>
+                <li>Venda fechada vira conta a receber, com parcelas e comissão</li>
+                <li>Contas a pagar e a receber, fluxo de caixa e conciliação com o extrato do banco</li>
+                <li>Perfis de acesso: dono, gestor, vendedor e financeiro</li>
+                <li>Exporta Excel e PDF, com a proposta pronta para o cliente</li>
               </ul>
             </dd>
+            <dt>Resultado</dt>
+            <dd>Uma venda digitada uma vez só, da proposta ao caixa, e cada pessoa vendo o que precisa.</dd>
           </dl>
-          <div class="chips"><span>React</span><span>TypeScript</span><span>Hono</span><span>Cloudflare D1</span><span>Vitest</span><span>GitHub Actions</span></div>
+          <div class="metrics">
+            <div><b>4</b><span>perfis de acesso</span></div>
+            <div><b>110</b><span>testes automáticos</span></div>
+            <div><b>348</b><span>telas conferidas</span></div>
+            <div><b>1</b><span>clique da venda ao caixa</span></div>
+          </div>
+          <div class="chips"><span>Claude Code</span><span>React</span><span>TypeScript</span><span>Hono</span><span>Cloudflare D1</span><span>Vitest</span><span>GitHub Actions</span></div>
         </div>
       </article>
 
