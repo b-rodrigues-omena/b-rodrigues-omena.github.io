@@ -2,16 +2,16 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Bruno de Luca · Sistemas web e automações com IA</title>
+<title>Bruno de Luca · Analista financeiro que constrói sistemas com IA</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Sistemas web e automações com IA, feitos sob medida por quem conhece a rotina financeira por dentro. São Paulo, atendimento em todo o Brasil.">
+<meta name="description" content="Bruno de Luca: analista financeiro que constrói sistemas com IA. Comercial, reembolsos, agendamento e financeiro funcionando, em vídeo.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="canonical" href="https://b-rodrigues-omena.github.io/">
 <meta name="theme-color" content="#09090a">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
-<meta property="og:title" content="Bruno de Luca · Sistemas web e automações com IA">
-<meta property="og:description" content="Sistemas web e automações com IA, feitos sob medida por quem conhece a rotina financeira por dentro. São Paulo, atendimento em todo o Brasil.">
+<meta property="og:title" content="Bruno de Luca · Analista financeiro que constrói sistemas com IA">
+<meta property="og:description" content="Comercial, reembolsos, agendamento e financeiro funcionando, em vídeo. Conheça os sistemas que projetei e construí.">
 <meta property="og:url" content="https://b-rodrigues-omena.github.io/">
 <meta property="og:image" content="https://b-rodrigues-omena.github.io/previa.png">
 <meta property="og:image:width" content="1200">
@@ -19,352 +19,283 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Unbounded:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap">
 <style>
-/* Layout: painel de instrumentos. Faixas de largura total separadas por fios de 1px, quadros com marcas de registro nos cantos e rótulos em mono, como a tela de um sistema. Preto é a identidade; o claro só entra por escolha. */
+/* Portfólio no espírito do Visão: preto, superfícies de vidro, cantos suaves, pílulas e um único destaque (o azul fosco dos filmes).
+   Pouco texto, muito ar. Cada bloco responde a um clique ou mostra o sistema funcionando. */
 :root{
-  --bg:#09090a;
-  --panel:#0e0f10;
-  --line:#222426;
-  --line-2:#3a3d40;
-  --muted:#8a8e93;
-  --fg:#e6e7e8;
-  --ink:#ffffff;
-  --inv:#09090a;
-  --grid:rgba(255,255,255,.035);
-  --screen:#000000;
-  --f-display:"Unbounded","Segoe UI",system-ui,sans-serif;
-  --f-body:"Geist","Segoe UI",system-ui,-apple-system,sans-serif;
-  --f-mono:"Geist Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
-  --max:1200px;
+  --bg:#050506; --glass:rgba(255,255,255,.035); --glass-2:rgba(255,255,255,.065);
+  --line:rgba(255,255,255,.085); --line-2:rgba(255,255,255,.16);
+  --fg:#c6c9cf; --ink:#f4f4f4; --muted:#868a92; --inv:#08090b;
+  --blue:#5B8DD9; --blue-soft:rgba(91,141,217,.15); --blue-text:#9dbdf0; --green:#5DBB7A;
+  --f:"Geist","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif;
+  --max:1120px; --r:24px; --ease:cubic-bezier(.2,.7,.2,1);
   color-scheme:dark;
 }
 :root[data-theme="light"]{
-  --bg:#f2f3f3;
-  --panel:#fafafa;
-  --line:#d6d8d9;
-  --line-2:#b4b7ba;
-  --muted:#5f6368;
-  --fg:#151617;
-  --ink:#000000;
-  --inv:#f2f3f3;
-  --grid:rgba(0,0,0,.045);
-  --screen:#000000;
+  --bg:#eef0f4; --glass:rgba(255,255,255,.7); --glass-2:rgba(255,255,255,.95);
+  --line:rgba(15,23,42,.1); --line-2:rgba(15,23,42,.2);
+  --fg:#39404a; --ink:#111418; --muted:#687180; --inv:#ffffff;
+  --blue:#3F6FBF; --blue-soft:rgba(63,111,191,.12); --blue-text:#2f5aa3; --green:#2E8A4C;
   color-scheme:light;
 }
-
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:76px}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;color:var(--fg);font:400 16px/1.65 var(--f);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  background:radial-gradient(1100px 640px at 88% -12%,var(--blue-soft),transparent 62%),radial-gradient(900px 620px at -12% 18%,rgba(255,255,255,.035),transparent 60%),var(--bg);background-attachment:fixed}
 a{color:inherit}
-:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
-::selection{background:var(--ink);color:var(--inv)}
-h1,h2,h3{text-wrap:balance}
 p{margin:0}
+h1,h2,h3{margin:0;color:var(--ink);font-weight:600;letter-spacing:-.035em;text-wrap:balance}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:8px}
+::selection{background:var(--blue);color:#fff}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:max(clamp(18px,4vw,40px),env(safe-area-inset-left,0px)) max(clamp(18px,4vw,40px),env(safe-area-inset-right,0px))}
+.card{border:1px solid var(--line);border-radius:var(--r);background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--blue-text);letter-spacing:.01em}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--blue)}
 
-.wrap{max-width:var(--max);margin:0 auto;padding-left:max(clamp(16px,4vw,40px),env(safe-area-inset-left,0px));padding-right:max(clamp(16px,4vw,40px),env(safe-area-inset-right,0px))}
-.mono{font-family:var(--f-mono)}
-.label{display:block;font:500 11px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+/* topo: nome, pílula de navegação com indicador deslizante, tema */
+.top{position:fixed;inset:calc(env(safe-area-inset-top,0px) + 14px) 0 auto;z-index:50;pointer-events:none}
+.top::before{content:"";position:absolute;inset:calc(-14px - env(safe-area-inset-top,0px)) 0 -22px;z-index:-1;background:linear-gradient(var(--bg) 42%,transparent);pointer-events:none}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top a,.top button,.top nav{pointer-events:auto}
+.me{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14px;letter-spacing:-.01em;white-space:nowrap}
+.me b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--inv);font-size:12px;font-weight:600;letter-spacing:0}
+.pill{position:relative;display:flex;gap:2px;padding:4px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);max-width:100%;overflow-x:auto;scrollbar-width:none}
+.pill::-webkit-scrollbar{display:none}
+.pill a{position:relative;z-index:1;padding:8px 15px;border-radius:999px;text-decoration:none;font-size:13.5px;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .25s}
+.pill a:hover,.pill a[aria-current="true"]{color:var(--ink)}
+.pill .ind{position:absolute;left:0;top:4px;bottom:4px;width:0;border-radius:999px;background:var(--glass-2);border:1px solid var(--line);opacity:0;transition:transform .45s var(--ease),width .45s var(--ease),opacity .3s}
+.round{display:grid;place-items:center;width:38px;height:38px;flex:none;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);cursor:pointer;color:var(--ink);transition:border-color .2s}
+.round:hover{border-color:var(--line-2)}
+.round svg{width:16px;height:16px}
+@media (max-width:760px){.me span{display:none}.pill a{padding:8px 12px;font-size:13px}}
 
-/* Faixa corrida */
-.ticker{border-bottom:1px solid var(--line);overflow:hidden;color:var(--muted);font:500 11px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase}
-.ticker-track{display:flex;width:max-content;padding-block:11px;animation:tick 48s linear infinite}
-.ticker-track span{padding-right:3em;white-space:nowrap}
-@keyframes tick{to{transform:translateX(-50%)}}
+/* botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:46px;padding:0 22px;border-radius:999px;border:1px solid var(--line-2);background:transparent;color:var(--ink);font-size:14.5px;font-weight:500;text-decoration:none;cursor:pointer;transition:transform .25s var(--ease),border-color .2s,background .2s}
+.btn:hover{transform:translateY(-1px);border-color:var(--ink)}
+.btn.solid{background:var(--ink);border-color:var(--ink);color:var(--inv);font-weight:600}
+.btn.sm{height:36px;padding:0 15px;font-size:13px}
+.btn svg{width:15px;height:15px}
 
-/* Navegação */
-.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;gap:24px;height:62px}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
-.mark{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--ink);font:600 11px/1 var(--f-display);letter-spacing:.02em}
-.logo .nm{font:500 13px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
-.links{display:flex;gap:26px;margin-left:auto}
-.links a{text-decoration:none;color:var(--muted);font:500 11.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding-block:8px;transition:color .2s}
-.links a:hover{color:var(--ink)}
-.nav-actions{display:flex;align-items:center;gap:10px}
-.tbtn{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line-2);background:transparent;color:var(--fg);cursor:pointer;transition:border-color .2s}
-.tbtn:hover{border-color:var(--ink)}
-.tbtn svg{width:16px;height:16px}
-@media (max-width:880px){.links{display:none}.nav-actions{margin-left:auto}}
-@media (max-width:420px){.logo .nm{display:none}}
+/* abertura */
+.hero{padding:clamp(128px,17vw,190px) 0 clamp(56px,8vw,96px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,72px);align-items:center}
+@media (max-width:920px){.hero .wrap{grid-template-columns:minmax(0,1fr)}}
+.hero h1{margin-top:22px;font-size:clamp(42px,7.2vw,84px);line-height:1;letter-spacing:-.045em}
+.hero h1 em{font-style:normal;color:var(--muted)}
+.hero .lede{margin-top:24px;max-width:46ch;font-size:clamp(16.5px,1.5vw,19px);line-height:1.6}
+.hero .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.quiet{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:44px;font-size:13.5px;color:var(--muted)}
+.quiet b{color:var(--ink);font-weight:600}
 
-/* Botões */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding-inline:22px;border:1px solid var(--ink);background:transparent;color:var(--ink);font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .2s,color .2s}
-.btn:hover{background:var(--ink);color:var(--inv)}
-.btn-solid{background:var(--ink);color:var(--inv)}
-.btn-solid:hover{background:transparent;color:var(--ink)}
-.btn-sm{height:38px;padding-inline:14px;font-size:11px}
-
-/* Quadro com marcas de registro */
-.ticks{position:relative}
-.ticks::before{content:"";position:absolute;inset:-1px;pointer-events:none;background:
-  linear-gradient(var(--ink),var(--ink)) 0 0/12px 1px,linear-gradient(var(--ink),var(--ink)) 0 0/1px 12px,
-  linear-gradient(var(--ink),var(--ink)) 100% 0/12px 1px,linear-gradient(var(--ink),var(--ink)) 100% 0/1px 12px,
-  linear-gradient(var(--ink),var(--ink)) 0 100%/12px 1px,linear-gradient(var(--ink),var(--ink)) 0 100%/1px 12px,
-  linear-gradient(var(--ink),var(--ink)) 100% 100%/12px 1px,linear-gradient(var(--ink),var(--ink)) 100% 100%/1px 12px;background-repeat:no-repeat}
-
-/* Abertura */
-.hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 70% 40%,#000 30%,transparent 80%);mask-image:radial-gradient(ellipse 80% 70% at 70% 40%,#000 30%,transparent 80%)}
-.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(40px,5vw,72px);align-items:center;padding-block:clamp(48px,8vw,104px)}
-@media (max-width:980px){.hero .wrap{grid-template-columns:minmax(0,1fr)}}
-.hero-meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
-.coords{font:500 11px/1.4 var(--f-mono);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
-.status{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line-2);padding:8px 12px;font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--fg)}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--ink);animation:pulse 2.2s ease-in-out infinite}
-@keyframes pulse{50%{opacity:.25}}
-.name{display:flex;flex-direction:column;margin:30px 0 0;font:500 clamp(44px,12vw,96px)/.94 var(--f-display);letter-spacing:-.04em;text-transform:uppercase;color:var(--ink)}
-.name span{white-space:nowrap}
-.name .o{color:var(--muted);background:linear-gradient(180deg,var(--muted) 10%,var(--line-2) 95%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-@media (min-width:981px){.name{font-size:clamp(56px,6.6vw,96px)}}
-.thesis{margin-top:30px;font:300 clamp(24px,3vw,36px)/1.15 var(--f-body);letter-spacing:-.02em;color:var(--ink)}
-.lede{margin-top:14px;max-width:50ch;color:var(--muted);font-size:17px}
-.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:44px;border-top:1px solid var(--line)}
-.stat{padding:18px 14px 0 0;min-width:0}
-.stat+.stat{border-left:1px solid var(--line);padding-left:16px}
-.stat b{display:block;font:500 clamp(24px,3vw,32px)/1 var(--f-display);letter-spacing:-.04em;color:var(--ink);font-variant-numeric:tabular-nums}
-.stat span{display:block;margin-top:9px;font:500 10.5px/1.45 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-
-/* Console */
-.console{min-width:0;border:1px solid var(--line-2);background:var(--panel)}
-.console-head{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line);font:500 11px/1 var(--f-mono);letter-spacing:.06em;color:var(--muted)}
-.sq{width:8px;height:8px;border:1px solid var(--line-2)}
-.console-head .file{margin-left:6px;color:var(--fg)}
-.live{display:flex;align-items:center;gap:8px;margin-left:auto;letter-spacing:.16em;text-transform:uppercase}
-.console-body{min-height:17em;padding:18px 16px;font:400 12.5px/1.75 var(--f-mono)}
-.ln{display:grid;grid-template-columns:9ch 17ch minmax(0,1fr);gap:0 12px}
+/* console: uma automação de verdade, digitada ao vivo */
+.console{overflow:hidden}
+.console-head{display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.console-head .sq{width:9px;height:9px;border-radius:50%;background:var(--line-2)}
+.console-head .file{margin-left:8px;color:var(--fg)}
+.console-head .live{margin-left:auto;display:inline-flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.3}}
+.console-body{min-height:15.5em;padding:20px 18px;font:400 12.5px/1.85 ui-monospace,"Cascadia Mono",Consolas,monospace}
+.ln{display:grid;grid-template-columns:8.5ch 16ch minmax(0,1fr);gap:0 12px}
 .ln .t,.ln .k{color:var(--muted)}
 .ln .v{color:var(--fg);min-width:0;overflow-wrap:anywhere}
 .ln.res{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line-2)}
 .ln.res .v{color:var(--ink)}
-.ln.alert .v span{background:var(--ink);color:var(--inv);padding:1px 6px}
-.cursor{display:inline-block;width:.6em;height:1.05em;margin-left:2px;background:var(--fg);vertical-align:-.18em;animation:blink 1s steps(1) infinite}
+.ln.alert .v span{background:var(--blue);color:#fff;padding:1px 7px;border-radius:6px}
+.cursor{display:inline-block;width:.55em;height:1.05em;margin-left:2px;background:var(--blue);vertical-align:-.18em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.console-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;padding:11px 14px;border-top:1px solid var(--line);font:500 10.5px/1.4 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.console-foot{padding:12px 18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
 @media (max-width:560px){.ln{grid-template-columns:8ch minmax(0,1fr)}.ln .v{grid-column:2}}
 
-/* Seções */
-.sec{border-bottom:1px solid var(--line)}
-.sec>.wrap{padding-block:clamp(64px,9vw,120px)}
-.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 48px;align-items:end;margin-bottom:clamp(36px,5vw,64px)}
-.sec-head .label{margin-bottom:16px}
-.sec-head p{max-width:46ch;color:var(--muted)}
-@media (max-width:880px){.sec-head{grid-template-columns:minmax(0,1fr)}}
-h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing:-.04em;color:var(--ink)}
+/* seções */
+.sec{padding:clamp(64px,9vw,120px) 0}
+.head{max-width:60ch;margin-bottom:clamp(28px,4vw,44px)}
+.head h2{margin-top:14px;font-size:clamp(30px,4.4vw,50px);line-height:1.04;letter-spacing:-.045em}
+.head p{margin-top:16px;font-size:17px;color:var(--muted)}
 
-/* Ao vivo: gravações do sistema */
-.live-grid{display:grid;grid-template-columns:minmax(0,2.3fr) minmax(0,.85fr);gap:clamp(28px,3.5vw,48px);align-items:start}
-@media (max-width:920px){.live-grid{grid-template-columns:minmax(0,1fr)}}
-.live-main{min-width:0}
-.browser{border:1px solid var(--line-2);background:var(--panel)}
-.browser-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);font:500 11px/1 var(--f-mono);letter-spacing:.06em;color:var(--muted)}
-.browser-bar .url{flex:1;min-width:0;margin-left:6px;padding:6px 10px;border:1px solid var(--line);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.browser-bar .tagline{letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
-@media (max-width:480px){.browser-bar .tagline{display:none}}
-.browser video,.phone video{display:block;width:100%;height:auto;max-width:100%;background:var(--screen)}
-.browser video{aspect-ratio:16/10}
-.clip-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-top:0}
-@media (max-width:760px){.clip-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.clip-tab{position:relative;padding:15px 12px 17px;border:0;background:var(--bg);color:var(--muted);text-align:left;font:500 11px/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:color .2s,background .2s}
-.clip-tab:hover{color:var(--fg)}
-.clip-tab[aria-selected="true"]{color:var(--ink);background:var(--panel)}
-.clip-tab .bar{position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--ink)}
-.clip-cap{margin-top:14px;min-height:3.2em;max-width:62ch;color:var(--muted)}
-.phone-wrap{margin:0;min-width:0}
-.phone{max-width:290px;margin:0 auto;padding:10px;border:1px solid var(--line-2);border-radius:34px;background:var(--panel)}
-.phone video{aspect-ratio:480/1040;border-radius:25px}
-.phone-wrap figcaption{margin-top:14px;text-align:center;font:500 10.5px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+/* sistemas: escolher e assistir */
+.works{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:820px){.works{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.work{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:2px 13px;padding:15px 16px 17px;border-radius:20px;border:1px solid var(--line);background:var(--glass);text-align:left;cursor:pointer;overflow:hidden;transition:transform .3s var(--ease),border-color .25s,background .25s}
+.work:hover{transform:translateY(-2px);border-color:var(--line-2);background:var(--glass-2)}
+.work .ic{grid-row:1/3;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line-2);color:var(--ink);transition:background .25s,border-color .25s,color .25s}
+.work .ic svg{width:13px;height:13px;margin-left:2px}
+.work b{font-size:15.5px;font-weight:600;color:var(--ink);letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.work small{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.work .bar{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--blue);border-radius:0 3px 3px 0}
+.work[aria-selected="true"]{border-color:var(--blue);background:var(--blue-soft)}
+.work[aria-selected="true"] .ic{background:var(--blue);border-color:var(--blue);color:#fff}
+.work:hover .ic{border-color:var(--ink)}
+/* equalizador no lugar do "play" enquanto o sistema escolhido toca */
+.work .eq{display:none;align-items:flex-end;gap:2.5px;height:13px}
+.work .eq i{width:3px;border-radius:2px;background:currentColor;animation:eq 1s ease-in-out infinite}
+.work .eq i:nth-child(1){height:60%}.work .eq i:nth-child(2){height:100%;animation-delay:.18s}.work .eq i:nth-child(3){height:45%;animation-delay:.36s}
+@keyframes eq{50%{transform:scaleY(.4)}}
+.work .eq i{transform-origin:bottom}
+.work[aria-selected="true"].tocando .ic svg{display:none}
+.work[aria-selected="true"].tocando .eq{display:flex}
+@media (max-width:560px){.work{padding:12px;gap:0 10px}.work .ic{grid-row:auto;width:32px;height:32px}.work b{font-size:14.5px}.work small{display:none}}
+.hint{display:flex;align-items:center;gap:8px;margin:0 0 14px;font-size:13px;color:var(--muted)}
+.hint svg{width:15px;height:15px;color:var(--blue-text)}
 
-/* Serviços */
-.svc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-@media (max-width:760px){.svc-grid{grid-template-columns:minmax(0,1fr)}}
-.svc{display:grid;align-content:start;gap:12px;padding:clamp(24px,3vw,36px);background:var(--bg);transition:background .25s}
-.svc:hover{background:var(--panel)}
-.svc svg{width:28px;height:28px;fill:none;stroke:var(--ink);stroke-width:1.25;stroke-linecap:square}
-.svc h3{margin:8px 0 0;font:500 21px/1.25 var(--f-body);letter-spacing:-.015em;color:var(--ink)}
-.svc p{color:var(--muted)}
-.svc .for{margin-top:8px;padding-top:14px;border-top:1px dashed var(--line-2);font:500 12px/1.6 var(--f-mono);letter-spacing:.02em;color:var(--fg)}
-.svc .for span{margin-right:8px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-size:10.5px}
+.player{position:relative;margin:12px auto 0;max-width:max(520px,min(100%,calc((100vh - 250px)*1.6)));overflow:hidden;background:#000;border-radius:var(--r);border:1px solid var(--line)}
+.player video{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:contain;background:#050506;cursor:pointer}
+.player .ctl{position:absolute;right:14px;bottom:14px;display:flex;gap:8px;opacity:0;transition:opacity .25s}
+.player:hover .ctl,.player.pausado .ctl,.player .ctl:focus-within{opacity:1}
+@media (hover:none){.player .ctl{opacity:1}}
+.player .ctl button{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.26);background:rgba(8,9,11,.66);color:#f4f4f4;cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.player .ctl button:hover{border-color:#fff}
+.player .ctl svg{width:14px;height:14px}
+.player .i-play{display:none}.player.pausado .i-play{display:block}.player.pausado .i-pause{display:none}
 
-/* Cases */
-.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start;padding-block:clamp(40px,5vw,64px);border-top:1px solid var(--line)}
-.case:first-child{border-top:0;padding-top:0}
-@media (max-width:920px){.case{grid-template-columns:minmax(0,1fr)}}
+.clips{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}
+.clips>span{font-size:13px;color:var(--muted);margin-right:4px}
+.clip{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 14px 0 11px;border-radius:999px;border:1px solid var(--line);background:transparent;font-size:13px;font-weight:500;color:var(--fg);cursor:pointer;transition:border-color .2s,background .2s,color .2s,transform .25s var(--ease)}
+.clip svg{width:9px;height:9px;opacity:.7}
+.clip:hover{border-color:var(--line-2);color:var(--ink);transform:translateY(-1px)}
+.clip[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-soft);color:var(--ink)}
+
+.wp{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);margin-top:clamp(28px,4vw,44px);animation:surge .5s var(--ease)}
+@media (max-width:820px){.wp{grid-template-columns:minmax(0,1fr)}}
+.wp[hidden]{display:none}
+.wp h3{font-size:clamp(24px,3vw,32px);letter-spacing:-.04em}
+.wp .txt{margin-top:12px;font-size:16.5px;max-width:52ch}
+.wp .orig{margin-top:12px;font-size:13.5px;color:var(--muted);max-width:52ch}
+.wp ul{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.wp li{position:relative;padding-left:26px;font-size:15px}
+.wp li::before{content:"";position:absolute;left:3px;top:8px;width:11px;height:6px;border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg)}
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.nums div{padding:16px 16px 14px;border-radius:18px;border:1px solid var(--line);background:var(--glass)}
+.nums b{display:block;font-size:30px;font-weight:600;letter-spacing:-.045em;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.nums span{display:block;margin-top:9px;font-size:12.5px;line-height:1.35;color:var(--muted)}
+.stack{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.stack span{padding:5px 12px;border-radius:999px;border:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+@keyframes surge{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* em produção */
+.prod{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(22px,3.4vw,40px)}
+@media (max-width:820px){.prod{grid-template-columns:minmax(0,1fr)}}
+.prod h3{font-size:clamp(24px,3vw,32px);letter-spacing:-.04em}
+.prod .where{margin-top:6px;font-size:13.5px;color:var(--muted)}
+.prod .txt{margin-top:14px;font-size:16.5px}
+.prod ul{margin:20px 0 0;padding:0;list-style:none;display:grid;gap:9px}
+.prod li{position:relative;padding-left:26px;font-size:15px}
+.prod li::before{content:"";position:absolute;left:3px;top:8px;width:11px;height:6px;border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg)}
+.prod .nums{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:24px}
+@media (max-width:560px){.prod .nums{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.prod .nums b{font-size:21px;white-space:nowrap}
+.prod .nums div{padding:14px 12px 12px}
 .viz{margin:0}
-.viz .frame{border:1px solid var(--line-2);background:var(--panel)}
-.viz svg{display:block;width:100%;height:auto;max-width:100%}
-/* case com filme: o filme ganha mais largura e acompanha a leitura do texto ao lado */
-@media (min-width:921px){.case:has(.viz.film){grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}.viz.film{position:sticky;top:88px}}
-/* filme do case: toca sozinho quando entra na tela; um clique pausa */
-.viz.film .frame{position:relative;background:#08090b}
-.viz.film video{display:block;width:100%;height:auto;aspect-ratio:16/10;background:#08090b;cursor:pointer}
-.film-btn{position:absolute;right:10px;top:10px;height:28px;padding-inline:10px;border:1px solid rgba(255,255,255,.3);background:rgba(8,9,11,.74);color:#f4f4f4;font:500 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;opacity:0;transition:opacity .2s}
-.viz.film .frame:hover .film-btn,.film-btn:focus-visible,.viz.film.pausado .film-btn{opacity:1}
-@media (hover:none){.film-btn{opacity:1}}
-/* ilustrações que se desenham quando o case entra na tela (só com o script ativo e sem "reduzir movimento") */
+.viz svg{display:block;width:100%;height:auto}
+.viz figcaption{margin-top:10px;font-size:12px;color:var(--muted);text-align:center}
+.s-l{fill:var(--muted);font-family:var(--f);font-size:9.5px;letter-spacing:.06em}
+.s-v{fill:var(--ink);font-family:var(--f);font-size:26px;font-weight:600;letter-spacing:-.04em}
+.s-mi{fill:var(--ink);font-family:var(--f);font-size:13px;font-weight:500}
+.s-m{fill:var(--ink);font-family:var(--f);font-size:11.5px;font-weight:500}
+.s-grid{fill:none;stroke:var(--line);stroke-dasharray:2 4}
+.s-ink{fill:none;stroke:var(--blue);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.s-solid{fill:var(--blue)}
+.s-box{fill:var(--glass);stroke:var(--line)}
+.stop-a{stop-color:var(--blue);stop-opacity:.28}.stop-b{stop-color:var(--blue);stop-opacity:0}
 @media (prefers-reduced-motion:no-preference){
-  .anima-ok .viz.anim .s-ink{stroke-dasharray:560;stroke-dashoffset:560}
-  .anima-ok .visto .viz.anim .s-ink{animation:traca 2.2s cubic-bezier(.2,.7,.2,1) .25s forwards}
-  .anima-ok .viz.anim .a-in{opacity:0}
-  .anima-ok .visto .viz.anim .a-in{animation:surge .55s ease-out forwards;animation-delay:calc(var(--i,0)*85ms + .3s)}
-  .anima-ok .visto .viz.anim .pulsa{transform-box:fill-box;transform-origin:center;animation:pulsa 2.6s ease-in-out 2.6s infinite}
+  .js .viz .s-ink{stroke-dasharray:560;stroke-dashoffset:560}
+  .js .in .viz .s-ink{animation:traca 2.2s var(--ease) .25s forwards}
+  .js .viz .a-in{opacity:0}
+  .js .in .viz .a-in{animation:surge .55s ease-out forwards;animation-delay:calc(var(--i,0)*85ms + .3s)}
+  .js .in .viz .pulsa{transform-box:fill-box;transform-origin:center;animation:pulsa 2.6s ease-in-out 2.6s infinite}
   @keyframes traca{to{stroke-dashoffset:0}}
-  @keyframes surge{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
   @keyframes pulsa{50%{transform:scale(2);opacity:.3}}
 }
-.viz figcaption{margin-top:10px;font:500 10.5px/1.4 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.tags{display:flex;flex-wrap:wrap;gap:8px}
-.tag{padding:6px 9px;border:1px solid var(--line-2);font:500 10.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--fg)}
-.tag.solid{background:var(--ink);border-color:var(--ink);color:var(--inv)}
-.case h3{margin:20px 0 6px;font:500 clamp(22px,2.6vw,30px)/1.12 var(--f-display);letter-spacing:-.035em;color:var(--ink)}
-.where{font:500 12px/1.4 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.case .lead{margin-top:18px;max-width:56ch}
-.kv{display:grid;grid-template-columns:12ch minmax(0,1fr);gap:12px 18px;margin:22px 0 0}
-.kv dt{font:500 10.5px/2.1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.kv dd{margin:0;min-width:0}
-@media (max-width:480px){.kv{grid-template-columns:minmax(0,1fr);gap:4px}.kv dd+dt{margin-top:12px}}
-.done{display:grid;gap:6px;margin:0;padding:0;list-style:none}
-.done li{position:relative;padding-left:20px}
-.done li::before{content:"+";position:absolute;left:0;top:0;font-family:var(--f-mono);color:var(--muted)}
-.chips{display:flex;flex-wrap:wrap;gap:6px 0;margin-top:24px;font:500 11px/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.chips span+span::before{content:"/";margin-inline:12px;color:var(--line-2)}
-.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin-top:24px;background:var(--line);border:1px solid var(--line)}
-.metrics div{padding:14px 14px 12px;background:var(--bg);min-width:0}
-.metrics b{display:block;font:500 20px/1 var(--f-display);letter-spacing:-.04em;color:var(--ink);font-variant-numeric:tabular-nums}
-.metrics span{display:block;margin-top:8px;font:500 10px/1.4 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-@media (max-width:560px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.note{margin-top:18px;font:500 11px/1.5 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.note a{color:var(--ink);text-underline-offset:3px}
+.also{margin:clamp(28px,4vw,40px) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:920px){.also{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.also{grid-template-columns:minmax(0,1fr)}}
+.also li{padding:18px;border-radius:20px;border:1px solid var(--line);background:var(--glass)}
+.also b{display:block;color:var(--ink);font-weight:600;font-size:15px;letter-spacing:-.02em}
+.also span{display:block;margin-top:6px;font-size:13.5px;line-height:1.5;color:var(--muted)}
 
-/* SVG das ilustrações */
-.s-l{fill:var(--muted);font-family:var(--f-mono);font-size:9.5px;letter-spacing:.08em}
-.s-m{fill:var(--fg);font-family:var(--f-mono);font-size:11px}
-.s-r{fill:var(--fg);font-family:var(--f-mono);font-size:9.5px}
-.s-mi{fill:var(--ink);font-family:var(--f-mono);font-size:12.5px}
-.s-v{fill:var(--ink);font-family:var(--f-display);font-size:25px;letter-spacing:-.03em}
-.s-inv{fill:var(--inv);font-family:var(--f-mono);font-size:9.5px;letter-spacing:.08em}
-.s-box{fill:none;stroke:var(--line-2)}
-.s-box-d{fill:none;stroke:var(--line-2);stroke-dasharray:3 3}
-.s-grid{fill:none;stroke:var(--line);stroke-dasharray:2 4}
-.s-line{fill:none;stroke:var(--line-2)}
-.s-link{fill:none;stroke:var(--muted)}
-.s-ink{fill:none;stroke:var(--ink);stroke-width:1.5}
-.s-solid{fill:var(--ink)}
-.s-bg{fill:var(--bg);stroke:var(--line-2)}
-.s-bar{fill:var(--muted)}
-.s-bar-inv{fill:var(--inv);opacity:.55}
-.stop-a{stop-color:var(--ink);stop-opacity:.18}
-.stop-b{stop-color:var(--ink);stop-opacity:0}
+/* habilidades */
+.sks{display:flex;flex-wrap:wrap;gap:8px}
+.sk{height:42px;padding:0 20px;border-radius:999px;border:1px solid var(--line);background:var(--glass);font-size:14.5px;font-weight:500;color:var(--fg);cursor:pointer;transition:border-color .2s,background .2s,color .2s,transform .25s var(--ease)}
+.sk:hover{border-color:var(--line-2);color:var(--ink);transform:translateY(-1px)}
+.sk[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--inv);font-weight:600}
+.skp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);margin-top:16px;padding:clamp(22px,3.4vw,36px);animation:surge .45s var(--ease)}
+@media (max-width:820px){.skp{grid-template-columns:minmax(0,1fr)}}
+.skp[hidden]{display:none}
+.skp h3{font-size:clamp(21px,2.6vw,27px);letter-spacing:-.035em}
+.skp p{margin-top:10px;font-size:16px}
+.skp ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+.skp li{padding:7px 14px;border-radius:999px;border:1px solid var(--line);font-size:13.5px;color:var(--fg)}
+.where-in{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:20px;font-size:13px;color:var(--muted)}
+.go{height:32px;padding:0 13px;border-radius:999px;border:1px solid var(--blue);background:var(--blue-soft);color:var(--ink);font-size:13px;font-weight:500;cursor:pointer;transition:transform .25s var(--ease)}
+.go:hover{transform:translateY(-1px)}
 
-/* Também construí */
-.more{margin-top:clamp(48px,6vw,72px)}
-.more .label{margin-bottom:16px}
-.more ul{margin:0;padding:0;list-style:none;border-top:1px solid var(--line-2)}
-.more li{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr) minmax(0,.7fr);gap:6px 24px;padding:16px 0;border-bottom:1px solid var(--line)}
-.more li b{font-weight:500;color:var(--ink)}
-.more li span{color:var(--muted)}
-.more li em{font:500 11px/1.9 var(--f-mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:right}
-@media (max-width:760px){.more li{grid-template-columns:minmax(0,1fr)}.more li em{text-align:left}}
+/* como trabalho */
+.steps{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;counter-reset:p}
+@media (max-width:820px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.steps{grid-template-columns:minmax(0,1fr)}}
+.steps li{padding:22px 20px;border-radius:20px;border:1px solid var(--line);background:var(--glass);counter-increment:p}
+.steps li::before{content:counter(p);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--blue-soft);color:var(--blue-text);font-size:13px;font-weight:600}
+.steps h3{margin-top:16px;font-size:17px;letter-spacing:-.025em}
+.steps p{margin-top:7px;font-size:14.5px;line-height:1.55;color:var(--muted)}
 
-/* Processo */
-.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0;padding:0;list-style:none;border-top:1px solid var(--line-2)}
-.step{position:relative;padding:26px 22px 0 0;min-width:0}
-.step::before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;background:var(--bg);border:1px solid var(--ink)}
-.step:last-child::before{background:var(--ink)}
-.step .n{font:500 11px/1 var(--f-mono);letter-spacing:.16em;color:var(--muted)}
-.step h3{margin:14px 0 8px;font:500 18px/1.3 var(--f-body);letter-spacing:-.01em;color:var(--ink)}
-.step p{font-size:15px;color:var(--muted)}
-@media (max-width:920px){
-  .steps{grid-template-columns:minmax(0,1fr);border-top:0;border-left:1px solid var(--line-2)}
-  .step{padding:0 0 30px 26px}
-  .step:last-child{padding-bottom:0}
-  .step::before{top:3px;left:-5px}
-}
+/* sobre */
+.about{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,72px);align-items:start}
+@media (max-width:820px){.about{grid-template-columns:minmax(0,1fr)}}
+.about p{font-size:17px;max-width:54ch}
+.about p+p{margin-top:16px}
+.career{margin:0;padding:0;list-style:none;position:relative}
+.career::before{content:"";position:absolute;left:5px;top:10px;bottom:10px;width:1px;background:var(--line-2)}
+.career li{position:relative;display:grid;grid-template-columns:7ch minmax(0,1fr);gap:14px;padding:10px 0 10px 28px;font-size:15px}
+.career li::before{content:"";position:absolute;left:0;top:17px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--line-2);transition:border-color .2s,background .2s}
+.career li:last-child::before{border-color:var(--blue);background:var(--blue)}
+.career li:hover::before{border-color:var(--blue)}
+.career b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
 
-/* Sobre */
-.about{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,5vw,72px);align-items:start}
-@media (max-width:920px){.about{grid-template-columns:minmax(0,1fr)}}
-.about-text{display:grid;gap:18px;max-width:62ch;font-size:17px}
-.about-text p+p{color:var(--muted)}
-.facts{margin:0;border:1px solid var(--line-2)}
-.facts div{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:14px 18px;border-bottom:1px solid var(--line)}
-.facts div:last-child{border-bottom:0}
-.facts dt{font:500 10.5px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.facts dd{margin:0;text-align:right;color:var(--ink)}
-.career{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:clamp(40px,5vw,64px) 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
-.career li{padding:16px 16px 0 0;min-width:0}
-.career li+li{border-left:1px solid var(--line);padding-left:16px}
-.career b{display:block;font:500 12px/1 var(--f-mono);letter-spacing:.12em;color:var(--ink)}
-.career span{display:block;margin-top:10px;font-size:14px;line-height:1.45;color:var(--muted)}
-@media (max-width:920px){
-  .career{grid-template-columns:minmax(0,1fr);border-top:0}
-  .career li,.career li+li{display:grid;grid-template-columns:9ch minmax(0,1fr);gap:16px;padding:12px 0;border-left:0;border-bottom:1px solid var(--line)}
-  .career span{margin-top:0}
-  .career b{line-height:1.45}
-}
+/* contato */
+.contact{text-align:center}
+.contact h2{font-size:clamp(38px,6.4vw,76px);line-height:1;letter-spacing:-.045em}
+.contact .sub{margin:18px auto 0;max-width:44ch;font-size:17px;color:var(--muted)}
+.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:clamp(28px,4vw,44px);text-align:left}
+@media (max-width:820px){.ways{grid-template-columns:minmax(0,1fr)}}
+.way{padding:22px;border-radius:var(--r);border:1px solid var(--line);background:var(--glass);transition:border-color .25s,transform .3s var(--ease)}
+.way:hover{border-color:var(--line-2);transform:translateY(-2px)}
+.way small{display:block;font-size:13px;color:var(--muted)}
+.way .val{display:block;margin-top:6px;color:var(--ink);font-size:16.5px;font-weight:500;letter-spacing:-.01em;text-decoration:none;overflow-wrap:anywhere}
+.way .acts{display:flex;gap:8px;margin-top:18px}
 
-/* Ferramentas */
-.stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-@media (max-width:880px){.stack{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.stack{grid-template-columns:minmax(0,1fr)}}
-.col{padding:24px;background:var(--bg)}
-.col h3{margin:0 0 14px;font:500 11px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
-.col ul{display:grid;gap:7px;margin:0;padding:0;list-style:none;color:var(--muted);font-size:15px}
-.col.key{background:var(--panel)}
-.col.key h3::after{content:" · diferencial";color:var(--muted)}
-
-/* Contato */
-.contact .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,5vw,72px);align-items:end}
-@media (max-width:920px){.contact .wrap{grid-template-columns:minmax(0,1fr)}}
-.contact h2{font-size:clamp(34px,5.4vw,68px)}
-.contact .sub{margin-top:22px;max-width:44ch;color:var(--muted);font-size:17px}
-.rows{border-top:1px solid var(--line-2)}
-.row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
-.row small{display:block;margin-bottom:6px;font:500 10.5px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.row .val{font:500 clamp(16px,1.8vw,19px)/1.3 var(--f-body);color:var(--ink);overflow-wrap:anywhere;text-decoration:none}
-.row a.val:hover{text-decoration:underline;text-underline-offset:4px}
-.acts{display:flex;gap:8px}
-.ibtn{display:inline-flex;align-items:center;height:36px;padding-inline:12px;border:1px solid var(--line-2);background:transparent;color:var(--fg);font:500 10.5px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:border-color .2s,background .2s,color .2s}
-.ibtn:hover{border-color:var(--ink);color:var(--ink)}
-
-/* Rodapé */
-.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;padding-block:26px;font:500 11px/1.5 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.foot{padding:28px 0 calc(28px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}
 .foot a{text-decoration:none}
 .foot a:hover{color:var(--ink)}
 
+/* entrada suave ao rolar (só com o script ativo) */
+.js .rv{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .ticker-track,.dot,.cursor{animation:none}
+  .dot,.cursor,.work .eq i{animation:none}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .wp,.skp{animation:none}
 }
 </style>
 </head>
 <body>
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <span>Sistemas web sob medida</span><span>+</span><span>Automação com IA</span><span>+</span><span>ERP financeiro</span><span>+</span><span>Claude Code</span><span>+</span><span>São Paulo · atendo todo o Brasil</span><span>+</span>
-    <span>Sistemas web sob medida</span><span>+</span><span>Automação com IA</span><span>+</span><span>ERP financeiro</span><span>+</span><span>Claude Code</span><span>+</span><span>São Paulo · atendo todo o Brasil</span><span>+</span>
-  </div>
-</div>
-
-<header class="nav">
+<header class="top">
   <div class="wrap">
-    <a class="logo" href="#topo" aria-label="Bruno de Luca, voltar ao início"><span class="mark">BL</span><span class="nm">Bruno de Luca</span></a>
-    <nav class="links" aria-label="Seções">
-      <a href="#ao-vivo">Ao vivo</a>
-      <a href="#servicos">Serviços</a>
-      <a href="#cases">Cases</a>
-      <a href="#processo">Processo</a>
+    <a class="me" href="#topo" aria-label="Bruno de Luca, voltar ao início"><b>BL</b><span>Bruno de Luca</span></a>
+    <nav class="pill" id="nav" aria-label="Seções">
+      <span class="ind" aria-hidden="true"></span>
+      <a href="#sistemas">Sistemas</a>
+      <a href="#producao">Em produção</a>
+      <a href="#habilidades">Habilidades</a>
       <a href="#sobre">Sobre</a>
       <a href="#contato">Contato</a>
     </nav>
-    <div class="nav-actions">
-      <button class="tbtn" id="tema" type="button" aria-label="Usar tema claro" aria-pressed="false">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
-      </button>
-      <a class="btn btn-solid btn-sm" href="https://wa.me/5511961645087?text=Ol%C3%A1%2C%20Bruno!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Orçamento</a>
-    </div>
+    <button class="round" id="tema" type="button" aria-label="Usar tema claro" aria-pressed="false">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>
+    </button>
   </div>
 </header>
 
@@ -372,25 +303,17 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
 <section class="hero" id="topo">
   <div class="wrap">
     <div>
-      <div class="hero-meta">
-        <span class="status"><span class="dot" aria-hidden="true"></span>Aceitando novos projetos</span>
-        <span class="coords">São Paulo, BR · 23°33′S 46°38′W</span>
+      <span class="eyebrow"><i></i>Analista financeiro · constrói sistemas com IA</span>
+      <h1>Transformo processo <em>em sistema.</em></h1>
+      <p class="lede">Conheço a rotina financeira por dentro e construo os sistemas que ela pede. Aqui eles aparecem funcionando.</p>
+      <div class="acts">
+        <a class="btn solid" href="#sistemas">Ver os sistemas</a>
+        <a class="btn" href="#contato">Falar comigo</a>
       </div>
-      <h1 class="name"><span>Bruno</span><span class="o">de Luca</span></h1>
-      <p class="thesis">Transformo processo em sistema.</p>
-      <p class="lede">Sistemas web e automações com IA, feitos sob medida por quem conhece a rotina financeira por dentro. Do problema real ao sistema no ar.</p>
-      <div class="ctas">
-        <a class="btn btn-solid" href="https://wa.me/5511961645087?text=Ol%C3%A1%2C%20Bruno!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Pedir orçamento ↗</a>
-        <a class="btn" href="#ao-vivo">Ver funcionando ↓</a>
-      </div>
-      <div class="stats">
-        <div class="stat"><b>8+</b><span>anos em finanças</span></div>
-        <div class="stat"><b>2</b><span>sistemas em produção</span></div>
-        <div class="stat"><b>200+</b><span>scripts e automações</span></div>
-      </div>
+      <div class="quiet"><span><b>8+</b> anos em finanças</span><span><b>2</b> sistemas em produção</span><span><b>4</b> módulos do Visão</span></div>
     </div>
 
-    <div class="console ticks" aria-label="Exemplo de automação: um boleto chega por e-mail, a IA lê, o sistema confere e cria o lançamento">
+    <div class="console card" aria-label="Exemplo de automação: um boleto chega por e-mail, a IA lê, o sistema confere e cria o lançamento">
       <div class="console-head">
         <span class="sq"></span><span class="sq"></span><span class="sq"></span>
         <span class="file" id="console-file">boletos.log</span>
@@ -404,431 +327,332 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
         <div class="ln"><span class="t">09:14:04</span><span class="k">duplicidade</span><span class="v">nenhum comprovante igual ✓</span></div>
         <div class="ln res"><span class="t">09:14:04</span><span class="k">resultado</span><span class="v"><span>lançado, aguardando conferência</span><i class="cursor" aria-hidden="true"></i></span></div>
       </div>
-      <div class="console-foot"><span>Automação real do ERP no ar</span><span>Dados fictícios</span></div>
+      <div class="console-foot">Uma automação que escrevi, rodando com dados fictícios</div>
     </div>
   </div>
 </section>
 
-<section class="sec" id="ao-vivo">
+<section class="sec" id="sistemas">
   <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <span class="label">[ Ao vivo ]</span>
-        <h2>O sistema funcionando.</h2>
-      </div>
-      <p>Gravação real do Visão, o sistema que construí com IA: comercial, reembolsos e financeiro no mesmo lugar, rodando com dados fictícios de uma empresa de exemplo. Não é maquete, é o sistema.</p>
+    <div class="head rv">
+      <span class="eyebrow"><i></i>Sistemas</span>
+      <h2>Escolha um e assista.</h2>
+      <p>O Visão é o sistema de gestão que projetei e construí. Cada filme mostra um módulo em uso de verdade, com dados fictícios.</p>
     </div>
-    <div class="live-grid">
-      <div class="live-main">
-        <div class="browser ticks">
-          <div class="browser-bar">
-            <span class="sq"></span><span class="sq"></span><span class="sq"></span>
-            <span class="url">visão · empresa exemplo</span>
-            <span class="tagline">Dados fictícios</span>
-          </div>
-          <video id="demo-video" src="midia/comercial.mp4" poster="midia/comercial.jpg" width="1280" height="800" muted playsinline autoplay preload="metadata" aria-label="Gravação do sistema: painel comercial, follow-up, venda virando conta a receber, reembolsos, visão geral, fluxo de caixa e conciliação"></video>
-        </div>
-        <div class="clip-tabs" role="tablist" aria-label="Telas do sistema">
-          <button class="clip-tab" type="button" role="tab" id="clip-comercial" aria-selected="true" data-src="midia/comercial.mp4" data-poster="midia/comercial.jpg" data-cap="Fechado no mês contra a meta, previsão com o risco de cada mês, rankings e as vendas somadas ao caixa.">Comercial<span class="bar"></span></button>
-          <button class="clip-tab" type="button" role="tab" id="clip-followup" aria-selected="false" data-src="midia/followup.mp4" data-poster="midia/followup.jpg" data-cap="As semanas do mês, o quadro das etapas e o detalhe ao lado. Arrastar o cartão muda a etapa do negócio.">Follow-up<span class="bar"></span></button>
-          <button class="clip-tab" type="button" role="tab" id="clip-venda" aria-selected="false" data-src="midia/venda.mp4" data-poster="midia/venda.jpg" data-cap="Negócio fechado com um clique: as parcelas viram contas a receber e a comissão vira conta a pagar.">Venda → caixa<span class="bar"></span></button>
-          <button class="clip-tab" type="button" role="tab" id="clip-reembolso" aria-selected="false" data-src="midia/reembolso.mp4" data-poster="midia/reembolso.jpg" data-cap="A fila de quem aprova: o que não tem alerta sai em lote; no pedido com alerta, o cupom fica a um clique.">Reembolsos<span class="bar"></span></button>
-          <button class="clip-tab" type="button" role="tab" id="clip-reembolso-pagar" aria-selected="false" data-src="midia/reembolso-pagar.mp4" data-poster="midia/reembolso-pagar.jpg" data-cap="O pedido aprovado já é conta a pagar. O financeiro registra o pagamento e o painel mostra onde a equipe gasta.">Reembolso → pagar<span class="bar"></span></button>
-          <button class="clip-tab" type="button" role="tab" id="clip-inicio" aria-selected="false" data-src="midia/inicio.mp4" data-poster="midia/inicio.jpg" data-cap="Saldo de hoje, projeção de 30 dias e só os avisos que pedem atenção.">Visão geral<span class="bar"></span></button>
-          <button class="clip-tab" type="button" role="tab" id="clip-fluxo" aria-selected="false" data-src="midia/fluxo.mp4" data-poster="midia/fluxo.jpg" data-cap="O mês dia a dia: o que entra, o que sai e o saldo projetado no fim de cada dia.">Fluxo de caixa<span class="bar"></span></button>
-          <button class="clip-tab" type="button" role="tab" id="clip-conciliacao" aria-selected="false" data-src="midia/conciliacao.mp4" data-poster="midia/conciliacao.jpg" data-cap="O extrato do banco casado com os lançamentos, com a certeza de cada sugestão. Um clique confirma.">Conciliação<span class="bar"></span></button>
-        </div>
-        <p class="clip-cap" id="demo-cap" aria-live="polite">Fechado no mês contra a meta, previsão com o risco de cada mês, rankings e as vendas somadas ao caixa.</p>
+
+    <p class="hint rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.2a5 5 0 0 1-3.9-1.9L4 15.5a1.6 1.6 0 0 1 2.4-2L9 15.5"/></svg>Toque em um sistema para trocar o filme</p>
+    <div class="works rv" role="tablist" aria-label="Sistemas">
+      <button class="work" type="button" role="tab" aria-selected="true" aria-controls="wp-comercial" data-w="comercial">
+        <span class="ic"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1.2v9.6L10.5 6z" fill="currentColor"/></svg><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></span>
+        <b>Comercial</b><small>Da proposta ao caixa</small><i class="bar"></i>
+      </button>
+      <button class="work" type="button" role="tab" aria-selected="false" aria-controls="wp-reembolsos" data-w="reembolsos">
+        <span class="ic"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1.2v9.6L10.5 6z" fill="currentColor"/></svg><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></span>
+        <b>Reembolsos</b><small>Do cupom à conta paga</small><i class="bar"></i>
+      </button>
+      <button class="work" type="button" role="tab" aria-selected="false" aria-controls="wp-agendamento" data-w="agendamento">
+        <span class="ic"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1.2v9.6L10.5 6z" fill="currentColor"/></svg><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></span>
+        <b>Agendamento</b><small>Do pedido à entrega</small><i class="bar"></i>
+      </button>
+      <button class="work" type="button" role="tab" aria-selected="false" aria-controls="wp-financeiro" data-w="financeiro">
+        <span class="ic"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1.2v9.6L10.5 6z" fill="currentColor"/></svg><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></span>
+        <b>Financeiro</b><small>Caixa, fluxo e resultado</small><i class="bar"></i>
+      </button>
+    </div>
+
+    <div class="player rv" id="player">
+      <video id="filme" src="midia/case-comercial.mp4" poster="midia/case-comercial.jpg" width="1280" height="800" muted loop playsinline preload="metadata" aria-label="Filme do sistema escolhido"></video>
+      <div class="ctl">
+        <button type="button" id="pp" aria-label="Pausar o filme"><svg class="i-pause" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 1.5h2.4v9H2.5zM7.1 1.5h2.4v9H7.1z" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1.2v9.6L10.5 6z" fill="currentColor"/></svg></button>
+        <button type="button" id="cheia" aria-label="Ver em tela cheia"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 4.5v-3h3M10.5 4.5v-3h-3M1.5 7.5v3h3M10.5 7.5v3h-3"/></svg></button>
       </div>
-      <figure class="phone-wrap">
-        <div class="phone">
-          <video id="demo-celular" src="midia/celular.mp4" poster="midia/celular.jpg" width="480" height="1040" muted loop playsinline autoplay preload="metadata" aria-label="Gravação do sistema no celular"></video>
+    </div>
+
+    <article class="wp" id="wp-comercial" data-w="comercial" role="tabpanel">
+      <div>
+        <div class="clips" aria-label="Outras gravações do Comercial">
+          <span>Assistir</span>
+          <button class="clip" type="button" aria-pressed="true" data-v="case-comercial">Filme</button>
+          <button class="clip" type="button" aria-pressed="false" data-v="comercial">Painel</button>
+          <button class="clip" type="button" aria-pressed="false" data-v="followup">Follow-up</button>
+          <button class="clip" type="button" aria-pressed="false" data-v="venda">Venda → caixa</button>
+          <button class="clip" type="button" aria-pressed="false" data-v="celular">No celular</button>
         </div>
-        <figcaption>No celular, como aplicativo</figcaption>
+        <h3 style="margin-top:26px">Visão Comercial</h3>
+        <p class="txt">Propostas, follow-ups e previsão de vendas ligados ao financeiro. A venda fechada vira conta a receber sozinha.</p>
+        <ul>
+          <li>Follow-up com data e quadro por etapa do negócio</li>
+          <li>Previsão contra a meta, com o risco de cada mês</li>
+          <li>Negócio ganho gera as parcelas e a comissão no financeiro</li>
+        </ul>
+      </div>
+      <div>
+        <div class="nums">
+          <div><b>4</b><span>perfis de acesso</span></div>
+          <div><b>79</b><span>conferências de permissão</span></div>
+          <div><b>1</b><span>clique da venda ao caixa</span></div>
+        </div>
+        <div class="stack"><span>React</span><span>TypeScript</span><span>Hono</span><span>Cloudflare D1</span><span>Vitest</span></div>
+      </div>
+    </article>
+
+    <article class="wp" id="wp-reembolsos" data-w="reembolsos" role="tabpanel" hidden>
+      <div>
+        <div class="clips" aria-label="Outras gravações de Reembolsos">
+          <span>Assistir</span>
+          <button class="clip" type="button" aria-pressed="true" data-v="case-reembolsos">Filme</button>
+          <button class="clip" type="button" aria-pressed="false" data-v="reembolso">Aprovação</button>
+          <button class="clip" type="button" aria-pressed="false" data-v="reembolso-pagar">Pagamento</button>
+        </div>
+        <h3 style="margin-top:26px">Visão Reembolsos</h3>
+        <p class="txt">A equipe fotografa o cupom pelo celular, o sistema confere a política e o que é aprovado vira conta a pagar.</p>
+        <p class="orig">Segunda versão de uma plataforma de reembolso que já coloquei em produção, reescrita do zero.</p>
+        <ul>
+          <li>Teto, comprovante, prazo e despesa repetida conferidos sozinhos</li>
+          <li>Aprovação em lote do que não tem alerta</li>
+          <li>Cada pessoa vê só os próprios pedidos</li>
+        </ul>
+      </div>
+      <div>
+        <div class="nums">
+          <div><b>5</b><span>alertas automáticos</span></div>
+          <div><b>66</b><span>conferências de ponta a ponta</span></div>
+          <div><b>4</b><span>perfis de acesso</span></div>
+        </div>
+        <div class="stack"><span>React</span><span>TypeScript</span><span>Hono</span><span>Cloudflare D1</span><span>Vitest</span></div>
+      </div>
+    </article>
+
+    <article class="wp" id="wp-agendamento" data-w="agendamento" role="tabpanel" hidden>
+      <div>
+        <div class="clips" aria-label="Gravações do Agendamento">
+          <span>Assistir</span>
+          <button class="clip" type="button" aria-pressed="true" data-v="case-agendamento">Filme</button>
+        </div>
+        <h3 style="margin-top:26px">Visão Agendamento</h3>
+        <p class="txt">App de celular para oficinas e estéticas automotivas. O cliente agenda em quatro passos e acompanha cada etapa; a equipe conduz o dia pelo mesmo app.</p>
+        <p class="orig">Nasceu como o app de um negócio de estética automotiva em São Paulo, onde está em uso.</p>
+        <ul>
+          <li>Instala como aplicativo, sem passar por loja</li>
+          <li>Estimativa calculada na hora, conforme os serviços</li>
+          <li>Notificações no celular e área da equipe por PIN</li>
+        </ul>
+      </div>
+      <div>
+        <div class="nums">
+          <div><b>4</b><span>passos para agendar</span></div>
+          <div><b>5</b><span>etapas acompanhadas</span></div>
+          <div><b>1</b><span>app para cliente e equipe</span></div>
+        </div>
+        <div class="stack"><span>PWA</span><span>Web Push</span><span>Cloudflare Workers</span><span>D1</span></div>
+      </div>
+    </article>
+
+    <article class="wp" id="wp-financeiro" data-w="financeiro" role="tabpanel" hidden>
+      <div>
+        <div class="clips" aria-label="Outras gravações do Financeiro">
+          <span>Assistir</span>
+          <button class="clip" type="button" aria-pressed="true" data-v="case-financeiro">Filme</button>
+          <button class="clip" type="button" aria-pressed="false" data-v="visao-geral">Visão geral</button>
+          <button class="clip" type="button" aria-pressed="false" data-v="fluxo-de-caixa">Fluxo de caixa</button>
+          <button class="clip" type="button" aria-pressed="false" data-v="resultado">Resultado</button>
+        </div>
+        <h3 style="margin-top:26px">Visão Financeiro</h3>
+        <p class="txt">O caixa de hoje e dos próximos 30 dias, o fluxo dia a dia e o resultado do período, com aviso só do que pede atenção.</p>
+        <ul>
+          <li>Projeção de 30 dias logo na tela inicial</li>
+          <li>Contas a pagar e a receber e conciliação com o extrato</li>
+          <li>Resultado (DRE) com os meses lado a lado</li>
+        </ul>
+      </div>
+      <div>
+        <div class="nums">
+          <div><b>30</b><span>dias de caixa projetados</span></div>
+          <div><b>6</b><span>meses de resultado lado a lado</span></div>
+          <div><b>49</b><span>testes automáticos de regra</span></div>
+        </div>
+        <div class="stack"><span>React</span><span>TypeScript</span><span>Hono</span><span>Cloudflare D1</span><span>Recharts</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sec" id="producao">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="eyebrow"><i></i>Em produção</span>
+      <h2>Usado por uma equipe, todos os dias.</h2>
+    </div>
+    <div class="prod card rv">
+      <div>
+        <h3>ERP Financeiro Web</h3>
+        <p class="where">Startup de mídia OOH · São Paulo</p>
+        <p class="txt">O primeiro sistema que construí virou o ERP da empresa onde trabalho: pagar, receber, caixa e documentos num lugar só.</p>
+        <ul>
+          <li>Cerca de 25 painéis, do contas a pagar ao DRE</li>
+          <li>Boletos e notas fiscais lidos por IA direto do e-mail</li>
+          <li>Quarentena antigolpe e trava contra pagamento em dobro</li>
+        </ul>
+        <div class="nums">
+          <div><b>~20 mil</b><span>linhas de código</span></div>
+          <div><b>12</b><span>rotinas agendadas</span></div>
+          <div><b>13</b><span>assistentes de IA</span></div>
+          <div><b>24h</b><span>no ar, na nuvem</span></div>
+        </div>
+      </div>
+      <figure class="viz">
+        <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração de painel financeiro: saldo, projeção de 30 dias e totais a pagar e a receber">
+          <defs><linearGradient id="g-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="stop-a"/><stop offset="1" class="stop-b"/></linearGradient></defs>
+          <text x="24" y="38" class="s-l">SALDO EM CONTA</text>
+          <text x="24" y="72" class="s-v a-in" style="--i:1">R$ 48.215,30</text>
+          <text x="456" y="38" text-anchor="end" class="s-l">PROJEÇÃO · 30 DIAS</text>
+          <text x="456" y="70" text-anchor="end" class="s-mi a-in" style="--i:26">R$ 61.905,12</text>
+          <path d="M24 112H456M24 146H456M24 180H456" class="s-grid"/>
+          <path d="M24 150L64 148L104 152L144 164L184 172L224 174L264 172L304 146L344 140L384 136L424 128L456 124V196H24Z" fill="url(#g-area)" class="a-in" style="--i:14"/>
+          <polyline points="24,150 64,148 104,152 144,164 184,172 224,174 264,172 304,146 344,140 384,136 424,128 456,124" class="s-ink"/>
+          <circle cx="456" cy="124" r="4" class="s-solid a-in pulsa" style="--i:24"/>
+          <text x="24" y="214" class="s-l">HOJE</text>
+          <text x="240" y="214" text-anchor="middle" class="s-l">+15 DIAS</text>
+          <text x="456" y="214" text-anchor="end" class="s-l">+30 DIAS</text>
+          <rect x="24.5" y="230.5" width="135" height="52" rx="12" class="s-box"/>
+          <rect x="172.5" y="230.5" width="135" height="52" rx="12" class="s-box"/>
+          <rect x="320.5" y="230.5" width="135" height="52" rx="12" class="s-box"/>
+          <text x="36" y="250" class="s-l a-in" style="--i:16">A PAGAR · 30D</text>
+          <text x="36" y="270" class="s-m a-in" style="--i:17">R$ 18.740,00</text>
+          <text x="184" y="250" class="s-l a-in" style="--i:19">A RECEBER · 30D</text>
+          <text x="184" y="270" class="s-m a-in" style="--i:20">R$ 32.429,82</text>
+          <text x="332" y="250" class="s-l a-in" style="--i:22">A CONFERIR</text>
+          <text x="332" y="270" class="s-m a-in" style="--i:23">3 boletos</text>
+        </svg>
+        <figcaption>Ilustração com números fictícios: dados da empresa não aparecem aqui</figcaption>
       </figure>
     </div>
+    <ul class="also rv" aria-label="Também construí">
+      <li><b>Norte</b><span>Painel pessoal de tarefas, hábitos e metas, com assistente de IA</span></li>
+      <li><b>Importador de extratos</b><span>Lê o extrato do banco e confere tudo antes de importar</span></li>
+      <li><b>Painel de campanhas</b><span>Mapa de pontos e simulador de impactos de mídia</span></li>
+      <li><b>Diagnóstico financeiro</b><span>Doze meses de resultado, com leitura para a diretoria</span></li>
+    </ul>
   </div>
 </section>
 
-<section class="sec" id="servicos">
+<section class="sec" id="habilidades">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="head rv">
+      <span class="eyebrow"><i></i>Habilidades</span>
+      <h2>Finanças primeiro. Tecnologia depois.</h2>
+      <p>Toque em uma área para ver o que eu faço nela e em qual sistema aparece.</p>
+    </div>
+    <div class="sks rv" role="tablist" aria-label="Áreas">
+      <button class="sk" type="button" role="tab" aria-selected="true" aria-controls="sk-financas">Finanças</button>
+      <button class="sk" type="button" role="tab" aria-selected="false" aria-controls="sk-ia">IA</button>
+      <button class="sk" type="button" role="tab" aria-selected="false" aria-controls="sk-web">Web</button>
+      <button class="sk" type="button" role="tab" aria-selected="false" aria-controls="sk-dados">Dados e nuvem</button>
+      <button class="sk" type="button" role="tab" aria-selected="false" aria-controls="sk-qualidade">Qualidade</button>
+    </div>
+    <div class="skp card" id="sk-financas" role="tabpanel">
       <div>
-        <span class="label">[ Serviços ]</span>
-        <h2>O que eu construo para você.</h2>
+        <h3>Sei como o dinheiro anda na empresa.</h3>
+        <p>É o que faz o sistema sair certo de primeira: as regras vêm da rotina, não do manual.</p>
+        <div class="where-in">Aparece em <button class="go" type="button" data-go="financeiro">Financeiro</button><button class="go" type="button" data-go="reembolsos">Reembolsos</button></div>
       </div>
-      <p>Cada projeto começa pela rotina de quem vai usar o sistema. A tecnologia vem depois, escolhida para resolver aquele problema.</p>
+      <ul><li>Contas a pagar e a receber</li><li>Conciliação bancária</li><li>Fluxo de caixa</li><li>DRE gerencial</li><li>Fechamento contábil</li></ul>
     </div>
-    <div class="svc-grid">
-      <article class="svc">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16"/><path d="M3 8h18M7 12h5M7 15.5h8"/></svg>
-        <h3>Sistemas web sob medida</h3>
-        <p>Comercial, financeiro, reembolsos e painéis feitos para o seu processo, com os setores ligados entre si. Funcionam no computador e no celular, com login e perfis de acesso.</p>
-        <p class="for"><span>Ideal para</span>quem controla a empresa em planilhas espalhadas</p>
-      </article>
-      <article class="svc">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 12h4l6-5M11 12l6 5"/></svg>
-        <h3>Automação com IA</h3>
-        <p>E-mails, boletos e notas fiscais lidos por IA e lançados sozinhos. Tarefas repetitivas que rodam todo dia, sem ninguém apertar botão.</p>
-        <p class="for"><span>Ideal para</span>equipes que perdem horas copiando dados</p>
-      </article>
-      <article class="svc">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18M6 17v-6M10 17V7M14 17v-4M18 17V5"/></svg>
-        <h3>Painéis de gestão</h3>
-        <p>Fluxo de caixa, DRE, funil de vendas e metas numa tela, atualizados sozinhos. Você enxerga o mês inteiro antes de ele acontecer.</p>
-        <p class="for"><span>Ideal para</span>sócios e diretores que querem ver os números sem pedir relatório</p>
-      </article>
-      <article class="svc">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10.5 6h3M11 18h2"/></svg>
-        <h3>Apps de agendamento e atendimento</h3>
-        <p>Aplicativo que o cliente instala direto do navegador, com agenda, notificações no celular e conversa pelo WhatsApp.</p>
-        <p class="for"><span>Ideal para</span>prestadores de serviço que agendam por mensagem</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="cases">
-  <div class="wrap">
-    <div class="sec-head">
+    <div class="skp card" id="sk-ia" role="tabpanel" hidden>
       <div>
-        <span class="label">[ Cases ]</span>
-        <h2>Sistemas reais, rodando.</h2>
+        <h3>Construo com IA e coloco IA para trabalhar.</h3>
+        <p>O Claude é meu parceiro de programação, e também lê documentos e confere regras dentro dos sistemas.</p>
+        <div class="where-in">Aparece em <button class="go" type="button" data-go="comercial">Comercial</button><a class="go" href="#producao" style="display:inline-flex;align-items:center;text-decoration:none">ERP em produção</a></div>
       </div>
-      <p>Projetos usados no dia a dia por empresas e pessoas. Dados de clientes nunca aparecem aqui: os filmes mostram os sistemas com dados fictícios e as ilustrações usam números inventados.</p>
+      <ul><li>Claude Code</li><li>Leitura de boletos e notas com IA</li><li>Engenharia de prompt</li><li>Assistentes de IA dentro do sistema</li></ul>
     </div>
-
-    <div class="cases">
-      <article class="case">
-        <figure class="viz anim">
-          <div class="frame ticks">
-            <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração de painel financeiro: saldo, projeção de 30 dias e totais a pagar e a receber">
-              <defs><linearGradient id="g-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="stop-a"/><stop offset="1" class="stop-b"/></linearGradient></defs>
-              <text x="24" y="38" class="s-l">SALDO EM CONTA</text>
-              <text x="24" y="72" class="s-v a-in" style="--i:1">R$ 48.215,30</text>
-              <text x="456" y="38" text-anchor="end" class="s-l">PROJEÇÃO · 30 DIAS</text>
-              <text x="456" y="70" text-anchor="end" class="s-mi a-in" style="--i:26">R$ 61.905,12</text>
-              <path d="M24 112H456M24 146H456M24 180H456" class="s-grid"/>
-              <path d="M24 150L64 148L104 152L144 164L184 172L224 174L264 172L304 146L344 140L384 136L424 128L456 124V196H24Z" fill="url(#g-area)" class="a-in" style="--i:14"/>
-              <polyline points="24,150 64,148 104,152 144,164 184,172 224,174 264,172 304,146 344,140 384,136 424,128 456,124" class="s-ink"/>
-              <circle cx="456" cy="124" r="3.5" class="s-solid a-in pulsa" style="--i:24"/>
-              <text x="24" y="214" class="s-l">HOJE</text>
-              <text x="240" y="214" text-anchor="middle" class="s-l">+15 DIAS</text>
-              <text x="456" y="214" text-anchor="end" class="s-l">+30 DIAS</text>
-              <rect x="24.5" y="230.5" width="135" height="52" class="s-box"/>
-              <rect x="172.5" y="230.5" width="135" height="52" class="s-box"/>
-              <rect x="320.5" y="230.5" width="135" height="52" class="s-box"/>
-              <text x="34" y="250" class="s-l a-in" style="--i:16">A PAGAR · 30D</text>
-              <text x="34" y="270" class="s-m a-in" style="--i:17">R$ 18.740,00</text>
-              <text x="182" y="250" class="s-l a-in" style="--i:19">A RECEBER · 30D</text>
-              <text x="182" y="270" class="s-m a-in" style="--i:20">R$ 32.429,82</text>
-              <text x="330" y="250" class="s-l a-in" style="--i:22">A CONFERIR</text>
-              <text x="330" y="270" class="s-m a-in" style="--i:23">3 boletos</text>
-            </svg>
-          </div>
-          <figcaption>Ilustração · números fictícios</figcaption>
-        </figure>
-        <div>
-          <div class="tags"><span class="tag solid">Em produção</span><span class="tag">Uso diário</span></div>
-          <h3>ERP Financeiro Web</h3>
-          <p class="where">Startup de mídia OOH · São Paulo</p>
-          <p class="lead">Um ERP feito sob medida para acompanhar o crescimento da empresa: pagar, receber, caixa e documentos reunidos num sistema só, usado pela equipe todos os dias.</p>
-          <dl class="kv">
-            <dt>O que fiz</dt>
-            <dd>
-              <ul class="done">
-                <li>~25 painéis: pagar, receber, fluxo de caixa com projeção, conciliação e DRE</li>
-                <li>Boletos e notas fiscais lidos por IA direto do e-mail</li>
-                <li>Quarentena antigolpe e trava contra pagamento em dobro</li>
-                <li>Perfis de acesso, verificação em duas etapas e backup semanal</li>
-              </ul>
-            </dd>
-            <dt>Resultado</dt>
-            <dd>Caixa dos próximos 30 dias numa tela. O fechamento do mês sai num único download para a contabilidade.</dd>
-          </dl>
-          <div class="metrics">
-            <div><b>~20 mil</b><span>linhas de código</span></div>
-            <div><b>12</b><span>rotinas agendadas</span></div>
-            <div><b>13</b><span>assistentes de IA</span></div>
-            <div><b>24h</b><span>no ar, na nuvem</span></div>
-          </div>
-          <div class="chips"><span>Claude Code</span><span>JavaScript</span><span>SQL</span><span>Cloudflare Workers</span><span>D1</span><span>R2</span></div>
-          <p class="note">A mesma interface aparece <a href="#ao-vivo">funcionando ao vivo</a>, com dados fictícios</p>
-        </div>
-      </article>
-
-      <article class="case">
-        <figure class="viz film">
-          <div class="frame ticks">
-            <video class="case-film" src="midia/case-comercial.mp4" poster="midia/case-comercial.jpg" width="1280" height="800" muted loop playsinline preload="none" aria-label="Filme do case: painel do gestor com meta, previsão e caixa; follow-up da vendedora no celular; venda fechada virando contas a receber"></video>
-            <button class="film-btn" type="button" aria-label="Pausar o vídeo">Pausar</button>
-          </div>
-          <figcaption>Filme · 26 s · sistema real, dados fictícios</figcaption>
-        </figure>
-        <div>
-          <div class="tags"><span class="tag solid">Produto próprio</span><span class="tag">Em evolução</span></div>
-          <h3>Visão, comercial e financeiro</h3>
-          <p class="where">Sistema de gestão para empresas</p>
-          <p class="lead">Meu laboratório de produto: um sistema em que os setores conversam. A venda fechada no comercial vira conta a receber no financeiro, e a previsão de vendas entra na projeção de caixa. As telas também aparecem, sem cortes, em <a href="#ao-vivo">Ao vivo</a>.</p>
-          <dl class="kv">
-            <dt>O que tem</dt>
-            <dd>
-              <ul class="done">
-                <li>Propostas, follow-ups com data e quadro das etapas do negócio</li>
-                <li>Funil e previsão de vendas contra a meta, com o risco de cada mês</li>
-                <li>Venda fechada vira conta a receber, com parcelas e comissão</li>
-                <li>Contas a pagar e a receber, fluxo de caixa e conciliação com o extrato do banco</li>
-                <li>Perfis de acesso: dono, gestor, vendedor e financeiro</li>
-                <li>Exporta Excel e PDF, com a proposta pronta para o cliente</li>
-              </ul>
-            </dd>
-            <dt>Resultado</dt>
-            <dd>Uma venda digitada uma vez só, da proposta ao caixa, e cada pessoa vendo o que precisa.</dd>
-          </dl>
-          <div class="metrics">
-            <div><b>4</b><span>perfis de acesso</span></div>
-            <div><b>110</b><span>testes automáticos</span></div>
-            <div><b>348</b><span>telas conferidas</span></div>
-            <div><b>1</b><span>clique da venda ao caixa</span></div>
-          </div>
-          <div class="chips"><span>Claude Code</span><span>React</span><span>TypeScript</span><span>Hono</span><span>Cloudflare D1</span><span>Vitest</span><span>GitHub Actions</span></div>
-        </div>
-      </article>
-
-      <article class="case">
-        <figure class="viz film">
-          <div class="frame ticks">
-            <video class="case-film" src="midia/case-reembolsos.mp4" poster="midia/case-reembolsos.jpg" width="1280" height="800" muted loop playsinline preload="none" aria-label="Filme do case: a vendedora fotografa o cupom e envia pelo celular; o gestor vê o alerta, confere o cupom e aprova; o financeiro registra o pagamento"></video>
-            <button class="film-btn" type="button" aria-label="Pausar o vídeo">Pausar</button>
-          </div>
-          <figcaption>Filme · 28 s · sistema real, dados e cupons fictícios</figcaption>
-        </figure>
-        <div>
-          <div class="tags"><span class="tag solid">Produto próprio</span><span class="tag">Módulo do Visão</span></div>
-          <h3>Reembolsos da equipe</h3>
-          <p class="where">Despesas e prestação de contas</p>
-          <p class="lead">A segunda versão de uma ideia que já coloquei em produção: uma plataforma de reembolso para a equipe de uma empresa. Aqui ela foi reescrita do zero como módulo do Visão, ligada ao financeiro.</p>
-          <dl class="kv">
-            <dt>O que tem</dt>
-            <dd>
-              <ul class="done">
-                <li>Pedido pelo celular, com o cupom fotografado na hora</li>
-                <li>Política conferida sozinha: teto por tipo, comprovante, prazo e despesa repetida</li>
-                <li>Aprovação em lote do que não tem alerta e devolução com recado</li>
-                <li>Pedido aprovado vira conta a pagar, em nome de quem pediu</li>
-                <li>Cada pessoa vê só os próprios pedidos; gestor aprova, financeiro paga</li>
-              </ul>
-            </dd>
-            <dt>Resultado</dt>
-            <dd>Do cupom à conta paga sem planilha e sem digitar o mesmo valor duas vezes.</dd>
-          </dl>
-          <div class="metrics">
-            <div><b>5</b><span>alertas automáticos</span></div>
-            <div><b>4</b><span>perfis de acesso</span></div>
-            <div><b>66</b><span>conferências de ponta a ponta</span></div>
-            <div><b>1</b><span>clique para aprovar em lote</span></div>
-          </div>
-          <div class="chips"><span>Claude Code</span><span>React</span><span>TypeScript</span><span>Hono</span><span>Cloudflare D1</span><span>Vitest</span></div>
-        </div>
-      </article>
-
-      <article class="case">
-        <figure class="viz film">
-          <div class="frame ticks">
-            <video class="case-film" src="midia/case-agendamento.mp4" poster="midia/case-agendamento.jpg" width="1280" height="800" muted loop playsinline preload="none" aria-label="Filme do case: o cliente agenda o veículo em quatro passos pelo celular; a equipe aceita e avança o serviço; o cliente acompanha a etapa"></video>
-            <button class="film-btn" type="button" aria-label="Pausar o vídeo">Pausar</button>
-          </div>
-          <figcaption>Filme · 26 s · marca, contatos e preços fictícios na demonstração</figcaption>
-        </figure>
-        <div>
-          <div class="tags"><span class="tag solid">Negócio real</span><span class="tag">No celular</span></div>
-          <h3>App de agendamento</h3>
-          <p class="where">Estética automotiva · São Paulo</p>
-          <p class="lead">O cliente escolhe o serviço, o dia e o horário pelo celular. A equipe organiza a agenda no mesmo app, sem trocar dezenas de mensagens para marcar um horário.</p>
-          <dl class="kv">
-            <dt>O que tem</dt>
-            <dd>
-              <ul class="done">
-                <li>Pedido em quatro passos, com a estimativa calculada na hora</li>
-                <li>Instala no celular como aplicativo, sem passar por loja</li>
-                <li>Etapas acompanhadas pelo cliente, do agendado ao entregue</li>
-                <li>Notificações no celular, fotos do veículo e conversa pelo WhatsApp</li>
-                <li>Área da equipe com acesso por PIN: pedidos, agenda e pátio</li>
-              </ul>
-            </dd>
-            <dt>Resultado</dt>
-            <dd>O cliente agenda e acompanha sozinho. A equipe conduz o dia inteiro pelo celular.</dd>
-          </dl>
-          <div class="chips"><span>PWA</span><span>Web Push</span><span>Cloudflare Workers</span><span>D1</span></div>
-        </div>
-      </article>
-
-      <article class="case">
-        <figure class="viz anim">
-          <div class="frame ticks">
-            <svg viewBox="0 0 480 300" role="img" aria-label="Ilustração de funil de vendas em colunas, de frio a fechado, e agenda do time com feedback de reunião">
-              <text x="24" y="30" class="s-l">FRIO · 4</text>
-              <text x="136" y="30" class="s-l">MORNO · 3</text>
-              <text x="248" y="30" class="s-l">QUENTE · 2</text>
-              <text x="360" y="30" class="s-l">FECHADO · 1</text>
-              <path d="M24 38.5H120M136 38.5H232M248 38.5H344M360 38.5H456" class="s-line"/>
-              <g class="a-in" style="--i:0"><rect x="24.5" y="48.5" width="95" height="27" class="s-box"/><text x="32" y="61" class="s-r">Cliente A</text><rect x="32" y="66" width="40" height="3" class="s-bar"/></g>
-              <g class="a-in" style="--i:2"><rect x="24.5" y="82.5" width="95" height="27" class="s-box"/><text x="32" y="95" class="s-r">Cliente B</text><rect x="32" y="100" width="62" height="3" class="s-bar"/></g>
-              <g class="a-in" style="--i:4"><rect x="24.5" y="116.5" width="95" height="27" class="s-box"/><text x="32" y="129" class="s-r">Cliente C</text><rect x="32" y="134" width="28" height="3" class="s-bar"/></g>
-              <g class="a-in" style="--i:6"><rect x="24.5" y="150.5" width="95" height="27" class="s-box"/><text x="32" y="163" class="s-r">Cliente D</text><rect x="32" y="168" width="52" height="3" class="s-bar"/></g>
-              <g class="a-in" style="--i:8"><rect x="136.5" y="48.5" width="95" height="27" class="s-box"/><text x="144" y="61" class="s-r">Cliente E</text><rect x="144" y="66" width="70" height="3" class="s-bar"/></g>
-              <g class="a-in" style="--i:10"><rect x="136.5" y="82.5" width="95" height="27" class="s-box"/><text x="144" y="95" class="s-r">Cliente F</text><rect x="144" y="100" width="46" height="3" class="s-bar"/></g>
-              <g class="a-in" style="--i:12"><rect x="136.5" y="116.5" width="95" height="27" class="s-box-d"/><text x="144" y="129" class="s-r">Cliente G</text><text x="144" y="139" class="s-l">PARADA · 32D</text></g>
-              <g class="a-in" style="--i:14"><rect x="248.5" y="48.5" width="95" height="27" class="s-box"/><text x="256" y="61" class="s-r">Cliente H</text><rect x="256" y="66" width="58" height="3" class="s-bar"/></g>
-              <g class="a-in" style="--i:16"><rect x="248.5" y="82.5" width="95" height="27" class="s-box"/><text x="256" y="95" class="s-r">Cliente I</text><rect x="256" y="100" width="36" height="3" class="s-bar"/></g>
-              <g class="a-in" style="--i:18"><rect x="360" y="48" width="96" height="28" class="s-solid"/><text x="368" y="61" class="s-inv">CLIENTE J</text><rect x="368" y="66" width="64" height="3" class="s-bar-inv"/></g>
-              <text x="24" y="204" class="s-l">AGENDA DO TIME · ATUALIZADA HÁ 3 MIN</text>
-              <text x="456" y="204" text-anchor="end" class="s-l">GOOGLE AGENDA</text>
-              <g class="a-in" style="--i:20"><rect x="24.5" y="212.5" width="431" height="30" class="s-box"/></g>
-              <text x="34" y="231" class="s-m">14:00</text><text x="84" y="231" class="s-m">Reunião · Cliente H</text>
-              <g class="a-in" style="--i:22"><rect x="368.5" y="218.5" width="80" height="18" class="s-box"/><text x="408.5" y="231" text-anchor="middle" class="s-l">+ FEEDBACK</text></g>
-              <g class="a-in" style="--i:24"><rect x="24.5" y="248.5" width="431" height="30" class="s-box"/></g>
-              <text x="34" y="267" class="s-m">16:30</text><text x="84" y="267" class="s-m">Apresentação · Cliente E</text>
-              <g class="a-in" style="--i:26"><rect x="368" y="254" width="81" height="19" class="s-solid"/><text x="408.5" y="267" text-anchor="middle" class="s-inv">FEEDBACK ✓</text></g>
-            </svg>
-          </div>
-          <figcaption>Ilustração · clientes fictícios</figcaption>
-        </figure>
-        <div>
-          <div class="tags"><span class="tag solid">No ar</span><span class="tag">Pedido da diretoria</span></div>
-          <h3>Plataforma Comercial</h3>
-          <p class="where">Time comercial · startup de mídia OOH</p>
-          <p class="lead">Uma plataforma feita a pedido da diretoria comercial para acompanhar o funil inteiro num lugar só: propostas, previsão de vendas e agenda do time.</p>
-          <dl class="kv">
-            <dt>O que fiz</dt>
-            <dd>
-              <ul class="done">
-                <li>Funil de propostas em colunas, com o histórico de cada negociação</li>
-                <li>Previsão de vendas contra a meta do mês e motivos de perda</li>
-                <li>Agenda do time ligada ao Google Agenda, com feedback de cada reunião</li>
-                <li>Follow-ups com sugestões e um assistente de IA que consulta o funil</li>
-                <li>Alertas automáticos das propostas que pedem atenção</li>
-              </ul>
-            </dd>
-            <dt>Resultado</dt>
-            <dd>Funil, previsão de vendas e agenda do time reunidos numa tela só, sempre atualizados.</dd>
-          </dl>
-          <div class="metrics">
-            <div><b>1</b><span>assistente de IA no funil</span></div>
-            <div><b>15 min</b><span>agenda sincronizada</span></div>
-            <div><b>160+</b><span>testes automáticos</span></div>
-            <div><b>7</b><span>checagens de dados</span></div>
-          </div>
-          <div class="chips"><span>Claude Code</span><span>JavaScript</span><span>Cloudflare Workers</span><span>D1</span><span>Google Agenda</span><span>API do Claude</span></div>
-        </div>
-      </article>
+    <div class="skp card" id="sk-web" role="tabpanel" hidden>
+      <div>
+        <h3>Telas que funcionam no computador e no celular.</h3>
+        <p>Do painel do gestor ao app instalado na tela do celular, com tema claro e escuro.</p>
+        <div class="where-in">Aparece em <button class="go" type="button" data-go="agendamento">Agendamento</button><button class="go" type="button" data-go="comercial">Comercial</button></div>
+      </div>
+      <ul><li>JavaScript e TypeScript</li><li>React</li><li>HTML e CSS</li><li>Apps instaláveis (PWA)</li><li>Gráficos e painéis</li></ul>
     </div>
-
-    <div class="more">
-      <span class="label">[ Também construí ]</span>
-      <ul>
-        <li><b>Norte</b><span>Painel pessoal de tarefas, hábitos e metas, com assistente de IA</span><em>PWA · Cloudflare</em></li>
-        <li><b>Importador de extratos</b><span>Lê arquivos OFX do banco e confere tudo antes de importar</span><em>PowerShell</em></li>
-        <li><b>Painel de campanhas de mídia</b><span>Mapa de pontos e simulador de impactos para campanhas</span><em>Web · Mapas</em></li>
-        <li><b>Diagnóstico financeiro</b><span>Análise de 12 meses com DRE e leitura executiva para a diretoria</span><em>Excel · SQL</em></li>
-      </ul>
+    <div class="skp card" id="sk-dados" role="tabpanel" hidden>
+      <div>
+        <h3>Dados organizados, na nuvem, com cópia de segurança.</h3>
+        <p>Banco de dados, arquivos e rotinas que rodam sozinhas todos os dias.</p>
+        <div class="where-in">Aparece em <button class="go" type="button" data-go="financeiro">Financeiro</button><a class="go" href="#producao" style="display:inline-flex;align-items:center;text-decoration:none">ERP em produção</a></div>
+      </div>
+      <ul><li>SQL</li><li>Cloudflare Workers, D1 e R2</li><li>Extratos bancários (OFX)</li><li>Rotinas agendadas</li><li>Backup automático</li><li>Excel avançado</li></ul>
+    </div>
+    <div class="skp card" id="sk-qualidade" role="tabpanel" hidden>
+      <div>
+        <h3>Testo antes de entregar.</h3>
+        <p>Cada perfil de acesso é conferido por teste automático, e cada tela é vista em computador, celular e nos dois temas.</p>
+        <div class="where-in">Aparece em <button class="go" type="button" data-go="reembolsos">Reembolsos</button><button class="go" type="button" data-go="comercial">Comercial</button></div>
+      </div>
+      <ul><li>Testes automáticos</li><li>Perfis e permissões no servidor</li><li>Git e GitHub</li><li>Revisão de segurança</li><li>Registro de decisões</li></ul>
     </div>
   </div>
 </section>
 
 <section class="sec" id="processo">
   <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <span class="label">[ Processo ]</span>
-        <h2>Como eu trabalho.</h2>
-      </div>
-      <p>O mesmo método que colocou dois sistemas no ar, em cinco passos. Você acompanha cada etapa e testa o sistema antes de ele virar rotina.</p>
+    <div class="head rv">
+      <span class="eyebrow"><i></i>Como eu trabalho</span>
+      <h2>Da rotina ao sistema no ar.</h2>
     </div>
-    <ol class="steps">
-      <li class="step"><span class="n">01</span><h3>Conversa</h3><p>Entendo como a rotina funciona hoje, com quem faz o trabalho, e onde está o gargalo.</p></li>
-      <li class="step"><span class="n">02</span><h3>Regras</h3><p>Transformo a rotina em regras claras: prazos, aprovações e quem vê o quê.</p></li>
-      <li class="step"><span class="n">03</span><h3>Construção com IA</h3><p>Desenvolvo com Claude Code, rápido, com revisão de segurança antes de publicar.</p></li>
-      <li class="step"><span class="n">04</span><h3>Teste com dados reais</h3><p>Cada tela é usada no dia a dia antes de virar padrão. O que incomoda, eu ajusto.</p></li>
-      <li class="step"><span class="n">05</span><h3>No ar e evoluindo</h3><p>Sistema na nuvem, com backup e rotinas automáticas. Sigo melhorando pelo uso real.</p></li>
+    <ol class="steps rv">
+      <li><h3>Entender a rotina</h3><p>Com quem faz o trabalho, vendo onde ele trava.</p></li>
+      <li><h3>Transformar em regra</h3><p>Prazos, aprovações e quem vê o quê.</p></li>
+      <li><h3>Construir e testar</h3><p>Com IA, testes automáticos e uso de verdade.</p></li>
+      <li><h3>Publicar e evoluir</h3><p>Na nuvem, com backup, melhorando pelo uso.</p></li>
     </ol>
   </div>
 </section>
 
 <section class="sec" id="sobre">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="head rv">
+      <span class="eyebrow"><i></i>Sobre</span>
+      <h2>Analista financeiro que aprendeu a construir.</h2>
+    </div>
+    <div class="about rv">
       <div>
-        <span class="label">[ Sobre ]</span>
-        <h2>Analista financeiro que aprendeu a construir.</h2>
+        <p>Comecei em 2017 como jovem aprendiz na contabilidade e passei os anos seguintes perto do dinheiro e dos processos. Hoje sou Analista Financeiro Pleno em uma startup de mídia.</p>
+        <p>Em 2025 comecei a construir com IA. Não tenho formação em TI: aprendi na prática, com curiosidade. Por isso falo a língua de quem usa o sistema.</p>
       </div>
-    </div>
-    <div class="about">
-      <div class="about-text">
-        <p>Comecei em 2017 como jovem aprendiz na contabilidade e passei os anos seguintes perto do dinheiro e dos processos: indústria, despachante e uma startup de mídia, onde hoje sou Analista Financeiro Pleno.</p>
-        <p>Em 2025 comecei a construir com IA. O primeiro sistema virou o ERP que a empresa usa todo dia. Depois veio a plataforma do time comercial. Não tenho formação em TI: aprendi na prática, com curiosidade e o Claude como parceiro de programação. Por isso falo a língua de quem usa o sistema, de contas a pagar a fechamento do mês.</p>
-      </div>
-      <dl class="facts">
-        <div><dt>Base</dt><dd>São Paulo · SP</dd></div>
-        <div><dt>Atendimento</dt><dd>Remoto, todo o Brasil</dd></div>
-        <div><dt>Experiência</dt><dd>8+ anos em finanças</dd></div>
-        <div><dt>Ferramenta</dt><dd>Claude Code</dd></div>
-        <div><dt>No ar</dt><dd>ERP e plataforma comercial</dd></div>
-        <div><dt>Status</dt><dd>Aceitando projetos</dd></div>
-      </dl>
-    </div>
-    <ol class="career" aria-label="Trajetória">
-      <li><b>2017</b><span>Jovem aprendiz na contabilidade, indústria têxtil</span></li>
-      <li><b>2019</b><span>Financeiro: contas a pagar e conciliação diária</span></li>
-      <li><b>2019–25</b><span>Administrativo em despachante, duas promoções</span></li>
-      <li><b>2025</b><span>Startup de mídia: campo, depois financeiro</span></li>
-      <li><b>2026</b><span>Dois sistemas no ar e promoção a Analista Pleno</span></li>
-    </ol>
-  </div>
-</section>
-
-<section class="sec" id="ferramentas">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <span class="label">[ Ferramentas ]</span>
-        <h2>O que eu uso.</h2>
-      </div>
-      <p>Finanças primeiro. Saber como o dinheiro anda na empresa é o que deixa o sistema certo de primeira.</p>
-    </div>
-    <div class="stack">
-      <div class="col key"><h3>Finanças</h3><ul><li>Contas a pagar e a receber</li><li>Conciliação bancária</li><li>Fluxo de caixa</li><li>DRE gerencial</li><li>Fechamento contábil</li></ul></div>
-      <div class="col"><h3>IA</h3><ul><li>Claude Code</li><li>IA generativa</li><li>Engenharia de prompt</li><li>Leitura de documentos com IA</li></ul></div>
-      <div class="col"><h3>Web</h3><ul><li>JavaScript e TypeScript</li><li>React</li><li>HTML e CSS</li><li>Apps instaláveis (PWA)</li></ul></div>
-      <div class="col"><h3>Dados</h3><ul><li>SQL</li><li>Cloudflare D1</li><li>Extratos bancários OFX</li><li>Excel avançado</li></ul></div>
-      <div class="col"><h3>Nuvem</h3><ul><li>Cloudflare Workers</li><li>Arquivos no R2</li><li>Rotinas agendadas</li><li>Backup automático</li></ul></div>
-      <div class="col"><h3>Rotina de código</h3><ul><li>Git e GitHub</li><li>PowerShell</li><li>Testes automáticos</li><li>Notificações no celular</li></ul></div>
+      <ol class="career" aria-label="Trajetória">
+        <li><b>2017</b><span>Jovem aprendiz na contabilidade</span></li>
+        <li><b>2019</b><span>Financeiro: contas a pagar e conciliação</span></li>
+        <li><b>2019–25</b><span>Administrativo, duas promoções</span></li>
+        <li><b>2025</b><span>Startup de mídia: campo, depois financeiro</span></li>
+        <li><b>2026</b><span>Sistemas no ar e promoção a Analista Pleno</span></li>
+      </ol>
     </div>
   </div>
 </section>
 
 <section class="sec contact" id="contato">
   <div class="wrap">
-    <div>
-      <span class="label">[ Contato ]</span>
-      <h2>Seu processo ainda vive numa planilha?</h2>
-      <p class="sub">Me conta como funciona hoje. Respondo rápido e digo, sem compromisso, o que dá para automatizar.</p>
-    </div>
-    <div class="rows">
-      <div class="row">
-        <div><small>WhatsApp</small><span class="val" id="c-whats">(11) 96164-5087</span></div>
+    <span class="eyebrow rv"><i></i>Contato</span>
+    <h2 class="rv" style="margin-top:14px">Vamos conversar.</h2>
+    <p class="sub rv">Sobre sistemas, finanças ou IA. Escreva por onde preferir, eu respondo.</p>
+    <div class="ways rv">
+      <div class="way">
+        <small>WhatsApp</small><span class="val" id="c-whats">(11) 96164-5087</span>
         <div class="acts">
-          <a class="ibtn" href="https://wa.me/5511961645087?text=Ol%C3%A1%2C%20Bruno!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Conversar ↗</a>
-          <button class="ibtn" type="button" id="copy-whats" data-copy="(11) 96164-5087" aria-controls="c-whats">Copiar</button>
+          <a class="btn sm solid" href="https://wa.me/5511961645087?text=Ol%C3%A1%2C%20Bruno!%20Vi%20seu%20portf%C3%B3lio%20e%20queria%20conversar." target="_blank" rel="noopener">Conversar</a>
+          <button class="btn sm" type="button" data-copy="(11) 96164-5087" aria-controls="c-whats">Copiar</button>
         </div>
       </div>
-      <div class="row">
-        <div><small>E-mail</small><span class="val" id="c-mail">b.rodrigues.omena@gmail.com</span></div>
-        <div class="acts"><button class="ibtn" type="button" id="copy-mail" data-copy="b.rodrigues.omena@gmail.com" aria-controls="c-mail">Copiar</button></div>
+      <div class="way">
+        <small>E-mail</small><span class="val" id="c-mail">b.rodrigues.omena@gmail.com</span>
+        <div class="acts">
+          <a class="btn sm solid" href="mailto:b.rodrigues.omena@gmail.com">Escrever</a>
+          <button class="btn sm" type="button" data-copy="b.rodrigues.omena@gmail.com" aria-controls="c-mail">Copiar</button>
+        </div>
       </div>
-      <div class="row">
-        <div><small>LinkedIn</small><a class="val" href="https://www.linkedin.com/in/brunodelucaomena" target="_blank" rel="noopener">linkedin.com/in/brunodelucaomena</a></div>
-        <div class="acts"><a class="ibtn" href="https://www.linkedin.com/in/brunodelucaomena" target="_blank" rel="noopener">Abrir ↗</a></div>
+      <div class="way">
+        <small>LinkedIn</small><a class="val" href="https://www.linkedin.com/in/brunodelucaomena" target="_blank" rel="noopener">in/brunodelucaomena</a>
+        <div class="acts"><a class="btn sm solid" href="https://www.linkedin.com/in/brunodelucaomena" target="_blank" rel="noopener">Abrir perfil</a></div>
       </div>
     </div>
   </div>
@@ -837,96 +661,113 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
 
 <footer class="foot">
   <div class="wrap">
-    <span>© 2026 Bruno de Luca</span>
-    <span>Feito com Claude Code · HTML, CSS e JS num arquivo só</span>
-    <a href="#topo">Voltar ao topo ↑</a>
+    <span>© 2026 Bruno de Luca · São Paulo</span>
+    <a href="#topo">Voltar ao topo</a>
   </div>
 </footer>
 
 <script>
 (function(){
   var root=document.documentElement;
-  var KEY='bdl-tema';
-  var tbtn=document.getElementById('tema');
-  try{var salvo=localStorage.getItem(KEY);if(salvo==='light'||salvo==='dark')root.setAttribute('data-theme',salvo);}catch(e){}
-  function rotulo(){
-    var claro=root.getAttribute('data-theme')==='light';
-    tbtn.setAttribute('aria-label',claro?'Usar tema escuro':'Usar tema claro');
-    tbtn.setAttribute('aria-pressed',String(claro));
-  }
-  rotulo();
-  tbtn.addEventListener('click',function(){
-    var prox=root.getAttribute('data-theme')==='light'?'dark':'light';
-    root.setAttribute('data-theme',prox);
-    try{localStorage.setItem(KEY,prox);}catch(e){}
-    rotulo();
-  });
+  root.classList.add('js');
+  var reduz=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(s,p){return (p||document).querySelector(s);}
+  function $$(s,p){return [].slice.call((p||document).querySelectorAll(s));}
 
-  document.querySelectorAll('[data-copy]').forEach(function(b){
+  // tema claro/escuro
+  var KEY='bdl-tema', tbtn=$('#tema');
+  try{var salvo=localStorage.getItem(KEY);if(salvo==='light'||salvo==='dark')root.setAttribute('data-theme',salvo);}catch(e){}
+  function rotulo(){var claro=root.getAttribute('data-theme')==='light';tbtn.setAttribute('aria-label',claro?'Usar tema escuro':'Usar tema claro');tbtn.setAttribute('aria-pressed',String(claro));}
+  rotulo();
+  tbtn.addEventListener('click',function(){var prox=root.getAttribute('data-theme')==='light'?'dark':'light';root.setAttribute('data-theme',prox);try{localStorage.setItem(KEY,prox);}catch(e){}rotulo();});
+
+  // copiar contato
+  $$('[data-copy]').forEach(function(b){
     b.addEventListener('click',function(){
       var texto=b.getAttribute('data-copy');
       function volta(){setTimeout(function(){b.textContent='Copiar';},1800);}
-      function seleciona(){
-        var el=document.getElementById(b.getAttribute('aria-controls'));
-        if(el){var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);}
-        b.textContent='Selecionado';volta();
-      }
+      function seleciona(){var el=document.getElementById(b.getAttribute('aria-controls'));if(el){var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);}b.textContent='Selecionado';volta();}
       try{navigator.clipboard.writeText(texto).then(function(){b.textContent='Copiado';volta();},seleciona);}catch(e){seleciona();}
     });
   });
 
+  // entrada suave ao rolar
+  var rvs=$$('.rv');
+  if('IntersectionObserver' in window&&!reduz){
+    var orv=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');orv.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    rvs.forEach(function(el){orv.observe(el);});
+  } else rvs.forEach(function(el){el.classList.add('in');});
 
+  // navegação: o indicador desliza para a seção que está na tela
   (function(){
-    var v=document.getElementById('demo-video'), cel=document.getElementById('demo-celular');
-    var abas=[].slice.call(document.querySelectorAll('.clip-tab'));
-    var leg=document.getElementById('demo-cap');
-    if(!v||!abas.length)return;
-    var reduz=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var atual=0;
-    function toca(el){var p=el.play();if(p&&p.catch)p.catch(function(){});}
-    function escolhe(i,tocar){
-      atual=i;
-      abas.forEach(function(a,j){a.setAttribute('aria-selected',String(j===i));a.querySelector('.bar').style.width=j<i?'100%':'0%';});
-      v.poster=abas[i].getAttribute('data-poster');v.src=abas[i].getAttribute('data-src');leg.textContent=abas[i].getAttribute('data-cap');
-      if(tocar)toca(v);
+    var nav=$('#nav'), ind=$('.ind',nav), links=$$('a',nav);
+    var secs=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1));});
+    function marca(i){
+      links.forEach(function(a,j){if(j===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});
+      if(i<0){ind.style.opacity=0;return;}
+      var a=links[i];ind.style.width=a.offsetWidth+'px';ind.style.transform='translateX('+a.offsetLeft+'px)';ind.style.opacity=1;
+      if(nav.scrollWidth>nav.clientWidth)nav.scrollTo({left:a.offsetLeft-nav.clientWidth/2+a.offsetWidth/2,behavior:reduz?'auto':'smooth'});
     }
-    abas.forEach(function(a,i){a.addEventListener('click',function(){escolhe(i,true);});});
-    v.addEventListener('timeupdate',function(){if(v.duration)abas[atual].querySelector('.bar').style.width=(v.currentTime/v.duration*100)+'%';});
-    v.addEventListener('ended',function(){escolhe((atual+1)%abas.length,true);});
-    if(reduz){[v,cel].forEach(function(el){if(!el)return;el.removeAttribute('autoplay');el.pause();el.controls=true;});return;}
+    var atual=-2;
+    function ve(){
+      var y=window.scrollY+window.innerHeight*.38, i=-1;
+      secs.forEach(function(s,j){if(s&&s.offsetTop<=y)i=j;});
+      if(i!==atual){atual=i;marca(i);}
+    }
+    window.addEventListener('scroll',ve,{passive:true});window.addEventListener('resize',function(){atual=-2;ve();});
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){atual=-2;ve();});
+    ve();
+  })();
+
+  // sistemas: escolher um troca o filme e o texto; os botões "Assistir" trocam a gravação dentro do mesmo sistema
+  (function(){
+    var v=$('#filme'), caixa=$('#player'), tabs=$$('.work'), paineis=$$('.wp'), pp=$('#pp');
+    if(!v||!tabs.length)return;
+    var parado=false;
+    function toca(){var p=v.play();if(p&&p.catch)p.catch(function(){});}
+    function estado(){
+      caixa.classList.toggle('pausado',v.paused);
+      pp.setAttribute('aria-label',v.paused?'Tocar o filme':'Pausar o filme');
+      tabs.forEach(function(t){t.classList.toggle('tocando',!v.paused);});
+    }
+    function carrega(nome,tocar){
+      v.poster='midia/'+nome+'.jpg';v.src='midia/'+nome+'.mp4';
+      tabs.forEach(function(t){$('.bar',t).style.width='0';});
+      if(tocar){parado=false;toca();}
+    }
+    function escolhe(w,tocar,clipe){
+      tabs.forEach(function(t){t.setAttribute('aria-selected',String(t.getAttribute('data-w')===w));});
+      paineis.forEach(function(p){
+        var meu=p.getAttribute('data-w')===w;p.hidden=!meu;
+        if(meu){var bs=$$('.clip',p);bs.forEach(function(b,i){b.setAttribute('aria-pressed',String(clipe?b.getAttribute('data-v')===clipe:i===0));});carrega(clipe||bs[0].getAttribute('data-v'),tocar);}
+      });
+    }
+    tabs.forEach(function(t){t.addEventListener('click',function(){escolhe(t.getAttribute('data-w'),true);});});
+    $$('.clip').forEach(function(b){b.addEventListener('click',function(){escolhe(b.closest('.wp').getAttribute('data-w'),true,b.getAttribute('data-v'));});});
+    function alterna(){if(v.paused){parado=false;toca();}else{parado=true;v.pause();}}
+    v.addEventListener('click',alterna);pp.addEventListener('click',alterna);
+    $('#cheia').addEventListener('click',function(){var f=v.requestFullscreen||v.webkitRequestFullscreen||v.webkitEnterFullscreen;if(f)f.call(v);});
+    v.addEventListener('play',estado);v.addEventListener('pause',estado);
+    v.addEventListener('timeupdate',function(){if(!v.duration)return;var t=tabs.filter(function(x){return x.getAttribute('aria-selected')==='true';})[0];if(t)$('.bar',t).style.width=(v.currentTime/v.duration*100)+'%';});
+    estado();
+    // "Aparece em": leva ao sistema e já toca
+    $$('[data-go]').forEach(function(b){b.addEventListener('click',function(){escolhe(b.getAttribute('data-go'),true);$('.hint').scrollIntoView({behavior:reduz?'auto':'smooth',block:'start'});});});
+    if(reduz){v.controls=true;return;}
     if('IntersectionObserver' in window){
-      var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)toca(e.target);else e.target.pause();});},{threshold:.2});
-      obs.observe(v);if(cel)obs.observe(cel);
+      new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!parado)toca();}else v.pause();});},{threshold:.35}).observe(v);
     }
   })();
 
-  // Filmes dos cases: tocam quando entram na tela e param ao sair; um clique (no vídeo ou no botão) pausa.
+  // habilidades
   (function(){
-    var lista=document.querySelector('.cases'); if(lista)lista.classList.add('anima-ok');
-    var cs=[].slice.call(document.querySelectorAll('.case'));
-    if('IntersectionObserver' in window){
-      var oc=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visto');oc.unobserve(e.target);}});},{threshold:.2});
-      cs.forEach(function(c){oc.observe(c);});
-    } else cs.forEach(function(c){c.classList.add('visto');});
-    var filmes=[].slice.call(document.querySelectorAll('video.case-film'));
-    if(!filmes.length)return;
-    var reduz=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function toca(v){var p=v.play();if(p&&p.catch)p.catch(function(){});}
-    filmes.forEach(function(v){
-      var f=v.closest('.viz'), b=f.querySelector('.film-btn');
-      function estado(){f.classList.toggle('pausado',v.paused);if(b){b.textContent=v.paused?'Tocar':'Pausar';b.setAttribute('aria-label',v.paused?'Tocar o vídeo':'Pausar o vídeo');}}
-      function alterna(){if(v.paused){v.removeAttribute('data-parado');toca(v);}else{v.setAttribute('data-parado','1');v.pause();}}
-      v.addEventListener('play',estado);v.addEventListener('pause',estado);v.addEventListener('click',alterna);
-      if(b)b.addEventListener('click',alterna);
-      estado();
-    });
-    if(reduz){filmes.forEach(function(v){v.controls=true;});return;}
-    if('IntersectionObserver' in window){
-      var of=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){if(!v.hasAttribute('data-parado'))toca(v);}else v.pause();});},{threshold:.45});
-      filmes.forEach(function(v){of.observe(v);});
-    }
+    var bs=$$('.sk'), ps=$$('.skp');
+    bs.forEach(function(b){b.addEventListener('click',function(){
+      bs.forEach(function(x){x.setAttribute('aria-selected',String(x===b));});
+      ps.forEach(function(p){p.hidden=p.id!==b.getAttribute('aria-controls');});
+    });});
   })();
 
+  // console: três automações digitadas em sequência
   var cenas=[
     {arq:'boletos.log',linhas:[
       ['09:14:02','e-mail recebido','cobranca_novembro.pdf'],
@@ -948,34 +789,26 @@ h2{margin:0;font:500 clamp(28px,4.4vw,52px)/1.05 var(--f-display);letter-spacing
       ['18:00:03','sem lançamento','2, enviadas para explicar'],
       ['18:00:04','resultado','caixa do dia conferido','res']]}
   ];
-  var corpo=document.getElementById('console-body');
-  var arq=document.getElementById('console-file');
-  var reduz=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var corpo=$('#console-body'), arq=$('#console-file');
   if(reduz||!corpo)return;
   var cursor=document.createElement('i');cursor.className='cursor';cursor.setAttribute('aria-hidden','true');
   function espera(ms){return new Promise(function(r){setTimeout(r,ms);});}
-  async function toca(cena){
-    arq.textContent=cena.arq;
-    corpo.textContent='';
+  async function digita(cena){
+    arq.textContent=cena.arq;corpo.textContent='';
     for(var i=0;i<cena.linhas.length;i++){
       var l=cena.linhas[i];
       var d=document.createElement('div');d.className='ln'+(l[3]?' '+l[3]:'');
       var t=document.createElement('span');t.className='t';t.textContent=l[0];
       var k=document.createElement('span');k.className='k';k.textContent=l[1];
-      var v=document.createElement('span');v.className='v';
-      var txt=document.createElement('span');v.appendChild(txt);v.appendChild(cursor);
-      d.appendChild(t);d.appendChild(k);d.appendChild(v);corpo.appendChild(d);
+      var val=document.createElement('span');val.className='v';
+      var txt=document.createElement('span');val.appendChild(txt);val.appendChild(cursor);
+      d.appendChild(t);d.appendChild(k);d.appendChild(val);corpo.appendChild(d);
       for(var c=1;c<=l[2].length;c++){txt.textContent=l[2].slice(0,c);await espera(16);}
       await espera(i===cena.linhas.length-2?520:300);
     }
   }
-  var atual=0;
-  async function laco(){
-    atual=(atual+1)%cenas.length;
-    await toca(cenas[atual]);
-    await espera(4600);
-    laco();
-  }
+  var n=0;
+  async function laco(){n=(n+1)%cenas.length;await digita(cenas[n]);await espera(4600);laco();}
   setTimeout(laco,5200);
 })();
 </script>
