@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Bruno de Luca · Portfólio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Bruno de Luca: analista financeiro que constrói sistemas com IA. Comercial, reembolsos, agendamento e financeiro funcionando, em vídeo.">
+<meta name="description" content="Bruno de Luca: analista financeiro que constrói sistemas com IA. Comercial, reembolsos, agendamento, financeiro e um assistente pessoal com IA funcionando, em vídeo.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="canonical" href="https://b-rodrigues-omena.github.io/">
 <meta name="theme-color" content="#09090a">
@@ -13,7 +13,7 @@
 <meta property="og:title" content="Bruno de Luca · Portfólio">
 <meta property="og:description" content="Finanças e tecnologia. Sistemas que projetei e construí, mostrados em funcionamento.">
 <meta property="og:url" content="https://b-rodrigues-omena.github.io/">
-<meta property="og:image" content="https://b-rodrigues-omena.github.io/capa-portfolio.png">
+<meta property="og:image" content="https://b-rodrigues-omena.github.io/capa-portfolio-2.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -116,8 +116,8 @@ button{font:inherit;color:inherit}
 .head p{margin-top:16px;font-size:17px;color:var(--muted)}
 
 /* sistemas: escolher e assistir */
-.works{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-@media (max-width:820px){.works{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.works{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:980px){.works{grid-template-columns:repeat(2,minmax(0,1fr))}.works .work:last-child{grid-column:1/-1}}
 .work{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:2px 13px;padding:15px 16px 17px;border-radius:20px;border:1px solid var(--line);background:var(--glass);text-align:left;cursor:pointer;overflow:hidden;transition:transform .3s var(--ease),border-color .25s,background .25s}
 .work:hover{transform:translateY(-2px);border-color:var(--line-2);background:var(--glass-2)}
 .work .ic{grid-row:1/3;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line-2);color:var(--ink);transition:background .25s,border-color .25s,color .25s}
@@ -136,6 +136,7 @@ button{font:inherit;color:inherit}
 .work .eq i{transform-origin:bottom}
 .work[aria-selected="true"].tocando .ic svg{display:none}
 .work[aria-selected="true"].tocando .eq{display:flex}
+@media (min-width:981px){.work{padding:14px 13px 16px;gap:2px 11px}.work .ic{width:34px;height:34px}.work small{white-space:normal;line-height:1.3}}
 @media (max-width:560px){.work{padding:12px;gap:0 10px}.work .ic{grid-row:auto;width:32px;height:32px}.work b{font-size:14.5px}.work small{display:none}}
 .hint{display:flex;align-items:center;gap:8px;margin:0 0 14px;font-size:13px;color:var(--muted)}
 .hint svg{width:15px;height:15px;color:var(--blue-text)}
@@ -333,7 +334,7 @@ button{font:inherit;color:inherit}
     <div class="head rv">
       <span class="eyebrow"><i></i>Sistemas</span>
       <h2>Escolha um e assista.</h2>
-      <p>O Visão é o sistema de gestão que projetei e construí. Cada filme mostra um módulo em uso de verdade, com dados fictícios.</p>
+      <p>O Visão é o sistema de gestão que projetei e construí; o Jarvis, meu assistente pessoal. Cada filme mostra um deles em uso de verdade, com dados fictícios.</p>
     </div>
 
     <p class="hint rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.2a5 5 0 0 1-3.9-1.9L4 15.5a1.6 1.6 0 0 1 2.4-2L9 15.5"/></svg>Toque em um sistema para trocar o filme</p>
@@ -353,6 +354,10 @@ button{font:inherit;color:inherit}
       <button class="work" type="button" role="tab" aria-selected="false" aria-controls="wp-financeiro" data-w="financeiro">
         <span class="ic"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1.2v9.6L10.5 6z" fill="currentColor"/></svg><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></span>
         <b>Financeiro</b><small>Caixa, fluxo e resultado</small><i class="bar"></i>
+      </button>
+      <button class="work" type="button" role="tab" aria-selected="false" aria-controls="wp-jarvis" data-w="jarvis">
+        <span class="ic"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1.2v9.6L10.5 6z" fill="currentColor"/></svg><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></span>
+        <b>Jarvis</b><small>Assistente pessoal com IA</small><i class="bar"></i>
       </button>
     </div>
 
@@ -470,6 +475,31 @@ button{font:inherit;color:inherit}
         <div class="stack"><span>React</span><span>TypeScript</span><span>Hono</span><span>Cloudflare D1</span><span>Recharts</span></div>
       </div>
     </article>
+
+    <article class="wp" id="wp-jarvis" data-w="jarvis" role="tabpanel" hidden>
+      <div>
+        <div class="clips" aria-label="Gravações do Jarvis">
+          <span>Assistir</span>
+          <button class="clip" type="button" aria-pressed="true" data-v="case-jarvis">Filme</button>
+        </div>
+        <h3 style="margin-top:26px">Jarvis</h3>
+        <p class="txt">Meu assistente pessoal. Converso por texto ou voz, e ele organiza o dia: prazos, lembretes, rotinas do mês e o que precisa lembrar.</p>
+        <p class="orig">Criado para o meu próprio uso, instalado no computador e no celular.</p>
+        <ul>
+          <li>Briefing do dia com clima, dólar e juros</li>
+          <li>Cria tarefas, lembretes e rotinas pela conversa, com dias úteis e feriados</li>
+          <li>Lê PDF, planilha e foto anexados</li>
+        </ul>
+      </div>
+      <div>
+        <div class="nums">
+          <div><b>3</b><span>formas de pedir: texto, voz ou arquivo</span></div>
+          <div><b>2</b><span>cérebros: IA gratuita ou Claude</span></div>
+          <div><b>1</b><span>app no computador e no celular</span></div>
+        </div>
+        <div class="stack"><span>PWA</span><span>Web Push</span><span>Cloudflare Workers</span><span>Workers AI</span><span>Claude</span></div>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -558,7 +588,7 @@ button{font:inherit;color:inherit}
       <div>
         <h3>Construo com IA e coloco IA para trabalhar.</h3>
         <p>O Claude é meu parceiro de programação, e também lê documentos e confere regras dentro dos sistemas.</p>
-        <div class="where-in">Aparece em <button class="go" type="button" data-go="comercial">Comercial</button><a class="go" href="#producao" style="display:inline-flex;align-items:center;text-decoration:none">ERP em produção</a></div>
+        <div class="where-in">Aparece em <button class="go" type="button" data-go="jarvis">Jarvis</button><button class="go" type="button" data-go="comercial">Comercial</button><a class="go" href="#producao" style="display:inline-flex;align-items:center;text-decoration:none">ERP em produção</a></div>
       </div>
       <ul><li>Claude Code</li><li>Leitura de boletos e notas com IA</li><li>Engenharia de prompt</li><li>Assistentes de IA dentro do sistema</li></ul>
     </div>
